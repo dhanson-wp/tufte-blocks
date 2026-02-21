@@ -1,0 +1,174 @@
+/**
+ * Button Styles
+ *
+ * Default filled, outline, and link button variations.
+ * Uses theme.json CSS custom properties — no hardcoded colors.
+ *
+ * @package Tufte_Blocks
+ */
+
+/* ==========================================================================
+   Default Button (Filled)
+   ========================================================================== */
+
+/**
+ * Base button styles
+ * Gold background, compact padding
+ */
+.wp-block-button__link {
+	background: var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--background);
+	border: 1px solid var(--wp--preset--color--primary);
+	font-family: inherit;
+	font-size: 0.9rem;
+	padding: 0.5rem 1.25rem;
+	border-radius: 4px;
+	text-decoration: none;
+	display: inline-block;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/**
+ * Hover: lift + shadow
+ */
+.wp-block-button__link:hover {
+	background: var(--wp--preset--color--primary-hover);
+	border-color: var(--wp--preset--color--primary-hover);
+	color: var(--wp--preset--color--background);
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(201, 169, 89, 0.2);
+}
+
+.wp-block-button__link:focus {
+	background: var(--wp--preset--color--primary-hover);
+	border-color: var(--wp--preset--color--primary-hover);
+	color: var(--wp--preset--color--background);
+	outline: 2px solid var(--wp--preset--color--primary);
+	outline-offset: 2px;
+}
+
+.wp-block-button__link:active {
+	transform: translateY(0);
+	box-shadow: 0 2px 6px rgba(201, 169, 89, 0.15);
+}
+
+/* ==========================================================================
+   Outline Button
+   ========================================================================== */
+
+/**
+ * Transparent background, gold border
+ */
+.wp-block-button.is-style-outline .wp-block-button__link {
+	background: transparent;
+	color: var(--wp--preset--color--primary);
+	border: 1px solid var(--wp--preset--color--primary);
+}
+
+/**
+ * Hover: fill + lift
+ */
+.wp-block-button.is-style-outline .wp-block-button__link:hover {
+	background: var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--background);
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(201, 169, 89, 0.15);
+}
+
+.wp-block-button.is-style-outline .wp-block-button__link:focus {
+	background: var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--background);
+	outline: 2px solid var(--wp--preset--color--primary);
+	outline-offset: 2px;
+}
+
+.wp-block-button.is-style-outline .wp-block-button__link:active {
+	transform: translateY(0);
+	box-shadow: 0 2px 6px rgba(201, 169, 89, 0.1);
+}
+
+/* ==========================================================================
+   Link Button
+   ========================================================================== */
+
+/**
+ * No border, no background
+ * Arrow slides right on hover, underline reveals
+ */
+.wp-block-button.is-style-link .wp-block-button__link {
+	background: transparent;
+	color: var(--wp--preset--color--primary);
+	border: none;
+	padding: 0.5rem 0;
+	border-radius: 0;
+	position: relative;
+	box-shadow: none;
+}
+
+/**
+ * Arrow indicator
+ */
+.wp-block-button.is-style-link .wp-block-button__link::after {
+	content: ' →';
+	display: inline-block;
+	margin-left: 0.25rem;
+	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/**
+ * Underline reveal via pseudo-element
+ */
+.wp-block-button.is-style-link .wp-block-button__link::before {
+	content: '';
+	position: absolute;
+	bottom: 0.4rem;
+	left: 0;
+	width: 0;
+	height: 1px;
+	background: var(--wp--preset--color--primary);
+	transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/**
+ * Hover: arrow slides right, underline reveals
+ */
+.wp-block-button.is-style-link .wp-block-button__link:hover {
+	background: transparent;
+	color: var(--wp--preset--color--primary-hover);
+	transform: none;
+	box-shadow: none;
+}
+
+.wp-block-button.is-style-link .wp-block-button__link:hover::after {
+	transform: translateX(4px);
+}
+
+.wp-block-button.is-style-link .wp-block-button__link:hover::before {
+	width: calc(100% - 1.5rem); /* Exclude arrow width */
+}
+
+.wp-block-button.is-style-link .wp-block-button__link:focus {
+	background: transparent;
+	outline: 2px solid var(--wp--preset--color--primary);
+	outline-offset: 4px;
+	box-shadow: none;
+}
+
+.wp-block-button.is-style-link .wp-block-button__link:active {
+	transform: none;
+	box-shadow: none;
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+	.wp-block-button__link,
+	.wp-block-button.is-style-outline .wp-block-button__link,
+	.wp-block-button.is-style-link .wp-block-button__link,
+	.wp-block-button.is-style-link .wp-block-button__link::after,
+	.wp-block-button.is-style-link .wp-block-button__link::before {
+		transition-duration: 0.01ms !important;
+	}
+}

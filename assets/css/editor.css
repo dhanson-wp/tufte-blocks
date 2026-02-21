@@ -1,0 +1,138 @@
+/**
+ * Editor Styles
+ *
+ * Override WordPress block editor defaults to ensure
+ * proper visibility of theme colors.
+ *
+ * @package Tufte_Blocks
+ */
+
+/* ==========================================================================
+   Fix Grayed Out Content in Editor
+   ========================================================================== */
+
+/**
+ * WordPress reduces opacity on unfocused blocks.
+ * Override to ensure our light text on dark background remains visible.
+ */
+.editor-styles-wrapper {
+	color: var(--wp--preset--color--foreground);
+	background-color: var(--wp--preset--color--background);
+}
+
+/**
+ * Ensure blocks maintain full opacity when not selected
+ */
+.editor-styles-wrapper .wp-block {
+	color: inherit;
+}
+
+/**
+ * Override the editor's default dim effect on unfocused blocks
+ */
+.editor-styles-wrapper .block-editor-block-list__block:not(.is-selected):not(.has-child-selected) {
+	opacity: 1;
+}
+
+/**
+ * Ensure paragraphs and text blocks are fully visible
+ */
+.editor-styles-wrapper p,
+.editor-styles-wrapper .wp-block-paragraph,
+.editor-styles-wrapper .wp-block-heading,
+.editor-styles-wrapper .wp-block-list,
+.editor-styles-wrapper .wp-block-quote {
+	color: var(--wp--preset--color--foreground);
+	opacity: 1;
+}
+
+/**
+ * Secondary text elements in editor
+ */
+.editor-styles-wrapper .has-secondary-color {
+	color: var(--wp--preset--color--secondary);
+}
+
+/**
+ * Ensure links show proper color in editor
+ */
+.editor-styles-wrapper a {
+	color: var(--wp--preset--color--primary);
+}
+
+/* ==========================================================================
+   Content Links - Match Front-End (left-to-right background-image)
+   ========================================================================== */
+
+.editor-styles-wrapper .entry-content a:not(.wp-block-button__link),
+.editor-styles-wrapper .wp-block-post-content a:not(.wp-block-button__link) {
+	color: var(--wp--preset--color--accent, #c9a959);
+	text-decoration: none;
+	background-image: linear-gradient(currentColor, currentColor);
+	background-position: left bottom;
+	background-repeat: no-repeat;
+	background-size: 0% 1px;
+	transition: background-size 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+				color 0.3s ease;
+}
+
+.editor-styles-wrapper .entry-content a:not(.wp-block-button__link):hover,
+.editor-styles-wrapper .wp-block-post-content a:not(.wp-block-button__link):hover {
+	color: var(--wp--preset--color--foreground, #eeeeee);
+	background-size: 100% 1px;
+}
+
+/* ==========================================================================
+   Post Title Links - Match Front-End (left-to-right background-image)
+   ========================================================================== */
+
+.editor-styles-wrapper .wp-block-post-title a {
+	color: var(--wp--preset--color--foreground);
+	text-decoration: none;
+	background-image: linear-gradient(currentColor, currentColor);
+	background-position: left bottom;
+	background-repeat: no-repeat;
+	background-size: 0% 1px;
+	transition: background-size 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+				color 0.3s ease;
+}
+
+.editor-styles-wrapper .wp-block-post-title a:hover {
+	color: var(--wp--preset--color--accent, #c9a959);
+	background-size: 100% 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.editor-styles-wrapper .entry-content a:not(.wp-block-button__link),
+	.editor-styles-wrapper .wp-block-post-content a:not(.wp-block-button__link),
+	.editor-styles-wrapper .wp-block-post-title a {
+		transition: none;
+	}
+}
+
+/* ==========================================================================
+   Editor-Specific Adjustments
+   ========================================================================== */
+
+/**
+ * Match the content width to theme layout
+ */
+.editor-styles-wrapper .wp-block {
+	max-width: 650px;
+}
+
+.editor-styles-wrapper .wp-block[data-align="wide"] {
+	max-width: 1000px;
+}
+
+.editor-styles-wrapper .wp-block[data-align="full"] {
+	max-width: none;
+}
+
+/**
+ * Add left padding to match frontend layout
+ */
+.editor-styles-wrapper {
+	padding-left: clamp(1.5rem, -1.5rem + 12vw, 15vw);
+	padding-right: var(--wp--preset--spacing--50);
+}

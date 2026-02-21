@@ -1,0 +1,289 @@
+/**
+ * Component Styles
+ *
+ * Quote variations, Details block, Separator ornament, and other block styles.
+ * Uses theme.json CSS custom properties — no hardcoded colors.
+ *
+ * @package Tufte_Blocks
+ */
+
+/* ==========================================================================
+   Quote Block - Default
+   ========================================================================== */
+
+/**
+ * Remove WordPress default left border
+ * Citation with em-dash prefix
+ */
+.wp-block-quote {
+	border-left: none;
+	padding-left: 0;
+	margin-left: 0;
+}
+
+.wp-block-quote cite,
+.wp-block-quote footer {
+	font-size: var(--wp--preset--font-size--small);
+	font-style: normal;
+	color: var(--wp--preset--color--secondary);
+	margin-top: var(--wp--preset--spacing--30);
+	display: block;
+}
+
+.wp-block-quote cite::before,
+.wp-block-quote footer::before {
+	content: '— ';
+}
+
+/* ==========================================================================
+   Quote Block - Epigraph Variation
+   ========================================================================== */
+
+/**
+ * Right-aligned, gold right border
+ * Max-width 480px, 1.1rem italic text
+ */
+.wp-block-quote.is-style-epigraph {
+	text-align: right;
+	max-width: 480px;
+	margin-left: auto;
+	margin-right: 0;
+	padding-right: var(--wp--preset--spacing--50);
+	border-right: 3px solid var(--wp--preset--color--primary);
+	border-left: none;
+	font-size: 1.1rem;
+	font-style: italic;
+}
+
+.wp-block-quote.is-style-epigraph cite,
+.wp-block-quote.is-style-epigraph footer {
+	text-align: right;
+}
+
+/* ==========================================================================
+   Quote Block - Large Variation
+   ========================================================================== */
+
+/**
+ * Large quote stays at content width (650px); citation right-aligns within column.
+ */
+.wp-block-quote.is-style-large {
+	font-size: 1.75rem;
+	line-height: 1.4;
+}
+
+.wp-block-quote.is-style-large cite,
+.wp-block-quote.is-style-large footer {
+	font-size: var(--wp--preset--font-size--medium);
+}
+
+/* ==========================================================================
+   Details Block
+   ========================================================================== */
+
+/**
+ * Custom styling with + indicator
+ */
+.wp-block-details {
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+/**
+ * Summary element (clickable header)
+ * Custom + indicator instead of browser default
+ */
+.wp-block-details summary {
+	padding: var(--wp--preset--spacing--40) var(--wp--preset--spacing--50);
+	cursor: pointer;
+	list-style: none;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-weight: 400;
+	transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wp-block-details summary::-webkit-details-marker {
+	display: none;
+}
+
+.wp-block-details summary::marker {
+	display: none;
+	content: '';
+}
+
+/**
+ * Custom + indicator
+ * Rotates 45° to become × when open
+ */
+.wp-block-details summary::after {
+	content: '+';
+	font-size: 1.25rem;
+	font-weight: 300;
+	color: var(--wp--preset--color--secondary);
+	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	flex-shrink: 0;
+	margin-left: var(--wp--preset--spacing--40);
+}
+
+.wp-block-details[open] summary::after {
+	transform: rotate(45deg);
+}
+
+.wp-block-details summary:hover {
+	color: var(--wp--preset--color--primary);
+}
+
+.wp-block-details summary:hover::after {
+	color: var(--wp--preset--color--primary);
+}
+
+/**
+ * Details content
+ * Fade in + slight slide animation
+ */
+.wp-block-details > *:not(summary) {
+	padding: 0 var(--wp--preset--spacing--50) var(--wp--preset--spacing--40);
+	animation: tufte-details-open 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes tufte-details-open {
+	from {
+		opacity: 0;
+		transform: translateY(-8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* ==========================================================================
+   Grouped Details (Accordion Style)
+   ========================================================================== */
+
+/**
+ * Stack without double borders
+ * When Details blocks are inside a Group
+ */
+.wp-block-group > .wp-block-details + .wp-block-details {
+	margin-top: -1px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.wp-block-group > .wp-block-details:not(:last-child) {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.wp-block-group > .wp-block-details:first-child {
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+}
+
+.wp-block-group > .wp-block-details:last-child {
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+/* ==========================================================================
+   Separator Block - Ornament Variation
+   ========================================================================== */
+
+/**
+ * Section symbol (§) as decorative break
+ */
+.wp-block-separator.is-style-ornament {
+	border: none;
+	text-align: center;
+	overflow: visible;
+	height: auto;
+	background: transparent;
+}
+
+.wp-block-separator.is-style-ornament::before {
+	content: '§';
+	display: block;
+	font-size: 1.5rem;
+	color: var(--wp--preset--color--secondary);
+	letter-spacing: 0.1em;
+}
+
+/* ==========================================================================
+   Pullquote Block
+   ========================================================================== */
+
+/**
+ * Remove default borders, style consistently with quotes
+ */
+.wp-block-pullquote {
+	border-top: none;
+	border-bottom: none;
+	padding: 0;
+}
+
+.wp-block-pullquote blockquote {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+.wp-block-pullquote cite {
+	font-size: var(--wp--preset--font-size--small);
+	font-style: normal;
+	color: var(--wp--preset--color--secondary);
+}
+
+.wp-block-pullquote cite::before {
+	content: '— ';
+}
+
+/* ==========================================================================
+   Table Block
+   ========================================================================== */
+
+/**
+ * Clean table styling
+ */
+.wp-block-table table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.wp-block-table th,
+.wp-block-table td {
+	padding: var(--wp--preset--spacing--30) var(--wp--preset--spacing--40);
+	border-bottom: 1px solid var(--wp--preset--color--border);
+	text-align: left;
+}
+
+.wp-block-table th {
+	font-weight: 400;
+	font-family: var(--wp--preset--font-family--monospace);
+	font-size: var(--wp--preset--font-size--small);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: var(--wp--preset--color--secondary);
+}
+
+.wp-block-table thead {
+	border-bottom: 2px solid var(--wp--preset--color--border);
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+	.wp-block-details summary,
+	.wp-block-details summary::after {
+		transition-duration: 0.01ms !important;
+	}
+
+	.wp-block-details > *:not(summary) {
+		animation-duration: 0.01ms !important;
+	}
+}

@@ -1,0 +1,327 @@
+/**
+ * Pattern Styles
+ *
+ * Block pattern-specific styles (epigraph, etc.).
+ * Uses theme.json CSS custom properties.
+ *
+ * @package Tufte_Blocks
+ */
+
+/* ========================================
+   PATTERN: NEWSLETTER CTA
+   ======================================== */
+
+.tufte-newsletter-cta {
+	text-align: center;
+}
+
+.tufte-newsletter-eyebrow {
+	font-family: var(--wp--preset--font-family--monospace);
+	font-size: 0.7rem !important;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+
+.tufte-newsletter-desc {
+	max-width: 440px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* ========================================
+   Global: Eyebrow Label
+   ======================================== */
+.tufte-eyebrow {
+	font-family: var(--wp--preset--font-family--monospace);
+	font-size: 0.7rem !important;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	line-height: 1.4;
+	margin-bottom: 0.5rem !important;
+}
+
+/* ========================================
+   Pattern: Section Header
+   ======================================== */
+.tufte-section-header .tufte-section-desc {
+	font-size: 0.95rem;
+	line-height: 1.6;
+	max-width: 600px;
+}
+
+/* ========================================
+   Pattern: Testimonial / Epigraph
+   ======================================== */
+.tufte-epigraph {
+	text-align: center;
+}
+
+.tufte-epigraph .tufte-epigraph-quote-mark {
+	font-size: 3rem;
+	line-height: 1;
+	opacity: 0.5;
+	margin-bottom: 0.5rem !important;
+}
+
+.tufte-epigraph .tufte-epigraph-quote {
+	font-size: 1.4rem;
+	font-style: italic;
+	line-height: 1.6;
+	margin-bottom: 1.25rem !important;
+}
+
+.tufte-epigraph .tufte-epigraph-attribution {
+	font-size: 0.85rem;
+	color: var(--wp--preset--color--secondary);
+}
+
+.tufte-epigraph .tufte-epigraph-attribution strong {
+	color: var(--wp--preset--color--foreground);
+	font-weight: 400;
+}
+
+/* ========================================
+   Pattern: Stats Row
+   ======================================== */
+.tufte-stats-row {
+	text-align: center;
+}
+
+.tufte-stat-item {
+	padding: 1.5rem 1rem;
+}
+
+.tufte-stat-number {
+	font-size: 2rem;
+	font-weight: 400;
+	line-height: 1.2;
+	margin-bottom: 0.25rem !important;
+}
+
+.tufte-stat-label {
+	font-size: 0.82rem;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	font-family: var(--wp--preset--font-family--monospace);
+}
+
+/* ========================================
+   Pattern: Reading List / Bibliography
+   ======================================== */
+.tufte-reading-list {
+	max-width: 700px;
+}
+
+.tufte-reading-item {
+	padding: 1.25rem 0;
+	border-bottom: 1px solid var(--wp--preset--color--border, #333333);
+	align-items: start;
+	gap: 1.5rem;
+}
+
+.tufte-reading-item:last-child {
+	border-bottom: none;
+}
+
+.tufte-book-number {
+	font-family: var(--wp--preset--font-family--monospace, Consolas, 'Liberation Mono', Menlo, Courier, monospace);
+	font-size: 0.85rem !important;
+	color: var(--wp--preset--color--primary) !important;
+	padding-top: 0.2rem;
+	margin: 0 !important;
+	flex-shrink: 0;
+}
+
+.tufte-book-info {
+	min-width: 0;
+}
+
+.tufte-book-title {
+	font-size: 1.1rem !important;
+	font-weight: 400;
+	font-style: italic;
+	margin-bottom: 0.2rem !important;
+}
+
+.tufte-book-title a {
+	color: var(--wp--preset--color--foreground, #eeeeee);
+	text-decoration: none;
+}
+
+.tufte-book-title a:hover {
+	color: var(--wp--preset--color--primary);
+}
+
+.tufte-book-author {
+	font-size: 0.95rem !important;
+	color: var(--wp--preset--color--secondary, #a0a0a0) !important;
+	margin-bottom: 0.35rem !important;
+}
+
+.tufte-book-note {
+	font-size: 0.88rem !important;
+	color: var(--wp--preset--color--secondary, #a0a0a0) !important;
+	line-height: 1.5;
+	font-style: italic;
+	margin: 0 !important;
+}
+
+/* ========================================
+   PATTERN: ABOUT CARD
+   ======================================== */
+
+.tufte-about-card {
+	max-width: 700px;
+}
+
+.tufte-about-row {
+	gap: 2.5rem !important;
+	align-items: start;
+}
+
+/* Photo — static, no hover effect */
+.tufte-about-photo {
+	flex-shrink: 0;
+	width: 200px !important;
+	border-radius: 4px;
+	border: 1px solid var(--wp--preset--color--border, #333333);
+	overflow: hidden;
+}
+
+.tufte-about-photo img {
+	aspect-ratio: 3/4;
+	object-fit: cover;
+	border-radius: 4px;
+}
+
+/* Info stack */
+.tufte-about-info {
+	min-width: 0;
+}
+
+/* Name */
+.tufte-about-name {
+	font-size: 1.4rem !important;
+	font-weight: 400 !important;
+	margin-bottom: 0.25rem !important;
+}
+
+/* Role — gold accent color */
+.tufte-about-role {
+	font-size: 0.9rem !important;
+	color: var(--wp--preset--color--primary) !important;
+	margin-bottom: 1rem !important;
+}
+
+/* Bio text */
+.tufte-about-bio {
+	font-size: 0.92rem !important;
+	color: var(--wp--preset--color--secondary, #a0a0a0) !important;
+	line-height: 1.7;
+	margin-bottom: 1.25rem !important;
+}
+
+/* Links row */
+.tufte-about-links {
+	gap: 1.25rem !important;
+}
+
+.tufte-about-links p {
+	font-family: var(--wp--preset--font-family--monospace) !important;
+	font-size: 0.73rem !important;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	margin: 0 !important;
+}
+
+.tufte-about-links a {
+	color: var(--wp--preset--color--primary);
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+.tufte-about-links a:hover {
+	color: var(--wp--preset--color--primary-hover);
+}
+
+@media (max-width: 768px) {
+	.tufte-about-row {
+		flex-wrap: wrap !important;
+	}
+	.tufte-about-photo {
+		max-width: 200px !important;
+	}
+}
+
+/* ========================================
+   PATTERN: SYLLABUS / COURSE LISTING
+   ======================================== */
+
+.tufte-syllabus {
+	max-width: 700px;
+}
+
+/* Each row: week num + content + status */
+.tufte-syllabus-item {
+	padding: 1rem 0 !important;
+	border-bottom: 1px solid var(--wp--preset--color--border, #333333);
+	gap: 1.25rem !important;
+}
+
+.tufte-syllabus-item:last-child {
+	border-bottom: none;
+}
+
+/* Week number — gold monospace */
+.tufte-syllabus-item .tufte-week-num {
+	font-family: var(--wp--preset--font-family--monospace) !important;
+	font-size: 0.75rem !important;
+	color: var(--wp--preset--color--primary) !important;
+	margin: 0 !important;
+	flex-shrink: 0;
+	min-width: 3rem;
+}
+
+/* Inner row: content + status stay together */
+.tufte-syllabus-item .tufte-syllabus-content-row {
+	flex: 1;
+	min-width: 0;
+	gap: 1.25rem !important;
+	justify-content: space-between;
+}
+
+/* Content stack — grows to fill */
+.tufte-syllabus-item .tufte-week-content {
+	flex: 1;
+	min-width: 0;
+	gap: 0.15rem !important;
+}
+
+/* Week title */
+.tufte-syllabus-item .tufte-week-title {
+	font-size: 0.95rem !important;
+	margin: 0 !important;
+}
+
+/* Reading/detail line */
+.tufte-syllabus-item .tufte-week-detail {
+	font-size: 0.82rem !important;
+	color: var(--wp--preset--color--secondary, #a0a0a0) !important;
+	margin: 0 !important;
+}
+
+/* Status label — monospace, secondary by default */
+.tufte-syllabus-item .tufte-week-status {
+	font-family: var(--wp--preset--font-family--monospace) !important;
+	font-size: 0.7rem !important;
+	color: var(--wp--preset--color--secondary, #a0a0a0) !important;
+	letter-spacing: 0.03em;
+	margin: 0 !important;
+	flex-shrink: 0;
+	white-space: nowrap;
+}
+
+/* Complete status — gold */
+.tufte-syllabus-item .tufte-week-status.is-complete {
+	color: var(--wp--preset--color--primary) !important;
+}

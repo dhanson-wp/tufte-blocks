@@ -1,0 +1,102 @@
+/**
+ * Link Styles
+ *
+ * Animated underline reveal for content links.
+ * Uses theme.json CSS custom properties — no hardcoded colors.
+ *
+ * @package Tufte_Blocks
+ */
+
+/* ==========================================================================
+   Content Links - Animated Underline
+   ========================================================================== */
+
+/**
+ * Target content areas but exclude buttons
+ * Uses background-image for underline (works across multi-line links).
+ * Left-to-right reveal (background-position: left bottom).
+ */
+.entry-content a:not(.wp-block-button__link):not(.wp-block-navigation-item__content),
+.wp-block-post-content a:not(.wp-block-button__link):not(.wp-block-navigation-item__content),
+.comment-content a:not(.wp-block-button__link) {
+	color: var(--wp--preset--color--accent, #c9a959);
+	text-decoration: none;
+	background-image: linear-gradient(currentColor, currentColor);
+	background-position: left bottom;
+	background-repeat: no-repeat;
+	background-size: 0% 1px;
+	transition: background-size 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+				color 0.3s ease;
+}
+
+/**
+ * Hover: underline reveals left-to-right, works on multi-line links
+ */
+.entry-content a:not(.wp-block-button__link):not(.wp-block-navigation-item__content):hover,
+.wp-block-post-content a:not(.wp-block-button__link):not(.wp-block-navigation-item__content):hover,
+.comment-content a:not(.wp-block-button__link):hover {
+	color: var(--wp--preset--color--foreground, #eeeeee);
+	background-size: 100% 1px;
+}
+
+/**
+ * Focus state for accessibility
+ */
+.entry-content a:not(.wp-block-button__link):not(.wp-block-navigation-item__content):focus,
+.wp-block-post-content a:not(.wp-block-button__link):not(.wp-block-navigation-item__content):focus,
+.comment-content a:not(.wp-block-button__link):focus {
+	outline: 2px solid var(--wp--preset--color--primary);
+	outline-offset: 2px;
+	background-size: 100% 1px;
+}
+
+/* ==========================================================================
+   Post Title Links (Query loop / archive titles)
+   ========================================================================== */
+
+/**
+ * Same left-to-right background-image underline as content links
+ * (consistent style, works on multi-line titles)
+ */
+.wp-block-post-title a {
+	color: var(--wp--preset--color--foreground);
+	text-decoration: none;
+	background-image: linear-gradient(currentColor, currentColor);
+	background-position: left bottom;
+	background-repeat: no-repeat;
+	background-size: 0% 1px;
+	transition: background-size 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+				color 0.3s ease;
+}
+
+.wp-block-post-title a:hover {
+	color: var(--wp--preset--color--accent, #c9a959);
+	background-size: 100% 1px;
+}
+
+.wp-block-post-title a:focus {
+	outline: 2px solid var(--wp--preset--color--primary);
+	outline-offset: 2px;
+	background-size: 100% 1px;
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+	.entry-content a:not(.wp-block-button__link):not(.wp-block-navigation-item__content),
+	.wp-block-post-content a:not(.wp-block-button__link):not(.wp-block-navigation-item__content),
+	.comment-content a:not(.wp-block-button__link),
+	.wp-block-post-title a {
+		transition: none;
+	}
+}
+
+/* Social icons — no underline on hover (override content link background-image) */
+.wp-block-social-links a,
+.wp-block-social-links a:hover,
+.wp-block-social-links a:focus {
+	background-image: none !important;
+	background-size: 0 !important;
+}

@@ -1,0 +1,36 @@
+/* =============================================================
+   TUFTE LEFT MARGIN
+   Mirrors tufte-css reference: padding-left 12.5% on wide viewports.
+   Symmetric padding below 1000px.
+   ============================================================= */
+
+@media (min-width: 1001px) {
+    .wp-site-blocks {
+        padding-left: 12.5% !important;
+        padding-right: 3rem !important;
+    }
+}
+
+@media (max-width: 1000px) {
+    .wp-site-blocks {
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+    }
+}
+
+@media (max-width: 599px) {
+    .wp-site-blocks {
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
+    }
+}
+
+/* =============================================================
+   FULL-WIDTH BLOCKS — ALIGN LEFT WITH CONTENT
+   Prevent alignfull from breaking out on the left; keep left edge
+   aligned with the main content column.
+   ============================================================= */
+
+.wp-site-blocks .alignfull {
+    margin-left: 0 !important;
+}
