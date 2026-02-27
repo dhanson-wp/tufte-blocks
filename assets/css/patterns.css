@@ -375,3 +375,39 @@
 	inset: 0;
 	z-index: 1;
 }
+
+/* ========================================
+   SINGLE POST: TUFTE HERO
+   ======================================== */
+.tufte-hero {
+	position: relative;
+}
+
+/* Desktop: featured image floats in the right margin.
+   1200px ensures enough room for the image (~300px+) after
+   the 12.5% left padding eats into the viewport. */
+@media (min-width: 1200px) {
+	.tufte-hero .is-style-tufte-hero {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: calc(
+			var(--wp--style--global--content-size, 650px) +
+			var(--wp--preset--spacing--50, 1.5rem)
+		);
+		max-width: none;
+		margin: 0;
+	}
+
+	.tufte-hero .is-style-tufte-hero img {
+		width: 100%;
+		height: auto;
+	}
+}
+
+/* Below 1200px: image stacks below title */
+@media (max-width: 1199px) {
+	.tufte-hero .is-style-tufte-hero {
+		margin-top: var(--wp--preset--spacing--50);
+	}
+}

@@ -1,10 +1,10 @@
 <!-- wp:template-part {"slug":"header","tagName":"header"} /-->
 
-<!-- wp:group {"tagName":"main","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|80"}}},"layout":{"type":"default"}} -->
+<!-- wp:group {"tagName":"main","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|80"}}},"layout":{"type":"constrained","justifyContent":"left"}} -->
 <main class="wp-block-group" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--80)">
 
-	<!-- wp:group {"layout":{"type":"constrained","justifyContent":"left"},"style":{"spacing":{"blockGap":"var:preset|spacing|30","margin":{"bottom":"var:preset|spacing|60"}}}} -->
-	<div class="wp-block-group">
+	<!-- wp:group {"align":"wide","className":"tufte-hero","layout":{"type":"constrained","justifyContent":"left"},"style":{"spacing":{"blockGap":"var:preset|spacing|30","margin":{"bottom":"var:preset|spacing|60"}}}} -->
+	<div class="wp-block-group alignwide tufte-hero">
 		<!-- wp:post-title {"level":1} /-->
 
 		<!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"left","verticalAlignment":"baseline"},"style":{"spacing":{"blockGap":"var:preset|spacing|40"}}} -->
@@ -14,10 +14,10 @@
 			<!-- wp:post-terms {"term":"category","textColor":"secondary","fontSize":"small","fontFamily":"monospace","style":{"typography":{"textTransform":"uppercase","letterSpacing":"0.05em"}}} /-->
 		</div>
 		<!-- /wp:group -->
+
+		<!-- wp:post-featured-image {"className":"is-style-tufte-hero"} /-->
 	</div>
 	<!-- /wp:group -->
-
-	<!-- wp:post-featured-image {"align":"wide"} /-->
 
 	<!-- wp:post-content {"layout":{"inherit":true,"justifyContent":"left"}} /-->
 

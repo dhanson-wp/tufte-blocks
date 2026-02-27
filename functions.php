@@ -59,6 +59,15 @@ function tufte_blocks_register_block_styles(): void {
 			'label' => __( 'Ornament', 'tufte-blocks' ),
 		)
 	);
+
+	// Post Featured Image: Tufte Hero style (margin figure).
+	register_block_style(
+		'core/post-featured-image',
+		array(
+			'name'  => 'tufte-hero',
+			'label' => __( 'Tufte Hero', 'tufte-blocks' ),
+		)
+	);
 }
 add_action( 'init', 'tufte_blocks_register_block_styles' );
 
