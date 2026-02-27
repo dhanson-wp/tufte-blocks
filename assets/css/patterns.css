@@ -379,22 +379,24 @@
 /* ========================================
    SINGLE POST: TUFTE HERO
    ======================================== */
-.tufte-hero {
-	position: relative;
-}
 
-/* Desktop: featured image floats in the right margin.
-   1200px ensures enough room for the image (~300px+) after
-   the 12.5% left padding eats into the viewport. */
+/* Desktop: CSS Grid places the featured image in the right
+   margin column alongside the title and metadata. */
 @media (min-width: 1200px) {
+	.tufte-hero {
+		display: grid !important;
+		grid-template-columns: var(--wp--style--global--content-size, 650px) 1fr;
+		column-gap: var(--wp--preset--spacing--50, 1.5rem);
+		align-items: start;
+	}
+
+	.tufte-hero > *:not(.is-style-tufte-hero) {
+		grid-column: 1;
+	}
+
 	.tufte-hero .is-style-tufte-hero {
-		position: absolute !important;
-		top: 0;
-		right: 0;
-		left: calc(
-			var(--wp--style--global--content-size, 650px) +
-			var(--wp--preset--spacing--50, 1.5rem)
-		);
+		grid-column: 2;
+		grid-row: 1 / -1;
 		max-width: none !important;
 		margin: 0 !important;
 	}
