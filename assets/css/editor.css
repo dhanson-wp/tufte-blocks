@@ -83,23 +83,17 @@
 }
 
 /* ==========================================================================
-   Post Title Links - Match Front-End (left-to-right background-image)
+   Post Title Links - Color change only, no underline
    ========================================================================== */
 
 .editor-styles-wrapper .wp-block-post-title a {
 	color: var(--wp--preset--color--foreground);
 	text-decoration: none;
-	background-image: linear-gradient(currentColor, currentColor);
-	background-position: left bottom;
-	background-repeat: no-repeat;
-	background-size: 0% 1px;
-	transition: background-size 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-				color 0.3s ease;
+	transition: color 0.3s ease;
 }
 
 .editor-styles-wrapper .wp-block-post-title a:hover {
 	color: var(--wp--preset--color--accent, #c9a959);
-	background-size: 100% 1px;
 }
 
 @media (prefers-reduced-motion: reduce) {

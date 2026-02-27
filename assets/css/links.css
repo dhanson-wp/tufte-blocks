@@ -51,6 +51,20 @@
 }
 
 /* ==========================================================================
+   Query Loop Links - No underline (color change only)
+   ========================================================================== */
+
+/**
+ * Strip the animated underline from links inside query loops.
+ * Post titles, dates, categories, excerpts get color-only hover.
+ * Paragraph links in regular content still get the full underline.
+ */
+.wp-block-query a:not(.wp-block-button__link):not(.wp-block-read-more) {
+	background-image: none !important;
+	background-size: 0 !important;
+}
+
+/* ==========================================================================
    Post Title Links (Query loop / archive titles)
    ========================================================================== */
 
@@ -61,23 +75,16 @@
 .wp-block-post-title a {
 	color: var(--wp--preset--color--foreground);
 	text-decoration: none;
-	background-image: linear-gradient(currentColor, currentColor);
-	background-position: left bottom;
-	background-repeat: no-repeat;
-	background-size: 0% 1px;
-	transition: background-size 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-				color 0.3s ease;
+	transition: color 0.3s ease;
 }
 
 .wp-block-post-title a:hover {
 	color: var(--wp--preset--color--accent, #c9a959);
-	background-size: 100% 1px;
 }
 
 .wp-block-post-title a:focus {
 	outline: 2px solid var(--wp--preset--color--primary);
 	outline-offset: 2px;
-	background-size: 100% 1px;
 }
 
 /* ==========================================================================
