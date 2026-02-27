@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Define theme version for cache busting.
  */
-define( 'TUFTE_BLOCKS_VERSION', '1.0.0' );
+define( 'TUFTE_BLOCKS_VERSION', '1.3.0' );
 
 /**
  * Register custom block styles.
