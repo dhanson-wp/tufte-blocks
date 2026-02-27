@@ -388,15 +388,15 @@
    the 12.5% left padding eats into the viewport. */
 @media (min-width: 1200px) {
 	.tufte-hero .is-style-tufte-hero {
-		position: absolute;
+		position: absolute !important;
 		top: 0;
 		right: 0;
 		left: calc(
 			var(--wp--style--global--content-size, 650px) +
 			var(--wp--preset--spacing--50, 1.5rem)
 		);
-		max-width: none;
-		margin: 0;
+		max-width: none !important;
+		margin: 0 !important;
 	}
 
 	.tufte-hero .is-style-tufte-hero img {
