@@ -325,3 +325,53 @@
 .tufte-syllabus-item .tufte-week-status.is-complete {
 	color: var(--wp--preset--color--primary) !important;
 }
+
+/* ========================================
+   HOMEPAGE: POST CARD HOVER
+   ======================================== */
+.tufte-post-card {
+	position: relative;
+	min-height: 100%;
+	transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+	            transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tufte-post-card:hover {
+	border-color: var(--wp--preset--color--primary) !important;
+	transform: translateY(-2px);
+}
+
+/* Stretched link: post title link covers the entire card */
+.tufte-post-card .wp-block-post-title a::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.tufte-post-card {
+		transition-duration: 0.01ms !important;
+	}
+}
+
+/* ========================================
+   HOMEPAGE: NOTE ROW
+   ======================================== */
+.tufte-note-row {
+	position: relative;
+}
+
+.tufte-note-row .wp-block-post-date {
+	flex-shrink: 0;
+	min-width: 4.5rem;
+	white-space: nowrap;
+}
+
+/* Stretched link: date link covers the entire row */
+.tufte-note-row .wp-block-post-date a::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+}
