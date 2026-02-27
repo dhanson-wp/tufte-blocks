@@ -115,21 +115,6 @@
    ========================================================================== */
 
 /**
- * Match the content width to theme layout
- */
-.editor-styles-wrapper .wp-block {
-	max-width: 650px;
-}
-
-.editor-styles-wrapper .wp-block[data-align="wide"] {
-	max-width: 1000px;
-}
-
-.editor-styles-wrapper .wp-block[data-align="full"] {
-	max-width: none;
-}
-
-/**
  * Add left padding to match frontend layout
  */
 .editor-styles-wrapper {
