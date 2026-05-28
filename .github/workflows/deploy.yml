@@ -18,6 +18,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install lftp
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends lftp
+
       - name: Deploy via SFTP (lftp)
         env:
           LFTP_PASSWORD: ${{ secrets.SFTP_PASS }}
