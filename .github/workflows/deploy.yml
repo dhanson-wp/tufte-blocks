@@ -18,26 +18,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Deploy via SFTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.SFTP_HOST }}
-          username: ${{ secrets.SFTP_USER }}
-          password: ${{ secrets.SFTP_PASS }}
-          protocol: sftp
-          port: 22
-          local-dir: ./
-          server-dir: ${{ secrets.SFTP_REMOTE_PATH }}
-          dangerous-clean-slate: false
-          log-level: standard
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/.github*
-            **/.github*/**
-            **/.DS_Store
-            **/node_modules/**
-            **/*.swp
-            **/.idea/**
-            **/.vscode/**
-            **/README.md
+      - name: Deploy via SFTP (lftp)
+        env:
+          LFTP_PASSWORD: ${{ secrets.SFTP_PASS }}
+        run: |
+          lftp -u "${{ secrets.SFTP_USER }}" --env-password sftp://${{ secrets.SFTP_HOST }} -e "
+            set sftp:auto-confirm yes;
+            set net:max-retries 2;
+            set net:timeout 30;
+            mirror -R --verbose \
+              --exclude-glob .git \
+              --exclude-glob .git/* \
+              --exclude-glob .github \
+              --exclude-glob .github/* \
+              --exclude-glob .DS_Store \
+              --exclude-glob node_modules \
+              --exclude-glob node_modules/* \
+              --exclude-glob .idea \
+              --exclude-glob .idea/* \
+              --exclude-glob .vscode \
+              --exclude-glob .vscode/* \
+              --exclude-glob README.md \
+              --exclude-glob '*.swp' \
+              . ${{ secrets.SFTP_REMOTE_PATH }};
+            bye
+          "
