@@ -1,0 +1,215 @@
+/**
+ * Comment Thread Styles
+ *
+ * Handles only what theme.json cannot express:
+ * list resets, depth-based indentation, pill buttons,
+ * the bypostauthor badge, and the native comment form.
+ *
+ * @package Tufte_Blocks
+ */
+
+/* === Comments Container === */
+
+.wp-block-comments {
+	font-size: var(--wp--preset--font-size--small);
+}
+
+/* === List Reset === */
+
+.wp-block-comment-template,
+.wp-block-comment-template ol {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* === Spacing Between Comments === */
+
+.wp-block-comment-template > li {
+	padding: var(--wp--preset--spacing--50) 0;
+}
+
+.wp-block-comment-template > li + li {
+	border-top: 1px solid var(--wp--preset--color--border);
+}
+
+/* === Threaded Reply Indentation === */
+
+.wp-block-comment-template ol > li {
+	padding: var(--wp--preset--spacing--50) 0 0;
+	margin-left: var(--wp--preset--spacing--60);
+}
+
+.wp-block-comment-template ol ol > li {
+	margin-left: var(--wp--preset--spacing--60);
+}
+
+/* === Avatar (rounded — done in CSS to avoid block-level border style) === */
+
+.wp-block-avatar img {
+	border-radius: 50%;
+	display: block;
+}
+
+/* === Post Author Badge === */
+
+.bypostauthor > .comment-item .wp-block-comment-author-name::after,
+.bypostauthor > .wp-block-group .wp-block-comment-author-name::after {
+	content: "author";
+	font-family: var(--wp--preset--font-family--monospace);
+	font-size: 0.6rem;
+	letter-spacing: 0.08em;
+	color: var(--wp--preset--color--primary);
+	border: 1px solid var(--wp--preset--color--primary);
+	padding: 1px 5px;
+	border-radius: 2px;
+	margin-left: 6px;
+	vertical-align: middle;
+	font-weight: 400;
+	text-transform: lowercase;
+}
+
+/* === Reply / Edit Links (outline pill buttons) === */
+
+.wp-block-comment-reply-link a,
+.wp-block-comment-edit-link a {
+	display: inline-block;
+	color: var(--wp--preset--color--foreground);
+	background: transparent;
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: 999px;
+	padding: 0.25rem 0.75rem;
+	text-decoration: none;
+	transition: border-color var(--wp--custom--transition),
+	            color var(--wp--custom--transition),
+	            background var(--wp--custom--transition);
+}
+
+.wp-block-comment-reply-link a:hover,
+.wp-block-comment-edit-link a:hover {
+	color: var(--wp--preset--color--background);
+	background: var(--wp--preset--color--foreground);
+	border-color: var(--wp--preset--color--foreground);
+}
+
+/* === Comment Form (native comment_form() output — not a block) === */
+
+.wp-block-post-comments-form {
+	margin-top: var(--wp--preset--spacing--70);
+	padding-top: var(--wp--preset--spacing--50);
+	border-top: 1px solid var(--wp--preset--color--border);
+}
+
+.comment-reply-title {
+	font-family: var(--wp--preset--font-family--serif);
+	font-size: var(--wp--preset--font-size--medium);
+	font-weight: 400;
+	color: var(--wp--preset--color--foreground);
+	margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.comment-form label {
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--wp--preset--color--foreground);
+	display: block;
+	margin-bottom: 0.4rem;
+}
+
+.comment-form input[type="text"],
+.comment-form input[type="email"],
+.comment-form input[type="url"],
+.comment-form textarea {
+	width: 100%;
+	background: transparent;
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: 6px;
+	color: var(--wp--preset--color--foreground);
+	font-family: var(--wp--preset--font-family--serif);
+	font-size: var(--wp--preset--font-size--small);
+	padding: 0.625rem 0.875rem;
+	transition: border-color var(--wp--custom--transition);
+	box-sizing: border-box;
+}
+
+.comment-form input:focus,
+.comment-form textarea:focus {
+	outline: none;
+	border-color: var(--wp--preset--color--primary);
+}
+
+.comment-form textarea {
+	min-height: 120px;
+	line-height: 1.6;
+	resize: vertical;
+}
+
+.comment-form input::placeholder,
+.comment-form textarea::placeholder {
+	color: var(--wp--preset--color--secondary);
+}
+
+.comment-form p {
+	margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.comment-form .form-submit {
+	margin-bottom: 0;
+	margin-top: var(--wp--preset--spacing--50);
+}
+
+.comment-form input[type="submit"],
+.comment-form .submit {
+	display: block;
+	width: 100%;
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--wp--preset--color--background);
+	background: var(--wp--preset--color--foreground);
+	border: none;
+	border-radius: 999px;
+	padding: 0.75rem 1.5rem;
+	cursor: pointer;
+	font-weight: 500;
+	transition: background var(--wp--custom--transition);
+}
+
+.comment-form input[type="submit"]:hover {
+	background: var(--wp--preset--color--primary);
+}
+
+.comment-notes,
+.comment-awaiting-moderation,
+.logged-in-as {
+	font-size: 0.75rem;
+	color: var(--wp--preset--color--secondary);
+}
+
+#cancel-comment-reply-link {
+	font-size: 0.75rem;
+	color: var(--wp--preset--color--secondary);
+	margin-left: 0.5rem;
+}
+
+#cancel-comment-reply-link:hover {
+	color: var(--wp--preset--color--primary);
+}
+
+/* === Mobile === */
+
+@media (max-width: 600px) {
+	.wp-block-comment-template ol > li,
+	.wp-block-comment-template ol ol > li {
+		margin-left: var(--wp--preset--spacing--50);
+	}
+}
+
+/* === Reduced Motion === */
+
+@media (prefers-reduced-motion: reduce) {
+	.wp-block-comment-reply-link a,
+	.wp-block-comment-edit-link a,
+	.comment-form input,
+	.comment-form textarea,
+	.comment-form input[type="submit"] {
+		transition-duration: 0.01ms !important;
+	}
+}

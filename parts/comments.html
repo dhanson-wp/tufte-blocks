@@ -1,0 +1,53 @@
+<!-- wp:separator {"className":"is-style-wide","style":{"spacing":{"margin":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70"}}}} /-->
+
+<!-- wp:comments {"style":{"spacing":{"padding":{"bottom":"var:preset|spacing|80"}}}} -->
+<div class="wp-block-comments">
+
+	<!-- wp:comments-title {"level":2,"showPostTitle":false,"fontSize":"medium","fontFamily":"serif"} /-->
+
+	<!-- wp:comment-template -->
+
+		<!-- wp:group {"className":"comment-item","layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"top"},"style":{"spacing":{"blockGap":"var:preset|spacing|40","margin":{"bottom":"0"}}}} -->
+		<div class="wp-block-group comment-item">
+
+			<!-- wp:avatar {"size":32} /-->
+
+			<!-- wp:group {"layout":{"type":"flex","orientation":"vertical","justifyContent":"left"},"style":{"spacing":{"blockGap":"var:preset|spacing|30"}}} -->
+			<div class="wp-block-group">
+
+				<!-- wp:group {"layout":{"type":"flex","orientation":"vertical","justifyContent":"left"},"style":{"spacing":{"blockGap":"0"}}} -->
+				<div class="wp-block-group">
+					<!-- wp:comment-author-name {"isLink":false,"fontSize":"small"} /-->
+					<!-- wp:comment-date {"format":"F j, Y","isLink":false,"fontFamily":"monospace","fontSize":"small"} /-->
+				</div>
+				<!-- /wp:group -->
+
+				<!-- wp:comment-content /-->
+
+				<!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap"},"style":{"spacing":{"blockGap":"var:preset|spacing|30"}}} -->
+				<div class="wp-block-group">
+					<!-- wp:comment-reply-link {"fontFamily":"monospace","fontSize":"small"} /-->
+					<!-- wp:comment-edit-link {"fontFamily":"monospace","fontSize":"small"} /-->
+				</div>
+				<!-- /wp:group -->
+
+			</div>
+			<!-- /wp:group -->
+
+		</div>
+		<!-- /wp:group -->
+
+	<!-- /wp:comment-template -->
+
+	<!-- wp:comments-pagination {"paginationArrow":"none","style":{"spacing":{"margin":{"top":"var:preset|spacing|50"}}}} -->
+	<div class="wp-block-comments-pagination">
+		<!-- wp:comments-pagination-previous /-->
+		<!-- wp:comments-pagination-numbers /-->
+		<!-- wp:comments-pagination-next /-->
+	</div>
+	<!-- /wp:comments-pagination -->
+
+	<!-- wp:post-comments-form /-->
+
+</div>
+<!-- /wp:comments -->

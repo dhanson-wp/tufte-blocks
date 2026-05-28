@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Define theme version for cache busting.
  */
-define( 'TUFTE_BLOCKS_VERSION', '1.3.0' );
+define( 'TUFTE_BLOCKS_VERSION', '1.4.0' );
 
 /**
  * Register custom block styles.
@@ -136,6 +136,14 @@ function tufte_blocks_enqueue_styles(): void {
 	wp_enqueue_style(
 		'tufte-layout',
 		$theme_path . 'layout.css',
+		array(),
+		$version
+	);
+
+	// Comment thread styles.
+	wp_enqueue_style(
+		'tufte-blocks-comments',
+		$theme_path . 'comments.css',
 		array(),
 		$version
 	);
