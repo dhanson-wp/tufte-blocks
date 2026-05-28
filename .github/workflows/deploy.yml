@@ -23,25 +23,6 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends lftp
 
-      - name: Discover SFTP layout (temp diagnostic)
-        env:
-          LFTP_PASSWORD: ${{ secrets.SFTP_PASS }}
-        run: |
-          lftp -u "${{ secrets.SFTP_USER }}" --env-password sftp://${{ secrets.SFTP_HOST }} -e "
-            set sftp:auto-confirm yes;
-            echo === pwd ===;
-            pwd;
-            echo === ls root ===;
-            cls -la;
-            echo === ls htdocs ===;
-            cls -la htdocs;
-            echo === ls wp-content/themes ===;
-            cls -la wp-content/themes;
-            echo === ls htdocs/wp-content/themes ===;
-            cls -la htdocs/wp-content/themes;
-            bye
-          "
-
       - name: Deploy via SFTP (lftp)
         env:
           LFTP_PASSWORD: ${{ secrets.SFTP_PASS }}
@@ -50,7 +31,6 @@ jobs:
             set sftp:auto-confirm yes;
             set net:max-retries 2;
             set net:timeout 30;
-            mkdir -p ${{ secrets.SFTP_REMOTE_PATH }};
             mirror -R --verbose \
               --exclude-glob .git \
               --exclude-glob .git/* \
