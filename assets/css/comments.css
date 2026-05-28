@@ -184,6 +184,64 @@
 	color: var(--wp--preset--color--secondary);
 }
 
+/* === Checkboxes (subscribe-to-comments, mailing list opt-ins) === */
+
+.comment-form input[type="checkbox"] {
+	appearance: none;
+	-webkit-appearance: none;
+	width: 1rem;
+	height: 1rem;
+	margin: 0 0.5rem 0 0;
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: 3px;
+	background: transparent;
+	cursor: pointer;
+	vertical-align: -0.15em;
+	position: relative;
+	flex-shrink: 0;
+	transition: border-color var(--wp--custom--transition),
+	            background var(--wp--custom--transition);
+}
+
+.comment-form input[type="checkbox"]:hover {
+	border-color: var(--wp--preset--color--primary);
+}
+
+.comment-form input[type="checkbox"]:checked {
+	background: var(--wp--preset--color--primary);
+	border-color: var(--wp--preset--color--primary);
+}
+
+.comment-form input[type="checkbox"]:checked::after {
+	content: "";
+	position: absolute;
+	left: 4px;
+	top: 0;
+	width: 5px;
+	height: 9px;
+	border: solid var(--wp--preset--color--background);
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
+}
+
+.comment-form input[type="checkbox"]:focus-visible {
+	outline: 2px solid var(--wp--preset--color--primary);
+	outline-offset: 2px;
+}
+
+/* Keep checkbox + label on the same line (Jetpack's subscribe row was breaking) */
+.comment-form p:has(input[type="checkbox"]) {
+	display: flex;
+	align-items: baseline;
+	gap: 0.5rem;
+}
+
+.comment-form p:has(input[type="checkbox"]) label {
+	margin: 0;
+	font-size: var(--wp--preset--font-size--small);
+	display: inline;
+}
+
 #cancel-comment-reply-link {
 	font-size: 0.75rem;
 	color: var(--wp--preset--color--secondary);
