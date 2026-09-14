@@ -413,3 +413,101 @@
 		margin-top: var(--wp--preset--spacing--50);
 	}
 }
+
+/* ========================================
+   PROJECT CARD
+   ======================================== */
+
+/* Card container — hover state */
+.tufte-project-card {
+	position: relative;
+	transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+	            background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tufte-project-card:hover {
+	border-color: var(--wp--preset--color--primary) !important;
+	background-color: var(--wp--preset--color--surface) !important;
+}
+
+/* Stretched link: post title link covers the entire card */
+.tufte-project-card .wp-block-post-title a::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+}
+
+/* Icon — flex-shrink: 0, fixed size */
+.tufte-project-icon {
+	flex-shrink: 0;
+	width: 48px !important;
+	height: 48px !important;
+	margin: 0 !important;
+}
+
+.tufte-project-icon img {
+	width: 48px;
+	height: 48px;
+	object-fit: contain;
+}
+
+/* Info stack — fill remaining space */
+.tufte-project-info {
+	flex: 1;
+	min-width: 0;
+}
+
+/* Title row — space-between */
+.tufte-project-title-row {
+	width: 100%;
+}
+
+/* Tag pill styling */
+.tufte-project-pills {
+	margin: 0 !important;
+}
+
+.tufte-project-pills a {
+	font-family: var(--wp--preset--font-family--monospace);
+	font-size: 0.7rem !important;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--wp--preset--color--primary);
+	border: 1px solid var(--wp--preset--color--primary);
+	border-radius: 3px;
+	padding: 0.15em 0.5em;
+	line-height: 1.4;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+/* Tool terms — right-aligned, secondary */
+.tufte-project-tools {
+	margin: 0 !important;
+	white-space: nowrap;
+}
+
+.tufte-project-tools a {
+	color: var(--wp--preset--color--secondary);
+	font-size: 0.82rem !important;
+	text-decoration: none;
+}
+
+/* Responsive — stack at narrow viewports */
+@media (max-width: 480px) {
+	.tufte-project-card {
+		flex-wrap: wrap !important;
+	}
+	.tufte-project-title-row {
+		flex-direction: column !important;
+		align-items: flex-start !important;
+		gap: 0.25rem !important;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.tufte-project-card {
+		transition-duration: 0.01ms !important;
+	}
+}
