@@ -49,8 +49,10 @@ ps aux | grep "Studio/derekhansonblog" | grep -oE "127.0.0.1:[0-9]+" | sort -u |
 ```bash
 export STUDIO_PHP=/Applications/Studio.app/Contents/Resources/php-bin/8.4.25-studio-3/php
 phplint() { "$STUDIO_PHP" -l "$@"; }
-wpcli() { "$STUDIO_PHP" /usr/local/bin/wp --path=/Users/derekhanson/Studio/derekhansonblog "$@" 2>&1 | grep -v Deprecated; }
+wpcli() { "$STUDIO_PHP" /usr/local/bin/wp --path=/Users/derekhanson/Studio/derekhansonblog --require=/Users/derekhanson/Studio/derekhansonblog/wp-content/themes/tufte-blocks/tests/allow-hosts.php "$@" 2>&1 | grep -v Deprecated; }
 ```
+
+**Outbound HTTP.** Studio's `wp-config.php` defines `WP_HTTP_BLOCK_EXTERNAL`, for the web context and WP-CLI alike. `tests/allow-hosts.php` (loaded by the `wpcli` helper above via `--require`, which runs before wp-config) defines `WP_ACCESSIBLE_HOSTS` for the .org and GitHub hosts, so CLI sync runs fetch for real. The running Studio site stays blocked, so the sidebar's "Refresh now" button shows the recorded fetch errors locally instead of new values; that is the error path working, not a bug. Production on WordPress.com has no such block.
 
 Wherever a task says `php -l`, use `phplint`. The Studio version folder name may change after a Studio update; `ls /Applications/Studio.app/Contents/Resources/php-bin/` shows the current one.
 
