@@ -415,99 +415,125 @@
 }
 
 /* ========================================
-   PROJECT CARD
+   PROJECTS
+   Archive grid, card, single hero, buttons,
+   details panel, patterns, project nav.
+   Every value is a theme.json token.
    ======================================== */
 
-/* Card container — hover state */
+/* --- Shared type helpers --- */
+.tufte-project-mono,
+.tufte-project-meta p,
+.tufte-project-back,
+.tufte-project-nav,
+.tufte-project-dl,
+.tufte-project-links .wp-block-button__link {
+	font-family: var(--wp--preset--font-family--monospace);
+}
+
+/* --- Archive header --- */
+.tufte-projects-archive .tufte-projects-title {
+	max-width: 26ch;
+}
+
+.tufte-projects-archive .tufte-projects-intro {
+	max-width: 62ch;
+}
+
+/* --- Card --- */
 .tufte-project-card {
 	position: relative;
-	transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-	            background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	overflow: hidden;
+	height: 100%;
+	transition: border-color var(--wp--custom--transition),
+	            transform var(--wp--custom--transition);
 }
 
-.tufte-project-card:hover {
+.tufte-project-card:hover,
+.tufte-project-card:focus-within {
 	border-color: var(--wp--preset--color--primary) !important;
-	background-color: var(--wp--preset--color--surface) !important;
+	transform: translateY(-2px);
 }
 
-/* Stretched link: post title link covers the entire card */
-.tufte-project-card .wp-block-post-title a::after {
+/* Banner: full bleed, fixed aspect, hairline below */
+.tufte-project-card .tufte-project-banner {
+	margin: 0;
+	width: 100%;
+	border-bottom: 1px solid var(--wp--preset--color--border);
+}
+
+.tufte-project-card .tufte-project-banner img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 1544 / 500;
+	object-fit: cover;
+	border-radius: 0;
+}
+
+/* Body fills the remaining height so the meta line sits at the bottom */
+.tufte-project-card .tufte-project-body {
+	flex: 1;
+	width: 100%;
+	min-width: 0;
+}
+
+.tufte-project-card .tufte-project-type,
+.tufte-project-card .tufte-project-type a {
+	color: var(--wp--preset--color--primary);
+	text-decoration: none;
+	margin-bottom: 0 !important;
+}
+
+.tufte-project-card .tufte-project-title {
+	margin: 0;
+}
+
+.tufte-project-card .tufte-project-title a {
+	color: var(--wp--preset--color--foreground);
+	transition: color var(--wp--custom--transition);
+}
+
+.tufte-project-card .tufte-project-title a:hover {
+	color: var(--wp--preset--color--primary);
+}
+
+/* Stretched link: the title link covers the whole card */
+.tufte-project-card .tufte-project-title a::after {
 	content: "";
 	position: absolute;
 	inset: 0;
 	z-index: 1;
 }
 
-/* Icon — flex-shrink: 0, fixed size */
-.tufte-project-icon {
-	flex-shrink: 0;
-	width: 48px !important;
-	height: 48px !important;
-	margin: 0 !important;
+.tufte-project-card .tufte-project-excerpt p {
+	margin: 0;
 }
 
-.tufte-project-icon img {
-	width: 48px;
-	height: 48px;
-	object-fit: contain;
+/* Meta line: v1.0.2 · Sep 2026 */
+.tufte-project-card .tufte-project-meta {
+	margin-top: auto !important;
+	padding-top: var(--wp--preset--spacing--20);
 }
 
-/* Info stack — fill remaining space */
-.tufte-project-info {
-	flex: 1;
-	min-width: 0;
-}
-
-/* Title row — space-between */
-.tufte-project-title-row {
-	width: 100%;
-}
-
-/* Tag pill styling */
-.tufte-project-pills {
-	margin: 0 !important;
-}
-
-.tufte-project-pills a {
-	font-family: var(--wp--preset--font-family--monospace);
-	font-size: 0.7rem !important;
+.tufte-project-meta p {
+	margin: 0;
+	font-size: 0.7rem;
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
-	color: var(--wp--preset--color--primary);
-	border: 1px solid var(--wp--preset--color--primary);
-	border-radius: 3px;
-	padding: 0.15em 0.5em;
-	line-height: 1.4;
-	text-decoration: none;
-	white-space: nowrap;
-}
-
-/* Tool terms — right-aligned, secondary */
-.tufte-project-tools {
-	margin: 0 !important;
-	white-space: nowrap;
-}
-
-.tufte-project-tools a {
 	color: var(--wp--preset--color--secondary);
-	font-size: 0.82rem !important;
-	text-decoration: none;
 }
 
-/* Responsive — stack at narrow viewports */
-@media (max-width: 480px) {
-	.tufte-project-card {
-		flex-wrap: wrap !important;
-	}
-	.tufte-project-title-row {
-		flex-direction: column !important;
-		align-items: flex-start !important;
-		gap: 0.25rem !important;
-	}
+.tufte-project-meta .tufte-project-version::before {
+	content: "v";
+}
+
+.tufte-project-meta .tufte-project-version + .tufte-project-date::before {
+	content: "· ";
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.tufte-project-card {
+	.tufte-project-card,
+	.tufte-project-card .tufte-project-title a {
 		transition-duration: 0.01ms !important;
 	}
 }
