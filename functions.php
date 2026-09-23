@@ -33,6 +33,7 @@ foreach ( array(
 	'sources/wporg',
 	'sources/github',
 	'sync',
+	'bindings',
 ) as $tufte_blocks_projects_file ) {
 	require_once get_template_directory() . '/inc/projects/' . $tufte_blocks_projects_file . '.php';
 }
