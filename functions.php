@@ -34,6 +34,7 @@ foreach ( array(
 	'sources/github',
 	'sync',
 	'bindings',
+	'editor',
 ) as $tufte_blocks_projects_file ) {
 	require_once get_template_directory() . '/inc/projects/' . $tufte_blocks_projects_file . '.php';
 }
