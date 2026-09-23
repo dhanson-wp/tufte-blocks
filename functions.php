@@ -30,6 +30,7 @@ foreach ( array(
 	'tool-icons',
 	'fields',
 	'header-parser',
+	'sources/wporg',
 ) as $tufte_blocks_projects_file ) {
 	require_once get_template_directory() . '/inc/projects/' . $tufte_blocks_projects_file . '.php';
 }
