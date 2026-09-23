@@ -3,7 +3,8 @@
  * Title: Project Card
  * Slug: tufte-blocks/project-card
  * Categories: tufte-projects
- * Description: A project showcase card with icon, title, type pill, tools, and description.
+ * Block Types: core/post-template
+ * Description: A project card with a full-bleed banner, type eyebrow, title, excerpt, and version line. Matches the projects archive template.
  * Keywords: project, card, portfolio, showcase
  *
  * @package Tufte_Blocks
@@ -11,42 +12,34 @@
 
 ?>
 
-<!-- wp:group {"className":"tufte-project-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|50","right":"var:preset|spacing|50"}},"border":{"width":"1px","color":"var:preset|color|border","radius":"4px"}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"top"}} -->
-<div class="wp-block-group tufte-project-card" style="border-color:var(--wp--preset--color--border);border-width:1px;border-radius:4px;padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)">
+<!-- wp:group {"tagName":"article","className":"tufte-project-card","style":{"border":{"width":"1px","color":"var:preset|color|border","radius":"4px"},"spacing":{"blockGap":"0"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"stretch"}} -->
+<article class="wp-block-group tufte-project-card" style="border-color:var(--wp--preset--color--border);border-width:1px;border-radius:4px">
 
-	<!-- wp:image {"width":"48px","height":"48px","className":"tufte-project-icon","style":{"border":{"radius":"4px"}}} -->
-	<figure class="wp-block-image is-resized tufte-project-icon" style="border-radius:4px"><img alt="" style="width:48px;height:48px"/></figure>
-	<!-- /wp:image -->
+	<!-- wp:post-featured-image {"isLink":true,"aspectRatio":"1544/500","scale":"cover","className":"tufte-project-banner"} /-->
 
-	<!-- wp:group {"className":"tufte-project-info","style":{"spacing":{"blockGap":"var:preset|spacing|20"}},"layout":{"type":"flex","orientation":"vertical"}} -->
-	<div class="wp-block-group tufte-project-info">
+	<!-- wp:group {"className":"tufte-project-body","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","right":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|50"},"blockGap":"var:preset|spacing|30"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"stretch"}} -->
+	<div class="wp-block-group tufte-project-body" style="padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)">
 
-		<!-- wp:group {"className":"tufte-project-title-row","style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
-		<div class="wp-block-group tufte-project-title-row">
-			<!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap","verticalAlignment":"baseline"},"style":{"spacing":{"blockGap":"var:preset|spacing|30"}}} -->
-			<div class="wp-block-group">
-				<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"1.1rem","fontWeight":"400"}}} -->
-				<h3 class="wp-block-heading" style="font-size:1.1rem;font-weight:400">Project Name</h3>
-				<!-- /wp:heading -->
+		<!-- wp:post-terms {"term":"project_type","separator":" · ","className":"tufte-eyebrow tufte-project-type","textColor":"primary"} /-->
 
-				<!-- wp:paragraph {"className":"tufte-project-pills tufte-eyebrow","textColor":"primary","style":{"typography":{"fontSize":"0.7rem"}}} -->
-				<p class="tufte-project-pills tufte-eyebrow has-primary-color has-text-color" style="font-size:0.7rem">Plugin</p>
-				<!-- /wp:paragraph -->
-			</div>
-			<!-- /wp:group -->
+		<!-- wp:post-title {"level":2,"isLink":true,"fontSize":"x-large","className":"tufte-project-title"} /-->
 
-			<!-- wp:paragraph {"textColor":"secondary","style":{"typography":{"fontSize":"0.82rem"}}} -->
-			<p class="has-secondary-color has-text-color" style="font-size:0.82rem">Claude · Cursor</p>
+		<!-- wp:post-excerpt {"moreText":"","showMoreOnNewLine":false,"excerptLength":30,"textColor":"secondary","fontSize":"small","className":"tufte-project-excerpt"} /-->
+
+		<!-- wp:group {"className":"tufte-project-meta","style":{"spacing":{"blockGap":"var:preset|spacing|20"}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
+		<div class="wp-block-group tufte-project-meta">
+			<!-- wp:paragraph {"className":"tufte-project-version","metadata":{"bindings":{"content":{"source":"tufte-blocks/project-field","args":{"key":"version"}}}}} -->
+			<p class="tufte-project-version">1.0.0</p>
+			<!-- /wp:paragraph -->
+
+			<!-- wp:paragraph {"className":"tufte-project-date","metadata":{"bindings":{"content":{"source":"tufte-blocks/project-field","args":{"key":"release_date"}}}}} -->
+			<p class="tufte-project-date">Jan 2026</p>
 			<!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:group -->
 
-		<!-- wp:paragraph {"textColor":"secondary","style":{"typography":{"fontSize":"0.92rem"}}} -->
-		<p class="has-secondary-color has-text-color" style="font-size:0.92rem">A brief description of the project and what it does.</p>
-		<!-- /wp:paragraph -->
-
 	</div>
 	<!-- /wp:group -->
 
-</div>
+</article>
 <!-- /wp:group -->
