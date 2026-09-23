@@ -2017,10 +2017,25 @@ tufte_assert_same( 'Hello', tufte_blocks_project_get_field( $fake_id, 'tagline' 
 tufte_assert_same( '', tufte_blocks_project_get_field( $fake_id, 'demo_url' ), 'get_field: unset manual meta is empty' );
 
 // Binding source callback signature.
-$block = new WP_Block( array( 'blockName' => 'core/paragraph', 'attrs' => array() ), array( 'postId' => $fake_id, 'postType' => 'project' ) );
+// Core copies the source's uses_context into $block->context inside
+// WP_Block::process_block_bindings(), so a direct call sets it by hand.
+$block          = new WP_Block( array( 'blockName' => 'core/paragraph', 'attrs' => array() ), array() );
+$block->context = array( 'postId' => $fake_id, 'postType' => 'project' );
 tufte_assert_same( '1.0.2', tufte_blocks_project_binding_value( array( 'key' => 'version' ), $block, 'content' ), 'binding: resolves via block context postId' );
 tufte_assert_same( '', tufte_blocks_project_binding_value( array(), $block, 'content' ), 'binding: missing key arg is empty' );
 tufte_assert_same( true, null !== get_block_bindings_source( 'tufte-blocks/project-field' ), 'binding: source is registered' );
+
+// The real path: core renders a bound paragraph and calls our source with context.
+$rendered = ( new WP_Block(
+	array(
+		'blockName'    => 'core/paragraph',
+		'attrs'        => array( 'metadata' => array( 'bindings' => array( 'content' => array( 'source' => 'tufte-blocks/project-field', 'args' => array( 'key' => 'version' ) ) ) ) ),
+		'innerHTML'    => '<p>placeholder</p>',
+		'innerContent' => array( '<p>placeholder</p>' ),
+	),
+	array( 'postId' => $fake_id, 'postType' => 'project' )
+) )->render();
+tufte_assert_same( true, str_contains( $rendered, '>1.0.2<' ), 'binding: core render replaces paragraph content via the source' );
 
 wp_cache_delete( $fake_id, 'post_meta' );
 ```
@@ -2158,7 +2173,7 @@ phplint inc/projects/bindings.php
 wpcli eval-file tests/run.php
 ```
 
-Expected: `85 passed, 0 failed`.
+Expected: `86 passed, 0 failed`.
 
 - [ ] **Step 5: Commit, then go back and do Task 5.2**
 
@@ -2192,21 +2207,27 @@ $bound = static fn( string $key, array $extra = array() ): array => array(
 	'attrs'     => array_merge( array( 'metadata' => array( 'bindings' => array( 'content' => array( 'source' => 'tufte-blocks/project-field', 'args' => array( 'key' => $key ) ) ) ) ) ), $extra ),
 	'innerHTML' => '<p>x</p>',
 );
-$ctx = array( 'postId' => $fake_id );
+$ctx = array( 'postId' => $fake_id, 'postType' => 'project' );
+// Build a WP_Block with context already populated, as core does before render_block fires.
+$inst = static function ( array $parsed ) use ( $ctx ): WP_Block {
+	$b          = new WP_Block( $parsed, array() );
+	$b->context = $ctx;
+	return $b;
+};
 
-tufte_assert_same( '<p>1.0.2</p>', tufte_blocks_project_filter_empty_bindings( '<p>1.0.2</p>', $bound( 'version' ), new WP_Block( $bound( 'version' ), $ctx ) ), 'filter: bound block with a value passes through' );
-tufte_assert_same( '', tufte_blocks_project_filter_empty_bindings( '<p></p>', $bound( 'tested_up_to' ), new WP_Block( $bound( 'tested_up_to' ), $ctx ) ), 'filter: bound block with an empty value is removed' );
+tufte_assert_same( '<p>1.0.2</p>', tufte_blocks_project_filter_empty_bindings( '<p>1.0.2</p>', $bound( 'version' ), $inst( $bound( 'version' ) ) ), 'filter: bound block with a value passes through' );
+tufte_assert_same( '', tufte_blocks_project_filter_empty_bindings( '<p></p>', $bound( 'tested_up_to' ), $inst( $bound( 'tested_up_to' ) ) ), 'filter: bound block with an empty value is removed' );
 
 $plain = array( 'blockName' => 'core/paragraph', 'attrs' => array(), 'innerHTML' => '<p>hi</p>' );
-tufte_assert_same( '<p>hi</p>', tufte_blocks_project_filter_empty_bindings( '<p>hi</p>', $plain, new WP_Block( $plain, $ctx ) ), 'filter: unbound block passes through' );
+tufte_assert_same( '<p>hi</p>', tufte_blocks_project_filter_empty_bindings( '<p>hi</p>', $plain, $inst( $plain ) ), 'filter: unbound block passes through' );
 
 $other = array( 'blockName' => 'core/paragraph', 'attrs' => array( 'metadata' => array( 'bindings' => array( 'content' => array( 'source' => 'core/post-meta', 'args' => array( 'key' => 'nope' ) ) ) ) ), 'innerHTML' => '<p></p>' );
-tufte_assert_same( '<p></p>', tufte_blocks_project_filter_empty_bindings( '<p></p>', $other, new WP_Block( $other, $ctx ) ), 'filter: other binding sources are not our business' );
+tufte_assert_same( '<p></p>', tufte_blocks_project_filter_empty_bindings( '<p></p>', $other, $inst( $other ) ), 'filter: other binding sources are not our business' );
 
 $row = array( 'blockName' => 'core/group', 'attrs' => array( 'className' => 'tufte-project-detail' ), 'innerHTML' => '' );
-tufte_assert_same( '', tufte_blocks_project_filter_empty_bindings( '<div class="wp-block-group tufte-project-detail"><p class="tufte-project-label">Version</p></div>', $row, new WP_Block( $row, $ctx ) ), 'filter: detail row without a value is removed' );
+tufte_assert_same( '', tufte_blocks_project_filter_empty_bindings( '<div class="wp-block-group tufte-project-detail"><p class="tufte-project-label">Version</p></div>', $row, $inst( $row ) ), 'filter: detail row without a value is removed' );
 $row_html = '<div class="wp-block-group tufte-project-detail"><p class="tufte-project-label">Version</p><p class="tufte-project-value">1.0.2</p></div>';
-tufte_assert_same( $row_html, tufte_blocks_project_filter_empty_bindings( $row_html, $row, new WP_Block( $row, $ctx ) ), 'filter: detail row with a value passes through' );
+tufte_assert_same( $row_html, tufte_blocks_project_filter_empty_bindings( $row_html, $row, $inst( $row ) ), 'filter: detail row with a value passes through' );
 
 wp_cache_delete( $fake_id, 'post_meta' );
 ```
@@ -2268,7 +2289,7 @@ add_filter( 'render_block', 'tufte_blocks_project_filter_empty_bindings', 20, 3 
 wpcli eval-file tests/run.php
 ```
 
-Expected: `91 passed, 0 failed`.
+Expected: `92 passed, 0 failed`.
 
 - [ ] **Step 5: Commit**
 
@@ -3577,7 +3598,7 @@ wpcli eval-file tests/run.php
 git status --short
 ```
 
-Expected: `91 passed, 0 failed`; only `style.css` and `functions.php` modified. Then open the archive and one single page once more in dark and light, desktop and 400px, and with `prefers-reduced-motion: reduce` emulated (card hover no longer animates).
+Expected: `92 passed, 0 failed`; only `style.css` and `functions.php` modified. Then open the archive and one single page once more in dark and light, desktop and 400px, and with `prefers-reduced-motion: reduce` emulated (card hover no longer animates).
 
 - [ ] **Step 3: Commit**
 
