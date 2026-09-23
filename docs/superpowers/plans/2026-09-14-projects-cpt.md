@@ -752,7 +752,9 @@ function tufte_blocks_project_format_month_year( string $value ): string {
 	if ( false === $timestamp ) {
 		return $value;
 	}
-	return wp_date( 'M Y', $timestamp );
+	// Format in UTC: a month-only value like "Sep 2026" parses as the 1st at
+	// midnight UTC, and a site timezone west of UTC would shift it to August.
+	return wp_date( 'M Y', $timestamp, new DateTimeZone( 'UTC' ) );
 }
 ```
 
