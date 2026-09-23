@@ -44,6 +44,10 @@ jobs:
               --exclude-glob .vscode \
               --exclude-glob .vscode/* \
               --exclude-glob README.md \
+              --exclude-glob docs \
+              --exclude-glob docs/* \
+              --exclude-glob tests \
+              --exclude-glob tests/* \
               --exclude-glob '*.swp' \
               . ${{ secrets.SFTP_REMOTE_PATH }};
             bye

@@ -15,7 +15,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Define theme version for cache busting.
  */
-define( 'TUFTE_BLOCKS_VERSION', '1.4.4' );
+define( 'TUFTE_BLOCKS_VERSION', '1.5.0' );
+
+/**
+ * Projects feature: post type, taxonomies, fields, sync, bindings, editor panel.
+ *
+ * Files are loaded in dependency order. The registry (fields.php) must load
+ * before anything that reads it.
+ *
+ * @since 1.5.0
+ */
+foreach ( array(
+	'post-type',
+	'tool-icons',
+	'fields',
+	'header-parser',
+	'sources/wporg',
+	'sources/github',
+	'sync',
+	'bindings',
+	'editor',
+	'render',
+) as $tufte_blocks_projects_file ) {
+	require_once get_template_directory() . '/inc/projects/' . $tufte_blocks_projects_file . '.php';
+}
+unset( $tufte_blocks_projects_file );
 
 /**
  * Register custom block styles.
@@ -255,6 +279,14 @@ function tufte_blocks_register_pattern_categories(): void {
 		array(
 			'label'       => __( 'Layout', 'tufte-blocks' ),
 			'description' => __( 'Structural patterns like heroes and section breaks.', 'tufte-blocks' ),
+		)
+	);
+
+	register_block_pattern_category(
+		'tufte-projects',
+		array(
+			'label'       => __( 'Projects', 'tufte-blocks' ),
+			'description' => __( 'Project showcase cards and layouts.', 'tufte-blocks' ),
 		)
 	);
 }
