@@ -3545,6 +3545,13 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 
 - [ ] **Step 4: Lint and confirm the patterns register**
 
+WordPress caches the theme's pattern files by theme version when `WP_DEBUG` is off (it is off in Studio), so new pattern files are invisible until the cache is cleared or the version changes. Clear it once after adding files, in its own process:
+
+```bash
+wpcli eval 'wp_get_theme()->delete_pattern_cache();'
+```
+
+
 ```bash
 for f in patterns/project-*.php; do phplint "$f"; done
 wpcli eval 'foreach ( WP_Block_Patterns_Registry::get_instance()->get_all_registered() as $p ) { if ( str_starts_with( $p["name"], "tufte-blocks/project" ) ) echo $p["name"], "\n"; }'
