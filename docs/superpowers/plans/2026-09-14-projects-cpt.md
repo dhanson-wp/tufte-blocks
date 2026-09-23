@@ -44,13 +44,17 @@ These facts were verified on 2026-09-14 and the tasks below depend on them.
 ps aux | grep "Studio/derekhansonblog" | grep -oE "127.0.0.1:[0-9]+" | sort -u | head -1
 ```
 
-**Running WP-CLI** whenever a task says `wpcli`:
+**PHP and WP-CLI.** Rosetta is gone from this Mac (macOS 27), so the Intel Homebrew `php` at `/usr/local/bin/php` no longer runs and neither does the bare `wp` command. Use the arm64 PHP that Studio ships, which has pdo_sqlite and curl and runs the existing `wp` phar against the site. Define both once per shell:
 
 ```bash
-wp --path=/Users/derekhanson/Studio/derekhansonblog "$@" 2>&1 | grep -v Deprecated
+export STUDIO_PHP=/Applications/Studio.app/Contents/Resources/php-bin/8.4.25-studio-3/php
+phplint() { "$STUDIO_PHP" -l "$@"; }
+wpcli() { "$STUDIO_PHP" /usr/local/bin/wp --path=/Users/derekhanson/Studio/derekhansonblog "$@" 2>&1 | grep -v Deprecated; }
 ```
 
-Define it once per shell: `wpcli() { wp --path=/Users/derekhanson/Studio/derekhansonblog "$@" 2>&1 | grep -v Deprecated; }`
+Wherever a task says `php -l`, use `phplint`. The Studio version folder name may change after a Studio update; `ls /Applications/Studio.app/Contents/Resources/php-bin/` shows the current one.
+
+**Host header.** WordPress redirects `127.0.0.1:PORT` to `derekhansonblog.wp.local`, which curl cannot follow, so every curl against the site must send `-H "Host: derekhansonblog.wp.local"`. The commands below include it.
 
 **Working directory for every task from Task 1.4 onward:** `/Users/derekhanson/Studio/derekhansonblog/wp-content/themes/tufte-blocks` (call it `$THEME`). Tasks 1.1 to 1.3 run in the repo checkout.
 
@@ -276,10 +280,10 @@ Expected: both greps print `NO REMOVED LINES`. `git diff --stat` shows roughly `
 
 ```bash
 PORT=$(ps aux | grep "Studio/derekhansonblog" | grep -oE "127.0.0.1:[0-9]+" | sort -u | head -1)
-curl -s -o /dev/null -w "home %{http_code}\n" "http://$PORT/"
-curl -s -o /dev/null -w "archive %{http_code}\n" -L "http://$PORT/projects/"
-curl -s -o /dev/null -w "single %{http_code}\n" -L "http://$PORT/projects/scroll-indicator/"
-curl -s "http://$PORT/" | grep -o 'tufte-blocks-patterns-css[^>]*ver=[0-9.]*' | head -1
+curl -s -H "Host: derekhansonblog.wp.local" -o /dev/null -w "home %{http_code}\n" "http://$PORT/"
+curl -s -H "Host: derekhansonblog.wp.local" -o /dev/null -w "archive %{http_code}\n" -L "http://$PORT/projects/"
+curl -s -H "Host: derekhansonblog.wp.local" -o /dev/null -w "single %{http_code}\n" -L "http://$PORT/projects/scroll-indicator/"
+curl -s -H "Host: derekhansonblog.wp.local" "http://$PORT/" | grep -o 'tufte-blocks-patterns-css[^>]*ver=[0-9.]*' | head -1
 ```
 
 Expected: three `200` lines and a stylesheet tag carrying `ver=1.4.4`.
@@ -366,7 +370,7 @@ mkdir -p inc/projects
   echo
   sed -n '389,401p' functions.php
 } > inc/projects/post-type.php
-php -l inc/projects/post-type.php
+phplint inc/projects/post-type.php
 ```
 
 Expected: `No syntax errors detected`. Open the file and confirm it starts with the `Register the Projects custom post type` docblock and ends with the `}, 99 );` of the rewrite flush.
@@ -376,7 +380,7 @@ Expected: `No syntax errors detected`. Open the file and confirm it starts with 
 ```bash
 sed -i '' '389,402d' functions.php
 sed -i '' '74,167d' functions.php
-php -l functions.php
+phplint functions.php
 grep -n "tufte_blocks_register_project_post_type\|flush_rewrite_rules" functions.php || echo REMOVED
 ```
 
@@ -406,7 +410,7 @@ END=$(grep -n "add_filter( 'render_block', 'tufte_blocks_render_tool_icons'" fun
   sed -n "${START},${END}p" functions.php
 } > inc/projects/tool-icons.php
 sed -i '' "${START},$((END+1))d" functions.php
-php -l inc/projects/tool-icons.php && php -l functions.php
+phplint inc/projects/tool-icons.php && phplint functions.php
 grep -c "tool_icon" functions.php || echo "0 left in functions.php"
 ```
 
@@ -428,7 +432,7 @@ END=$(grep -n "add_action( 'init', 'tufte_blocks_register_project_meta' );" func
   sed -n "${START},${END}p" functions.php
 } > inc/projects/fields.php
 sed -i '' "${START},$((END+1))d" functions.php
-php -l inc/projects/fields.php && php -l functions.php
+phplint inc/projects/fields.php && phplint functions.php
 ```
 
 - [ ] **Step 2: Confirm functions.php now matches the repo's 1.4.4 file plus only the pattern category**
@@ -472,16 +476,16 @@ unset( $tufte_blocks_projects_file );
 assert anchor in s
 open(p,'w').write(s.replace(anchor,loader,1))
 EOF
-php -l functions.php
+phplint functions.php
 ```
 
 - [ ] **Step 2: Verify nothing changed on the site**
 
 ```bash
 PORT=$(ps aux | grep "Studio/derekhansonblog" | grep -oE "127.0.0.1:[0-9]+" | sort -u | head -1)
-curl -s -L "http://$PORT/projects/" | grep -c "tufte-project-card"
-curl -s "http://$PORT/wp-json/wp/v2/project/5285?_fields=meta" | python3 -c "import json,sys;print(json.load(sys.stdin)['meta']['project_github_url'])"
-curl -s "http://$PORT/wp-json/wp/v2/project_tool/1519?_fields=meta" | python3 -c "import json,sys;print(json.load(sys.stdin)['meta'])"
+curl -s -H "Host: derekhansonblog.wp.local" -L "http://$PORT/projects/" | grep -c "tufte-project-card"
+curl -s -H "Host: derekhansonblog.wp.local" "http://$PORT/wp-json/wp/v2/project/5285?_fields=meta" | python3 -c "import json,sys;print(json.load(sys.stdin)['meta']['project_github_url'])"
+curl -s -H "Host: derekhansonblog.wp.local" "http://$PORT/wp-json/wp/v2/project_tool/1519?_fields=meta" | python3 -c "import json,sys;print(json.load(sys.stdin)['meta'])"
 ```
 
 Expected: `2`, `https://github.com/dhanson-wp/scroll-indicator`, `{'tool_icon': 5287}`.
@@ -755,9 +759,9 @@ function tufte_blocks_project_format_month_year( string $value ): string {
 - [ ] **Step 2: Lint and check the keys register over REST**
 
 ```bash
-php -l inc/projects/fields.php
+phplint inc/projects/fields.php
 PORT=$(ps aux | grep "Studio/derekhansonblog" | grep -oE "127.0.0.1:[0-9]+" | sort -u | head -1)
-curl -s "http://$PORT/wp-json/wp/v2/project/5285?_fields=meta" | python3 -c "
+curl -s -H "Host: derekhansonblog.wp.local" "http://$PORT/wp-json/wp/v2/project/5285?_fields=meta" | python3 -c "
 import json,sys; m=json.load(sys.stdin)['meta']
 print(sorted(k for k in m if k.startswith('project_')))"
 ```
@@ -795,7 +799,7 @@ cp /Users/derekhanson/Studio/derekhansonblog/wp-content/database/.ht.sqlite \
    /Users/derekhanson/Studio/derekhansonblog/backups/ht-sqlite-2026-09-14.bak
 wpcli post meta update 5285 project_wporg_slug scroll-indicator
 PORT=$(ps aux | grep "Studio/derekhansonblog" | grep -oE "127.0.0.1:[0-9]+" | sort -u | head -1)
-curl -s "http://$PORT/wp-json/wp/v2/project/5285?_fields=meta" | python3 -c "import json,sys;print(json.load(sys.stdin)['meta']['project_wporg_slug'])"
+curl -s -H "Host: derekhansonblog.wp.local" "http://$PORT/wp-json/wp/v2/project/5285?_fields=meta" | python3 -c "import json,sys;print(json.load(sys.stdin)['meta']['project_wporg_slug'])"
 ```
 
 Expected: `Success: Updated custom field 'project_wporg_slug'.` then `scroll-indicator`. If the update errors with a database lock, stop Studio, rerun, restart Studio.
@@ -1059,7 +1063,7 @@ foreach ( array(
 ```
 
 ```bash
-php -l inc/projects/header-parser.php
+phplint inc/projects/header-parser.php
 wpcli eval-file tests/run.php
 ```
 
@@ -1259,7 +1263,7 @@ function tufte_blocks_project_map_wporg( array $data ): array {
 Loader array gains `'sources/wporg'` after `'header-parser'`.
 
 ```bash
-php -l inc/projects/sources/wporg.php
+phplint inc/projects/sources/wporg.php
 wpcli eval-file tests/run.php
 ```
 
@@ -1559,7 +1563,7 @@ function tufte_blocks_project_map_github( array $repo, array $header, array $rel
 Loader array gains `'sources/github'` after `'sources/wporg'`.
 
 ```bash
-php -l inc/projects/sources/github.php
+phplint inc/projects/sources/github.php
 wpcli eval-file tests/run.php
 ```
 
@@ -1881,7 +1885,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 Loader array gains `'sync'` after `'sources/github'`.
 
 ```bash
-php -l inc/projects/sync.php
+phplint inc/projects/sync.php
 wpcli eval 'echo wp_next_scheduled( "tufte_blocks_projects_sync" ) ? "scheduled\n" : "not scheduled\n";'
 ```
 
@@ -1939,7 +1943,7 @@ Expected: Scroll Indicator shows `wporg` with version `1.0.2`, `github` with ver
 
 ```bash
 PORT=$(ps aux | grep "Studio/derekhansonblog" | grep -oE "127.0.0.1:[0-9]+" | sort -u | head -1)
-curl -s "http://$PORT/wp-json/wp/v2/project/5285?_fields=featured_media,meta" | python3 -c "import json,sys;d=json.load(sys.stdin);print(d['featured_media'], '_project_source_cache' in d['meta'])"
+curl -s -H "Host: derekhansonblog.wp.local" "http://$PORT/wp-json/wp/v2/project/5285?_fields=featured_media,meta" | python3 -c "import json,sys;d=json.load(sys.stdin);print(d['featured_media'], '_project_source_cache' in d['meta'])"
 ```
 
 Expected: a non-zero ID and `False`.
@@ -2145,7 +2149,7 @@ add_action( 'init', 'tufte_blocks_project_register_binding_source' );
 Loader array gains `'bindings'` after `'sync'`.
 
 ```bash
-php -l inc/projects/bindings.php
+phplint inc/projects/bindings.php
 wpcli eval-file tests/run.php
 ```
 
@@ -2528,7 +2532,7 @@ Open `http://$PORT/wp-admin/post.php?post=5285&action=edit` in the Browser pane.
 4. Type a tagline `A quiet cue that there is more below the fold.` and click Update. Reload; it persists. Check via REST:
 
 ```bash
-curl -s "http://$PORT/wp-json/wp/v2/project/5285?_fields=meta" | python3 -c "import json,sys;print(json.load(sys.stdin)['meta']['project_tagline'])"
+curl -s -H "Host: derekhansonblog.wp.local" "http://$PORT/wp-json/wp/v2/project/5285?_fields=meta" | python3 -c "import json,sys;print(json.load(sys.stdin)['meta']['project_tagline'])"
 ```
 
 5. Browser console shows no errors from `project-fields.js`.
@@ -2786,7 +2790,7 @@ Open `http://$PORT/projects/` in the Browser pane at desktop width, then at 400p
 - Switch style variation to Light in the Site Editor and reload: colors follow.
 
 ```bash
-curl -s -L "http://$PORT/projects/" | grep -o 'tufte-project-version">[^<]*' 
+curl -s -H "Host: derekhansonblog.wp.local" -L "http://$PORT/projects/" | grep -o 'tufte-project-version">[^<]*' 
 ```
 
 Expected: `tufte-project-version">1.0.2` and `tufte-project-version">1.4.4`.
@@ -2939,7 +2943,7 @@ Loader array gains `'render'` after `'editor'`. The final loader list is: `post-
 - [ ] **Step 2: Lint and commit**
 
 ```bash
-php -l inc/projects/render.php
+phplint inc/projects/render.php
 git add inc/projects/render.php functions.php
 git commit -m "Append the attachment caption to a project's featured image
 
@@ -3326,9 +3330,9 @@ Open `http://$PORT/projects/scroll-indicator/` and `http://$PORT/projects/tufte-
 - Project nav: "← All projects" left; on the older project (Tufte Blocks) the right side shows "Scroll Indicator →"; on the newest it shows nothing.
 
 ```bash
-curl -s -L "http://$PORT/projects/scroll-indicator/" | grep -c "tufte-project-demo"
-curl -s -L "http://$PORT/projects/tufte-blocks/" | grep -c "Plugin directory"
-curl -s -L "http://$PORT/projects/tufte-blocks/" | grep -o 'tufte-project-value">[^<]*'
+curl -s -H "Host: derekhansonblog.wp.local" -L "http://$PORT/projects/scroll-indicator/" | grep -c "tufte-project-demo"
+curl -s -H "Host: derekhansonblog.wp.local" -L "http://$PORT/projects/tufte-blocks/" | grep -c "Plugin directory"
+curl -s -H "Host: derekhansonblog.wp.local" -L "http://$PORT/projects/tufte-blocks/" | grep -o 'tufte-project-value">[^<]*'
 ```
 
 Expected: `0`, `0`, then six values as listed above.
@@ -3516,7 +3520,7 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 - [ ] **Step 4: Lint and confirm the patterns register**
 
 ```bash
-for f in patterns/project-*.php; do php -l "$f"; done
+for f in patterns/project-*.php; do phplint "$f"; done
 wpcli eval 'foreach ( WP_Block_Patterns_Registry::get_instance()->get_all_registered() as $p ) { if ( str_starts_with( $p["name"], "tufte-blocks/project" ) ) echo $p["name"], "\n"; }'
 ```
 
