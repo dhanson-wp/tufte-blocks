@@ -830,13 +830,14 @@ Pure PHP. Adapters are split into a `fetch` function (network) and a `map` funct
  *   wp --path=/Users/derekhanson/Studio/derekhansonblog eval-file tests/run.php
  * Prints one PASS/FAIL line per case and exits non-zero on any failure.
  *
+ * Note: WP-CLI eval()s this file inside a method, so it cannot declare
+ * strict_types and its counters must live in $GLOBALS.
+ *
  * @package Tufte_Blocks
  */
 
-declare(strict_types=1);
-
-$tufte_tests_failed = 0;
-$tufte_tests_passed = 0;
+$GLOBALS['tufte_tests_failed'] = 0;
+$GLOBALS['tufte_tests_passed'] = 0;
 
 /**
  * Assert two values are identical.
@@ -883,8 +884,8 @@ foreach ( glob( __DIR__ . '/test-*.php' ) as $tufte_test_file ) {
 	require $tufte_test_file;
 }
 
-echo "\n{$tufte_tests_passed} passed, {$tufte_tests_failed} failed\n";
-if ( $tufte_tests_failed > 0 ) {
+echo "\n{$GLOBALS['tufte_tests_passed']} passed, {$GLOBALS['tufte_tests_failed']} failed\n";
+if ( $GLOBALS['tufte_tests_failed'] > 0 ) {
 	exit( 1 );
 }
 ```

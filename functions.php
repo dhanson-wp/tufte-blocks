@@ -29,6 +29,7 @@ foreach ( array(
 	'post-type',
 	'tool-icons',
 	'fields',
+	'header-parser',
 ) as $tufte_blocks_projects_file ) {
 	require_once get_template_directory() . '/inc/projects/' . $tufte_blocks_projects_file . '.php';
 }

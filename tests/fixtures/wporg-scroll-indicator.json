@@ -1,0 +1,18 @@
+{
+  "name": "Scroll Indicator",
+  "slug": "scroll-indicator",
+  "version": "1.0.2",
+  "author": "<a href=\"https://profiles.wordpress.org/dhansondesigns/\">Derek Hanson</a>",
+  "requires": "6.4",
+  "tested": "7.0.4",
+  "requires_php": "7.4",
+  "last_updated": "2026-09-14 7:08pm GMT",
+  "added": "2026-09-14",
+  "homepage": "",
+  "download_link": "https://downloads.wordpress.org/plugin/scroll-indicator.1.0.2.zip",
+  "support_url": "https://wordpress.org/support/plugin/scroll-indicator/",
+  "banners": {
+    "low": "https://ps.w.org/scroll-indicator/assets/banner-772x250.png?rev=3695697",
+    "high": "https://ps.w.org/scroll-indicator/assets/banner-1544x500.png?rev=3695697"
+  }
+}
