@@ -537,3 +537,204 @@
 		transition-duration: 0.01ms !important;
 	}
 }
+
+/* --- Single: back link and project nav --- */
+.tufte-project-back,
+.tufte-project-nav {
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+}
+
+.tufte-project-back {
+	font-size: 0.7rem;
+	margin-top: 0 !important;
+}
+
+.tufte-project-nav {
+	font-size: 0.8rem;
+	letter-spacing: 0.05em;
+}
+
+.tufte-project-nav p,
+.tufte-project-nav .wp-block-post-navigation-link {
+	margin: 0;
+}
+
+/* --- Single: hero --- */
+.tufte-project-hero .tufte-project-type,
+.tufte-project-hero .tufte-project-type a {
+	color: var(--wp--preset--color--primary);
+	text-decoration: none;
+}
+
+.tufte-project-hero .tufte-project-h1 {
+	font-size: clamp(2.5rem, 6vw, 3rem);
+	max-width: 30ch;
+}
+
+.tufte-project-hero .tufte-project-tagline {
+	font-style: italic;
+	line-height: 1.5;
+	max-width: 44ch;
+	margin-bottom: var(--wp--preset--spacing--60) !important;
+}
+
+/* Primary button: theme default plus the handoff's roomier padding */
+.tufte-project-actions .wp-block-button__link {
+	padding: 0.75rem 1.5rem;
+}
+
+/* Secondary button: hairline border, foreground text, gold on hover */
+.tufte-project-actions .is-style-outline .wp-block-button__link {
+	border-color: var(--wp--preset--color--border);
+	color: var(--wp--preset--color--foreground);
+}
+
+.tufte-project-actions .is-style-outline .wp-block-button__link:hover,
+.tufte-project-actions .is-style-outline .wp-block-button__link:focus {
+	background: transparent;
+	border-color: var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--primary);
+	box-shadow: none;
+}
+
+/* Tertiary (link style) keeps default padding so it aligns with the buttons */
+.tufte-project-actions .is-style-link .wp-block-button__link {
+	padding: 0.75rem 0;
+}
+
+/* --- Single: featured figure --- */
+.tufte-project-single .tufte-project-figure img {
+	width: 100%;
+	border-radius: 0;
+}
+
+.tufte-project-single .tufte-project-figure .wp-element-caption {
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--wp--preset--color--secondary);
+	margin-top: var(--wp--preset--spacing--30);
+}
+
+/* --- Single: details panel --- */
+.tufte-project-details {
+	max-width: 480px;
+}
+
+.tufte-project-details .tufte-project-details-title {
+	margin: 0;
+}
+
+.tufte-project-dl {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: var(--wp--preset--spacing--20) var(--wp--preset--spacing--50);
+	font-size: 0.8rem;
+}
+
+.tufte-project-dl .tufte-project-detail {
+	display: contents;
+}
+
+.tufte-project-dl p {
+	margin: 0;
+}
+
+.tufte-project-dl .tufte-project-label {
+	color: var(--wp--preset--color--secondary);
+}
+
+.tufte-project-dl .tufte-project-value {
+	color: var(--wp--preset--color--foreground);
+}
+
+.tufte-project-links .wp-block-button__link {
+	font-size: 0.8rem;
+	padding: 0;
+}
+
+/* --- Pattern: features grid --- */
+.tufte-project-features .tufte-project-features-title {
+	max-width: 34ch;
+}
+
+.tufte-project-feature {
+	transition: border-color var(--wp--custom--transition),
+	            transform var(--wp--custom--transition);
+}
+
+.tufte-project-feature:hover {
+	border-color: var(--wp--preset--color--primary) !important;
+	transform: translateY(-2px);
+}
+
+.tufte-project-feature h3 {
+	margin-bottom: var(--wp--preset--spacing--20);
+}
+
+.tufte-project-feature p {
+	margin: 0;
+}
+
+.tufte-project-feature code {
+	font-family: var(--wp--preset--font-family--monospace);
+	font-size: 0.85em;
+}
+
+/* --- Pattern: install steps (01, 02, ...) --- */
+.tufte-project-steps {
+	list-style: none;
+	padding-left: 0;
+	margin: 0;
+	max-width: 46ch;
+	counter-reset: tufte-step;
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+
+.tufte-project-steps li {
+	display: flex;
+	gap: var(--wp--preset--spacing--40);
+	counter-increment: tufte-step;
+}
+
+.tufte-project-steps li::before {
+	content: counter(tufte-step, decimal-leading-zero);
+	font-family: var(--wp--preset--font-family--monospace);
+	font-size: 0.7rem;
+	letter-spacing: 0.1em;
+	color: var(--wp--preset--color--primary);
+	padding-top: 0.45rem;
+	flex-shrink: 0;
+}
+
+/* --- Pattern: FAQ (hairline rows instead of the theme's boxed details) --- */
+.tufte-project-faq .wp-block-details {
+	border: 0;
+	border-top: 1px solid var(--wp--preset--color--border);
+	border-radius: 0;
+	padding: 1.25rem 0;
+	margin: 0;
+}
+
+.tufte-project-faq .wp-block-details:last-child {
+	border-bottom: 1px solid var(--wp--preset--color--border);
+}
+
+.tufte-project-faq .wp-block-details summary {
+	padding: 0;
+	font-size: var(--wp--preset--font-size--medium);
+}
+
+.tufte-project-faq .wp-block-details > *:not(summary) {
+	padding: 0;
+	margin-top: var(--wp--preset--spacing--30);
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--wp--preset--color--secondary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.tufte-project-feature {
+		transition-duration: 0.01ms !important;
+	}
+}
