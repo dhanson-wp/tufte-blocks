@@ -59,4 +59,33 @@ $rendered = ( new WP_Block(
 ) )->render();
 tufte_assert_same( true, str_contains( $rendered, '>1.0.2<' ), 'binding: core render replaces paragraph content via the source' );
 
+// ---- empty-value filter -----------------------------------------------------
+
+$bound = static fn( string $key, array $extra = array() ): array => array(
+	'blockName' => 'core/paragraph',
+	'attrs'     => array_merge( array( 'metadata' => array( 'bindings' => array( 'content' => array( 'source' => 'tufte-blocks/project-field', 'args' => array( 'key' => $key ) ) ) ) ), $extra ),
+	'innerHTML' => '<p>x</p>',
+);
+$ctx = array( 'postId' => $fake_id, 'postType' => 'project' );
+// Build a WP_Block with context already populated, as core does before render_block fires.
+$inst = static function ( array $parsed ) use ( $ctx ): WP_Block {
+	$b          = new WP_Block( $parsed, array() );
+	$b->context = $ctx;
+	return $b;
+};
+
+tufte_assert_same( '<p>1.0.2</p>', tufte_blocks_project_filter_empty_bindings( '<p>1.0.2</p>', $bound( 'version' ), $inst( $bound( 'version' ) ) ), 'filter: bound block with a value passes through' );
+tufte_assert_same( '', tufte_blocks_project_filter_empty_bindings( '<p></p>', $bound( 'tested_up_to' ), $inst( $bound( 'tested_up_to' ) ) ), 'filter: bound block with an empty value is removed' );
+
+$plain = array( 'blockName' => 'core/paragraph', 'attrs' => array(), 'innerHTML' => '<p>hi</p>' );
+tufte_assert_same( '<p>hi</p>', tufte_blocks_project_filter_empty_bindings( '<p>hi</p>', $plain, $inst( $plain ) ), 'filter: unbound block passes through' );
+
+$other = array( 'blockName' => 'core/paragraph', 'attrs' => array( 'metadata' => array( 'bindings' => array( 'content' => array( 'source' => 'core/post-meta', 'args' => array( 'key' => 'nope' ) ) ) ) ), 'innerHTML' => '<p></p>' );
+tufte_assert_same( '<p></p>', tufte_blocks_project_filter_empty_bindings( '<p></p>', $other, $inst( $other ) ), 'filter: other binding sources are not our business' );
+
+$row = array( 'blockName' => 'core/group', 'attrs' => array( 'className' => 'tufte-project-detail' ), 'innerHTML' => '' );
+tufte_assert_same( '', tufte_blocks_project_filter_empty_bindings( '<div class="wp-block-group tufte-project-detail"><p class="tufte-project-label">Version</p></div>', $row, $inst( $row ) ), 'filter: detail row without a value is removed' );
+$row_html = '<div class="wp-block-group tufte-project-detail"><p class="tufte-project-label">Version</p><p class="tufte-project-value">1.0.2</p></div>';
+tufte_assert_same( $row_html, tufte_blocks_project_filter_empty_bindings( $row_html, $row, $inst( $row ) ), 'filter: detail row with a value passes through' );
+
 wp_cache_delete( $fake_id, 'post_meta' );

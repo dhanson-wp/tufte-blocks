@@ -109,3 +109,41 @@ function tufte_blocks_project_register_binding_source(): void {
 	);
 }
 add_action( 'init', 'tufte_blocks_project_register_binding_source' );
+
+/**
+ * Drop blocks whose project-field binding resolved to nothing.
+ *
+ * Block Bindings renders an empty element when a value is empty; the design
+ * says a button with no URL must not render at all, never fall back to "#".
+ * Also drops a details row (core/group.tufte-project-detail) whose value
+ * paragraph was dropped, so no orphan label is left behind.
+ *
+ * @param string   $block_content Rendered HTML.
+ * @param array    $block         Parsed block.
+ * @param WP_Block $instance      Block instance (for context).
+ * @return string
+ */
+function tufte_blocks_project_filter_empty_bindings( string $block_content, array $block, WP_Block $instance ): string {
+	$class_name = isset( $block['attrs']['className'] ) ? (string) $block['attrs']['className'] : '';
+	if ( 'core/group' === ( $block['blockName'] ?? '' ) && str_contains( $class_name, 'tufte-project-detail' ) ) {
+		return str_contains( $block_content, 'tufte-project-value' ) ? $block_content : '';
+	}
+
+	$bindings = $block['attrs']['metadata']['bindings'] ?? null;
+	if ( ! is_array( $bindings ) ) {
+		return $block_content;
+	}
+
+	foreach ( $bindings as $attribute => $binding ) {
+		if ( ( $binding['source'] ?? '' ) !== 'tufte-blocks/project-field' ) {
+			continue;
+		}
+		$value = tufte_blocks_project_binding_value( (array) ( $binding['args'] ?? array() ), $instance, (string) $attribute );
+		if ( '' === $value ) {
+			return '';
+		}
+	}
+
+	return $block_content;
+}
+add_filter( 'render_block', 'tufte_blocks_project_filter_empty_bindings', 20, 3 );
