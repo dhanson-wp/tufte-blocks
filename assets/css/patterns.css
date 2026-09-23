@@ -693,19 +693,21 @@
 }
 
 .tufte-project-steps li {
-	display: flex;
-	gap: var(--wp--preset--spacing--40);
+	position: relative;
+	padding-left: 2.5rem;
 	counter-increment: tufte-step;
 }
 
+/* Positioned rather than flex so an inline <code> stays in the text run */
 .tufte-project-steps li::before {
 	content: counter(tufte-step, decimal-leading-zero);
+	position: absolute;
+	left: 0;
+	top: 0.45rem;
 	font-family: var(--wp--preset--font-family--monospace);
 	font-size: 0.7rem;
 	letter-spacing: 0.1em;
 	color: var(--wp--preset--color--primary);
-	padding-top: 0.45rem;
-	flex-shrink: 0;
 }
 
 /* --- Pattern: FAQ (hairline rows instead of the theme's boxed details) --- */

@@ -36,7 +36,7 @@
 		foreach ( $tufte_features as $tufte_feature ) :
 			?>
 		<!-- wp:group {"className":"tufte-project-feature","style":{"border":{"width":"1px","color":"var:preset|color|border","radius":"4px"},"spacing":{"padding":{"top":"var:preset|spacing|50","right":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|50"},"blockGap":"var:preset|spacing|20"}},"layout":{"type":"constrained","justifyContent":"left"}} -->
-		<div class="wp-block-group tufte-project-feature" style="border-color:var(--wp--preset--color--border);border-width:1px;border-radius:4px;padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)">
+		<div class="wp-block-group tufte-project-feature has-border-color" style="border-color:var(--wp--preset--color--border);border-width:1px;border-radius:4px;padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)">
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading"><?php echo esc_html( $tufte_feature[0] ); ?></h3>
 			<!-- /wp:heading -->

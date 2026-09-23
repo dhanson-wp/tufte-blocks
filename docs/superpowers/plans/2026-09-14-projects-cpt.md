@@ -2615,7 +2615,7 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 		<!-- wp:post-template {"className":"tufte-project-grid","style":{"spacing":{"blockGap":"var:preset|spacing|60"}},"layout":{"type":"grid","minimumColumnWidth":"320px"}} -->
 
 			<!-- wp:group {"tagName":"article","className":"tufte-project-card","style":{"border":{"width":"1px","color":"var:preset|color|border","radius":"4px"},"spacing":{"blockGap":"0"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"stretch"}} -->
-			<article class="wp-block-group tufte-project-card" style="border-color:var(--wp--preset--color--border);border-width:1px;border-radius:4px">
+			<article class="wp-block-group tufte-project-card has-border-color" style="border-color:var(--wp--preset--color--border);border-width:1px;border-radius:4px">
 
 				<!-- wp:post-featured-image {"isLink":true,"aspectRatio":"1544/500","scale":"cover","className":"tufte-project-banner"} /-->
 
@@ -2853,7 +2853,7 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 ?>
 
 <!-- wp:group {"tagName":"article","className":"tufte-project-card","style":{"border":{"width":"1px","color":"var:preset|color|border","radius":"4px"},"spacing":{"blockGap":"0"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"stretch"}} -->
-<article class="wp-block-group tufte-project-card" style="border-color:var(--wp--preset--color--border);border-width:1px;border-radius:4px">
+<article class="wp-block-group tufte-project-card has-border-color" style="border-color:var(--wp--preset--color--border);border-width:1px;border-radius:4px">
 
 	<!-- wp:post-featured-image {"isLink":true,"aspectRatio":"1544/500","scale":"cover","className":"tufte-project-banner"} /-->
 
@@ -3028,7 +3028,7 @@ Section order: back link, hero, featured figure, post content, details panel, pr
 	<!-- wp:post-content {"layout":{"inherit":true,"justifyContent":"left"}} /-->
 
 	<!-- wp:group {"tagName":"aside","className":"tufte-project-details","style":{"border":{"width":"1px","color":"var:preset|color|border","radius":"4px"},"spacing":{"padding":{"top":"var:preset|spacing|50","right":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|50"},"blockGap":"var:preset|spacing|50"}},"layout":{"type":"constrained","justifyContent":"left"}} -->
-	<aside class="wp-block-group tufte-project-details" style="border-color:var(--wp--preset--color--border);border-width:1px;border-radius:4px;padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)">
+	<aside class="wp-block-group tufte-project-details has-border-color" style="border-color:var(--wp--preset--color--border);border-width:1px;border-radius:4px;padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)">
 		<!-- wp:heading {"level":3,"className":"tufte-project-details-title","fontFamily":"monospace","style":{"typography":{"fontSize":"0.9rem","textTransform":"uppercase","letterSpacing":"0.05em"}}} -->
 		<h3 class="wp-block-heading tufte-project-details-title has-monospace-font-family" style="font-size:0.9rem;letter-spacing:0.05em;text-transform:uppercase">Details</h3>
 		<!-- /wp:heading -->
@@ -3300,19 +3300,21 @@ Section order: back link, hero, featured figure, post content, details panel, pr
 }
 
 .tufte-project-steps li {
-	display: flex;
-	gap: var(--wp--preset--spacing--40);
+	position: relative;
+	padding-left: 2.5rem;
 	counter-increment: tufte-step;
 }
 
+/* Positioned rather than flex so an inline <code> stays in the text run */
 .tufte-project-steps li::before {
 	content: counter(tufte-step, decimal-leading-zero);
+	position: absolute;
+	left: 0;
+	top: 0.45rem;
 	font-family: var(--wp--preset--font-family--monospace);
 	font-size: 0.7rem;
 	letter-spacing: 0.1em;
 	color: var(--wp--preset--color--primary);
-	padding-top: 0.45rem;
-	flex-shrink: 0;
 }
 
 /* --- Pattern: FAQ (hairline rows instead of the theme's boxed details) --- */
@@ -3422,7 +3424,7 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 		foreach ( $tufte_features as $tufte_feature ) :
 			?>
 		<!-- wp:group {"className":"tufte-project-feature","style":{"border":{"width":"1px","color":"var:preset|color|border","radius":"4px"},"spacing":{"padding":{"top":"var:preset|spacing|50","right":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|50"},"blockGap":"var:preset|spacing|20"}},"layout":{"type":"constrained","justifyContent":"left"}} -->
-		<div class="wp-block-group tufte-project-feature" style="border-color:var(--wp--preset--color--border);border-width:1px;border-radius:4px;padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)">
+		<div class="wp-block-group tufte-project-feature has-border-color" style="border-color:var(--wp--preset--color--border);border-width:1px;border-radius:4px;padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)">
 			<!-- wp:heading {"level":3} -->
 			<h3 class="wp-block-heading"><?php echo esc_html( $tufte_feature[0] ); ?></h3>
 			<!-- /wp:heading -->

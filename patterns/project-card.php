@@ -13,7 +13,7 @@
 ?>
 
 <!-- wp:group {"tagName":"article","className":"tufte-project-card","style":{"border":{"width":"1px","color":"var:preset|color|border","radius":"4px"},"spacing":{"blockGap":"0"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"stretch"}} -->
-<article class="wp-block-group tufte-project-card" style="border-color:var(--wp--preset--color--border);border-width:1px;border-radius:4px">
+<article class="wp-block-group tufte-project-card has-border-color" style="border-color:var(--wp--preset--color--border);border-width:1px;border-radius:4px">
 
 	<!-- wp:post-featured-image {"isLink":true,"aspectRatio":"1544/500","scale":"cover","className":"tufte-project-banner"} /-->
 
