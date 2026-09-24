@@ -669,11 +669,6 @@
 	margin: 0;
 }
 
-.tufte-project-feature code {
-	font-family: var(--wp--preset--font-family--monospace);
-	font-size: 0.85em;
-}
-
 /* --- Pattern: install steps (01, 02, ...) --- */
 .tufte-project-steps {
 	list-style: none;
