@@ -14,10 +14,6 @@
 
 <!-- wp:group {"tagName":"section","align":"wide","className":"tufte-project-features","style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"constrained","justifyContent":"left"}} -->
 <section class="wp-block-group alignwide tufte-project-features">
-	<!-- wp:paragraph {"className":"tufte-eyebrow","textColor":"primary"} -->
-	<p class="tufte-eyebrow has-primary-color has-text-color">What it does</p>
-	<!-- /wp:paragraph -->
-
 	<!-- wp:heading {"level":2,"className":"tufte-project-features-title","style":{"spacing":{"margin":{"bottom":"var:preset|spacing|60"}}}} -->
 	<h2 class="wp-block-heading tufte-project-features-title" style="margin-bottom:var(--wp--preset--spacing--60)">Editor controls you already know.</h2>
 	<!-- /wp:heading -->
