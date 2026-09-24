@@ -3412,7 +3412,7 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 	<div class="wp-block-group tufte-project-feature-grid">
 		<?php
 		$tufte_features = array(
-			array( 'Native controls', 'Text colour, spacing, typography, and alignment come from core block supports, not a parallel settings panel.' ),
+			array( 'Native controls', 'Text color, spacing, typography, and alignment come from core block supports, not a parallel settings panel.' ),
 			array( 'Positioning', 'Fixed to the screen, or dragged into place with absolute positioning for hero-style sections.' ),
 			array( 'CSS-only motion', 'Animation is CSS and respects <code>prefers-reduced-motion</code>. No animation libraries.' ),
 			array( 'Click to scroll', 'A real button element. Click or keyboard-activate it to move down the page; it hides itself once scrolling starts.' ),
@@ -3477,7 +3477,7 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 		<!-- /wp:list-item -->
 
 		<!-- wp:list-item -->
-		<li>Choose an icon style, size, colour, and optional label.</li>
+		<li>Choose an icon style, size, color, and optional label.</li>
 		<!-- /wp:list-item -->
 	</ol>
 	<!-- /wp:list -->
@@ -3517,9 +3517,9 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 	<!-- /wp:details -->
 
 	<!-- wp:details -->
-	<details class="wp-block-details"><summary>Can I change the icon colour?</summary>
+	<details class="wp-block-details"><summary>Can I change the icon color?</summary>
 	<!-- wp:paragraph -->
-	<p>Yes. The block uses core text colour support, so colour comes from the normal block controls and your theme palette.</p>
+	<p>Yes. The block uses core text color support, so color comes from the normal block controls and your theme palette.</p>
 	<!-- /wp:paragraph -->
 	</details>
 	<!-- /wp:details -->
