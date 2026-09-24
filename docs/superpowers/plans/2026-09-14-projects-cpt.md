@@ -2907,7 +2907,9 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 
 ## Milestone 9: Single template, patterns, and CSS
 
-### Task 9.1: Featured image caption filter
+### Task 9.1: Featured image caption filter (removed after review)
+
+> Derek dropped the caption on 2026-09-23 after seeing it live. `inc/projects/render.php` and the figcaption CSS were removed; the featured figure renders bare.
 
 **Files:**
 - Create: `inc/projects/render.php`
