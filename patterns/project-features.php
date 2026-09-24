@@ -22,7 +22,7 @@
 	<div class="wp-block-group tufte-project-feature-grid">
 		<?php
 		$tufte_features = array(
-			array( 'Native controls', 'Text colour, spacing, typography, and alignment come from core block supports, not a parallel settings panel.' ),
+			array( 'Native controls', 'Text color, spacing, typography, and alignment come from core block supports, not a parallel settings panel.' ),
 			array( 'Positioning', 'Fixed to the screen, or dragged into place with absolute positioning for hero-style sections.' ),
 			array( 'CSS-only motion', 'Animation is CSS and respects <code>prefers-reduced-motion</code>. No animation libraries.' ),
 			array( 'Click to scroll', 'A real button element. Click or keyboard-activate it to move down the page; it hides itself once scrolling starts.' ),

@@ -27,9 +27,9 @@
 	<!-- /wp:details -->
 
 	<!-- wp:details -->
-	<details class="wp-block-details"><summary>Can I change the icon colour?</summary>
+	<details class="wp-block-details"><summary>Can I change the icon color?</summary>
 	<!-- wp:paragraph -->
-	<p>Yes. The block uses core text colour support, so colour comes from the normal block controls and your theme palette.</p>
+	<p>Yes. The block uses core text color support, so color comes from the normal block controls and your theme palette.</p>
 	<!-- /wp:paragraph -->
 	</details>
 	<!-- /wp:details -->

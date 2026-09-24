@@ -33,7 +33,7 @@
 		<!-- /wp:list-item -->
 
 		<!-- wp:list-item -->
-		<li>Choose an icon style, size, colour, and optional label.</li>
+		<li>Choose an icon style, size, color, and optional label.</li>
 		<!-- /wp:list-item -->
 	</ol>
 	<!-- /wp:list -->
