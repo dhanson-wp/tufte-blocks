@@ -609,12 +609,6 @@
 	border-radius: 0;
 }
 
-.tufte-project-single .tufte-project-figure .wp-element-caption {
-	font-size: var(--wp--preset--font-size--small);
-	color: var(--wp--preset--color--secondary);
-	margin-top: var(--wp--preset--spacing--30);
-}
-
 /* --- Single: details panel --- */
 .tufte-project-details {
 	max-width: 480px;
