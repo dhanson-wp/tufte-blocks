@@ -3,7 +3,8 @@
  * Tool icons for the project_tool taxonomy.
  *
  * Term meta, admin media uploader, and the frontend filter that prepends
- * an icon to each project_tool term link. Moved verbatim in 1.5.0.
+ * an icon to each project_tool term link, plus the bundled icon collection
+ * (1.6.0) that backs terms without an uploaded icon.
  *
  * @package Tufte_Blocks
  * @since 1.3.0
@@ -34,6 +35,49 @@ function tufte_blocks_register_tool_icon_meta(): void {
 	);
 }
 add_action( 'init', 'tufte_blocks_register_tool_icon_meta' );
+
+/**
+ * Register the bundled tool SVGs as a "tufte-blocks" icon collection.
+ *
+ * Makes them available to the core Icon block's picker, and gives
+ * project_tool terms a fallback icon when none is uploaded. Needs the
+ * Icons API from WordPress 7.1; older versions skip it.
+ *
+ * @since 1.6.0
+ * @return void
+ */
+function tufte_blocks_register_tool_icon_collection(): void {
+	if ( ! function_exists( 'wp_register_icon_collection' ) ) {
+		return;
+	}
+
+	wp_register_icon_collection(
+		'tufte-blocks',
+		array(
+			'label'       => __( 'Tufte Blocks', 'tufte-blocks' ),
+			'description' => __( 'Icons for the tools behind each project.', 'tufte-blocks' ),
+		)
+	);
+
+	$icons = array(
+		'antigravity' => __( 'Antigravity', 'tufte-blocks' ),
+		'claude'      => __( 'Claude', 'tufte-blocks' ),
+		'cursor'      => __( 'Cursor', 'tufte-blocks' ),
+		'gemini'      => __( 'Gemini', 'tufte-blocks' ),
+		'telex'       => __( 'Telex', 'tufte-blocks' ),
+	);
+
+	foreach ( $icons as $slug => $label ) {
+		wp_register_icon(
+			'tufte-blocks/' . $slug,
+			array(
+				'label'     => $label,
+				'file_path' => get_template_directory() . '/assets/images/tools/' . $slug . '.svg',
+			)
+		);
+	}
+}
+add_action( 'init', 'tufte_blocks_register_tool_icon_collection' );
 
 /**
  * Enqueue media uploader on project_tool term screens.
@@ -161,6 +205,50 @@ function tufte_blocks_tool_icon_inline_script(): void {
 }
 
 /**
+ * Icon markup for a project_tool term.
+ *
+ * An uploaded icon wins. Otherwise fall back to the bundled icon registered
+ * under the term's slug, if there is one.
+ *
+ * @since 1.6.0
+ * @param WP_Term $term Tool term.
+ * @return string Icon markup, or an empty string when the term has none.
+ */
+function tufte_blocks_get_tool_icon_markup( WP_Term $term ): string {
+	$icon_id  = (int) get_term_meta( $term->term_id, 'tool_icon', true );
+	$icon_url = $icon_id ? wp_get_attachment_url( $icon_id ) : '';
+
+	if ( $icon_url ) {
+		return sprintf(
+			'<img src="%s" alt="" class="tufte-tool-icon" style="width:1em;height:1em;vertical-align:-0.125em;margin-right:0.25em;">',
+			esc_url( $icon_url )
+		);
+	}
+
+	if ( ! function_exists( 'wp_get_icon' ) ) {
+		return '';
+	}
+
+	$svg = wp_get_icon(
+		'tufte-blocks/' . $term->slug,
+		array(
+			'size'  => null,
+			'class' => 'tufte-tool-icon',
+		)
+	);
+	if ( '' === $svg ) {
+		return '';
+	}
+
+	// Same sizing as the <img> path; wp_get_icon() cannot set a style attribute.
+	$processor = new WP_HTML_Tag_Processor( $svg );
+	$processor->next_tag( 'svg' );
+	$processor->set_attribute( 'style', 'width:1em;height:1em;vertical-align:-0.125em;margin-right:0.25em;' );
+
+	return $processor->get_updated_html();
+}
+
+/**
  * Prepend tool icons to project_tool term links on the frontend.
  *
  * @since 1.3.0
@@ -188,24 +276,14 @@ function tufte_blocks_render_tool_icons( string $block_content, array $block ): 
 	}
 
 	foreach ( $terms as $term ) {
-		$icon_id = (int) get_term_meta( $term->term_id, 'tool_icon', true );
-		if ( ! $icon_id ) {
+		$icon = tufte_blocks_get_tool_icon_markup( $term );
+		if ( '' === $icon ) {
 			continue;
 		}
-
-		$icon_url = wp_get_attachment_url( $icon_id );
-		if ( ! $icon_url ) {
-			continue;
-		}
-
-		$img = sprintf(
-			'<img src="%s" alt="" class="tufte-tool-icon" style="width:1em;height:1em;vertical-align:-0.125em;margin-right:0.25em;">',
-			esc_url( $icon_url )
-		);
 
 		$block_content = str_replace(
 			'>' . esc_html( $term->name ) . '</a>',
-			'>' . $img . esc_html( $term->name ) . '</a>',
+			'>' . $icon . esc_html( $term->name ) . '</a>',
 			$block_content
 		);
 	}

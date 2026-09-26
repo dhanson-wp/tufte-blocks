@@ -641,6 +641,20 @@
 	color: var(--wp--preset--color--foreground);
 }
 
+/* "Built with" is a post-terms block; drop its global eyebrow styling so it
+   reads like the other values. */
+.tufte-project-dl .tufte-project-tools {
+	margin: 0;
+	font-family: inherit;
+	font-size: inherit;
+	letter-spacing: normal;
+	text-transform: none;
+}
+
+.tufte-project-dl .tufte-project-tools a {
+	color: inherit;
+}
+
 .tufte-project-links .wp-block-button__link {
 	font-size: 0.8rem;
 	padding: 0;
