@@ -3,13 +3,16 @@ Contributors: dhanson
 Requires at least: 6.4
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 A typography-first block theme inspired by Edward Tufte's design principles, with a Projects post type for plugins and themes.
 
 == Changelog ==
+
+= 1.5.2 =
+* The Webmention form under your comments now matches the comment form, with the same field, fonts, and gold button.
 
 = 1.5.1 =
 * Inline code now reads as a small monospace chip on the surface color, on the front end and in the editor.
