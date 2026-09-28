@@ -3,7 +3,8 @@
  *
  * Handles only what theme.json cannot express:
  * list resets, depth-based indentation, pill buttons,
- * the bypostauthor badge, and the native comment form.
+ * the bypostauthor badge, the native comment form, and the
+ * Webmention plugin's form, which borrows the comment form's look.
  *
  * @package Tufte_Blocks
  */
@@ -108,7 +109,8 @@
 	margin-bottom: var(--wp--preset--spacing--40);
 }
 
-.comment-form label {
+.comment-form label,
+#webmention-form label {
 	font-size: var(--wp--preset--font-size--small);
 	color: var(--wp--preset--color--foreground);
 	display: block;
@@ -118,8 +120,10 @@
 .comment-form input[type="text"],
 .comment-form input[type="email"],
 .comment-form input[type="url"],
-.comment-form textarea {
+.comment-form textarea,
+#webmention-form input.webmention-source {
 	width: 100%;
+	max-width: none;
 	background: transparent;
 	border: 1px solid var(--wp--preset--color--border);
 	border-radius: 6px;
@@ -132,7 +136,8 @@
 }
 
 .comment-form input:focus,
-.comment-form textarea:focus {
+.comment-form textarea:focus,
+#webmention-form input.webmention-source:focus {
 	outline: none;
 	border-color: var(--wp--preset--color--primary);
 }
@@ -144,11 +149,13 @@
 }
 
 .comment-form input::placeholder,
+#webmention-form input::placeholder,
 .comment-form textarea::placeholder {
 	color: var(--wp--preset--color--secondary);
 }
 
-.comment-form p {
+.comment-form p,
+#webmention-form p {
 	margin-bottom: var(--wp--preset--spacing--40);
 }
 
@@ -158,7 +165,8 @@
 }
 
 .comment-form input[type="submit"],
-.comment-form .submit {
+.comment-form .submit,
+#webmention-form input[type="submit"] {
 	font-size: 0.9rem;
 	font-family: inherit;
 	color: var(--wp--preset--color--background);
@@ -172,12 +180,15 @@
 }
 
 .comment-form input[type="submit"]:hover,
-.comment-form input[type="submit"]:focus {
+.comment-form input[type="submit"]:focus,
+#webmention-form input[type="submit"]:hover,
+#webmention-form input[type="submit"]:focus {
 	background: var(--wp--preset--color--primary-hover);
 	border-color: var(--wp--preset--color--primary-hover);
 }
 
 .comment-notes,
+#webmention-source-description,
 .comment-awaiting-moderation,
 .logged-in-as {
 	font-size: 0.75rem;
@@ -242,6 +253,16 @@
 	display: inline;
 }
 
+/* === Webmention Form (the plugin's form after #respond) === */
+
+#webmention-form {
+	margin: var(--wp--preset--spacing--50) 0 0;
+}
+
+#webmention-form p:last-of-type {
+	margin-bottom: 0;
+}
+
 #cancel-comment-reply-link {
 	font-size: 0.75rem;
 	color: var(--wp--preset--color--secondary);
@@ -268,7 +289,8 @@
 	.wp-block-comment-edit-link a,
 	.comment-form input,
 	.comment-form textarea,
-	.comment-form input[type="submit"] {
+	.comment-form input[type="submit"],
+	#webmention-form input {
 		transition-duration: 0.01ms !important;
 	}
 }
