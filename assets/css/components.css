@@ -337,3 +337,45 @@ body .activitypub-modal__overlay .activitypub-dialog__button-group button:hover,
 body .activitypub-modal__overlay .activitypub-dialog__button-group button:focus-visible {
 	background-color: var(--wp--preset--color--primary-hover);
 }
+
+/**
+ * Follow card on narrow screens. The plugin keeps the name and handle on one
+ * ellipsized line beside the button, which leaves them a few characters wide
+ * at phone width. Stack the button under them and tighten the padding.
+ */
+@media (max-width: 600px) {
+	.tufte-follow-me {
+		padding: 1.5rem !important;
+	}
+
+	.tufte-follow-me .activitypub-profile__body {
+		flex-wrap: nowrap;
+		align-items: center;
+	}
+
+	.tufte-follow-me .activitypub-profile__avatar {
+		width: 56px;
+		height: 56px;
+		margin-right: 0.75rem;
+	}
+
+	.tufte-follow-me .activitypub-profile__content {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.75rem;
+	}
+
+	.tufte-follow-me .activitypub-profile__name,
+	.tufte-follow-me .activitypub-profile__handle {
+		white-space: normal;
+		overflow-wrap: break-word;
+	}
+
+	.tufte-follow-me .activitypub-profile__handle {
+		font-size: 0.85rem;
+	}
+
+	.tufte-follow-me .activitypub-profile div.wp-block-button {
+		margin-left: 0;
+	}
+}

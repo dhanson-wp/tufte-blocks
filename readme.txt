@@ -3,13 +3,16 @@ Contributors: dhanson
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.7.2
+Stable tag: 1.7.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 A typography-first block theme inspired by Edward Tufte's design principles, with a Projects post type for plugins and themes.
 
 == Changelog ==
+
+= 1.7.3 =
+* The Fediverse follow card fits phone screens, with the full name and handle showing and the button underneath.
 
 = 1.7.2 =
 * The Fediverse follow dialog styles now win over the plugin's, so the dark theme colors apply.
