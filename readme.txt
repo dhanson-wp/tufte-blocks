@@ -3,13 +3,16 @@ Contributors: dhanson
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.8.0
+Stable tag: 1.8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 A typography-first block theme inspired by Edward Tufte's design principles, with a Projects post type for plugins and themes.
 
 == Changelog ==
+
+= 1.8.1 =
+* Microformats now work on the front page and other static pages with post lists, and on the notes list. Each post and note in a list is an h-entry with its name, link, and date.
 
 = 1.8.0 =
 * Posts carry microformats2 markup (h-entry and h-feed), so sites that receive your webmentions can show your name, date, and content. Nothing changes on screen.

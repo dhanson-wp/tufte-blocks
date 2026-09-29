@@ -18,15 +18,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Post ID a block is rendering, when it belongs to a post.
+ * Post types that carry microformats: posts, and Jetpack Social notes.
+ *
+ * @return string[]
+ */
+function tufte_blocks_mf2_post_types(): array {
+	return array( 'post', 'jetpack-social-note' );
+}
+
+/**
+ * Post ID a block is rendering, when it belongs to a marked-up post type.
  *
  * @param WP_Block $instance Block instance.
- * @return int Zero when the block isn't rendering a post.
+ * @return int Zero when the block isn't rendering one.
  */
 function tufte_blocks_mf2_post_id( WP_Block $instance ): int {
 	$post_id = (int) ( $instance->context['postId'] ?? 0 );
 
-	return $post_id && 'post' === get_post_type( $post_id ) ? $post_id : 0;
+	return $post_id && in_array( get_post_type( $post_id ), tufte_blocks_mf2_post_types(), true ) ? $post_id : 0;
 }
 
 /**
@@ -51,25 +60,11 @@ function tufte_blocks_mf2_add_classes( string $html, array $classes, string $tag
 }
 
 /**
- * Mark each post in a query loop as an h-entry.
+ * A list of posts is an h-feed, and each post in it is an h-entry.
  *
- * The single post template sets h-entry on its own wrapper, since it doesn't
- * print post classes.
- *
- * @param string[] $classes Post classes.
- * @return string[]
- */
-function tufte_blocks_mf2_post_class( array $classes ): array {
-	if ( 'post' === get_post_type() && ! is_singular() ) {
-		$classes[] = 'h-entry';
-	}
-
-	return $classes;
-}
-add_filter( 'post_class', 'tufte_blocks_mf2_post_class' );
-
-/**
- * A list of posts is an h-feed.
+ * The entries are marked here, not through post_class, because a static page
+ * with query blocks (like the front page) counts as singular and would skip
+ * them. The single post template sets h-entry on its own wrapper.
  *
  * @param string   $block_content Rendered core/post-template.
  * @param array    $block         Parsed block.
@@ -77,11 +72,22 @@ add_filter( 'post_class', 'tufte_blocks_mf2_post_class' );
  * @return string
  */
 function tufte_blocks_mf2_feed( string $block_content, array $block, WP_Block $instance ): string {
-	if ( 'post' !== ( $instance->context['query']['postType'] ?? 'post' ) ) {
+	if ( ! in_array( $instance->context['query']['postType'] ?? 'post', tufte_blocks_mf2_post_types(), true ) ) {
 		return $block_content;
 	}
 
-	return tufte_blocks_mf2_add_classes( $block_content, array( 'h-feed' ) );
+	$processor = new WP_HTML_Tag_Processor( $block_content );
+	$is_first  = true;
+	while ( $processor->next_tag() ) {
+		if ( $is_first ) {
+			$processor->add_class( 'h-feed' );
+			$is_first = false;
+		} elseif ( 'LI' === $processor->get_tag() && $processor->has_class( 'wp-block-post' ) ) {
+			$processor->add_class( 'h-entry' );
+		}
+	}
+
+	return $processor->get_updated_html();
 }
 add_filter( 'render_block_core/post-template', 'tufte_blocks_mf2_feed', 10, 3 );
 
