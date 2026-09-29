@@ -3,13 +3,17 @@ Contributors: dhanson
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.6.0
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 A typography-first block theme inspired by Edward Tufte's design principles, with a Projects post type for plugins and themes.
 
 == Changelog ==
+
+= 1.7.0 =
+* Webmentions and pingbacks in your comments now link to the post that mentioned you, with a "Read on" button in place of Reply.
+* Reply no longer sends readers off to the other site on a mention.
 
 = 1.6.0 =
 * Project pages show a "Built with" row in Details, listing each tool with its icon.
