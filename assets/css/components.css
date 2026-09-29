@@ -315,23 +315,25 @@
  * The plugin styles its dialog with --wp--preset--color--base, --contrast,
  * and --contrast-3, which this palette doesn't define. Without them the frame
  * falls back to #1e1e1e text on our dark surface. Map it to our own tokens.
+ * The plugin's stylesheet loads after ours, so these selectors are one
+ * class more specific to win regardless of order.
  */
-.activitypub-modal__overlay {
+body .activitypub-modal__overlay {
 	--activitypub-modal-background-color: var(--wp--preset--color--surface);
 	--activitypub-modal-border-color: var(--wp--preset--color--border);
 	--activitypub-modal-text-color: var(--wp--preset--color--foreground);
 }
 
-.activitypub-modal__frame {
+body .activitypub-modal__overlay .activitypub-modal__frame {
 	color: var(--wp--preset--color--foreground);
 }
 
-.activitypub-dialog__button-group button {
+body .activitypub-modal__overlay .activitypub-dialog__button-group button {
 	background-color: var(--wp--preset--color--primary);
 	color: var(--wp--preset--color--background);
 }
 
-.activitypub-dialog__button-group button:hover,
-.activitypub-dialog__button-group button:focus-visible {
+body .activitypub-modal__overlay .activitypub-dialog__button-group button:hover,
+body .activitypub-modal__overlay .activitypub-dialog__button-group button:focus-visible {
 	background-color: var(--wp--preset--color--primary-hover);
 }
