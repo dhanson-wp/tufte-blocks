@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Define theme version for cache busting.
  */
-define( 'TUFTE_BLOCKS_VERSION', '1.7.3' );
+define( 'TUFTE_BLOCKS_VERSION', '1.8.0' );
 
 /**
  * Projects feature: post type, taxonomies, fields, sync, bindings, editor panel.
@@ -46,6 +46,7 @@ unset( $tufte_blocks_projects_file );
  * @since 1.7.0
  */
 require_once get_template_directory() . '/inc/linkbacks.php';
+require_once get_template_directory() . '/inc/microformats.php';
 
 /**
  * Register custom block styles.
