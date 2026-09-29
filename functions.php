@@ -41,6 +41,13 @@ foreach ( array(
 unset( $tufte_blocks_projects_file );
 
 /**
+ * Linkbacks: link webmentions and pingbacks to the post they came from.
+ *
+ * @since 1.7.0
+ */
+require_once get_template_directory() . '/inc/linkbacks.php';
+
+/**
  * Register custom block styles.
  *
  * @since 1.0.0
