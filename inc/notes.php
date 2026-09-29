@@ -105,36 +105,3 @@ function tufte_blocks_notes_hide_title( string $block_content ): string {
 	return has_post_format( 'status' ) ? '' : $block_content;
 }
 add_filter( 'render_block_core/post-title', 'tufte_blocks_notes_hide_title' );
-
-/**
- * Old note URLs (/sn/123/) go to the note's new address.
- *
- * @return void
- */
-function tufte_blocks_notes_redirect_old_urls(): void {
-	if ( ! is_404() ) {
-		return;
-	}
-
-	$path = (string) wp_parse_url( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ), PHP_URL_PATH );
-	if ( ! preg_match( '#^/sn/\d+/?$#', $path ) ) {
-		return;
-	}
-
-	$found = get_posts(
-		array(
-			'post_type'      => 'post',
-			'post_status'    => 'publish',
-			'meta_key'       => '_tufte_migrated_from', // phpcs:ignore WordPress.DB.SlowDBQuery
-			'meta_value'     => trailingslashit( $path ), // phpcs:ignore WordPress.DB.SlowDBQuery
-			'posts_per_page' => 1,
-			'fields'         => 'ids',
-		)
-	);
-
-	if ( $found ) {
-		wp_safe_redirect( get_permalink( $found[0] ), 301 );
-		exit;
-	}
-}
-add_action( 'template_redirect', 'tufte_blocks_notes_redirect_old_urls' );
