@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Define theme version for cache busting.
  */
-define( 'TUFTE_BLOCKS_VERSION', '1.9.1' );
+define( 'TUFTE_BLOCKS_VERSION', '1.9.2' );
 
 /**
  * Projects feature: post type, taxonomies, fields, sync, bindings, editor panel.
@@ -49,6 +49,7 @@ require_once get_template_directory() . '/inc/linkbacks.php';
 require_once get_template_directory() . '/inc/microformats.php';
 require_once get_template_directory() . '/inc/notes.php';
 require_once get_template_directory() . '/inc/performance.php';
+require_once get_template_directory() . '/inc/cache-warm.php';
 
 /**
  * Register custom block styles.
