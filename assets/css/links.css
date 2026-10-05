@@ -40,6 +40,16 @@
 }
 
 /**
+ * A pasted URL has no spaces to break on, so a long one would push the page
+ * wider than a phone screen. Let it wrap anywhere instead.
+ */
+.entry-content a,
+.wp-block-post-content a,
+.comment-content a {
+	overflow-wrap: anywhere;
+}
+
+/**
  * Focus state for accessibility
  */
 .entry-content a:not(.wp-block-button__link):not(.wp-block-navigation-item__content):focus,

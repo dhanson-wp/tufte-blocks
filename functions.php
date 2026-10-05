@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Define theme version for cache busting.
  */
-define( 'TUFTE_BLOCKS_VERSION', '1.9.2' );
+define( 'TUFTE_BLOCKS_VERSION', '1.9.3' );
 
 /**
  * Projects feature: post type, taxonomies, fields, sync, bindings, editor panel.
