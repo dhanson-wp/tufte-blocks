@@ -49,7 +49,6 @@ require_once get_template_directory() . '/inc/linkbacks.php';
 require_once get_template_directory() . '/inc/microformats.php';
 require_once get_template_directory() . '/inc/notes.php';
 require_once get_template_directory() . '/inc/performance.php';
-require_once get_template_directory() . '/inc/cache-warm.php';
 
 /**
  * Register custom block styles.

@@ -12,6 +12,9 @@ A typography-first block theme inspired by Edward Tufte's design principles, wit
 == Changelog ==
 
 = 1.9.3 =
+* Removed the background job that requested pages every four minutes. The site no longer schedules any cron events of its own.
+
+= 1.9.3 =
 * A long URL pasted into a note wraps onto the next line instead of pushing the page wider than a phone screen.
 
 = 1.9.2 =
