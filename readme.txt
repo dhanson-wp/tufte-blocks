@@ -3,13 +3,16 @@ Contributors: dhanson
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.9.0
+Stable tag: 1.9.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 A typography-first block theme inspired by Edward Tufte's design principles, with a Projects post type for plugins and themes.
 
 == Changelog ==
+
+= 1.9.1 =
+* Pages load faster when you click through the site. Internal links now prerender after a short hover, the main body font is preloaded, and the Threads embed script no longer blocks the page.
 
 = 1.9.0 =
 * Notes are posts in the Status format. They stay out of the blog loop, archives, search, and the main feed, and have their own list at /type/status/ with its own feed.
