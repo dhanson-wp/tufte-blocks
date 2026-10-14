@@ -3,13 +3,16 @@ Contributors: dhanson
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.9.3
+Stable tag: 1.9.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 A typography-first block theme inspired by Edward Tufte's design principles, with a Projects post type for plugins and themes.
 
 == Changelog ==
+
+= 1.9.4 =
+* Theme styles no longer leak into the editor's sidebars and modals. Inline code in plugin panels, such as Jetpack Social's {title} and {url} placeholders, is readable again.
 
 = 1.9.3 =
 * Removed the background job that requested pages every four minutes. The site no longer schedules any cron events of its own.
