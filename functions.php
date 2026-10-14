@@ -116,83 +116,62 @@ function tufte_current_year_shortcode(): string {
 add_shortcode( 'current_year', 'tufte_current_year_shortcode' );
 
 /**
- * Enqueue theme stylesheets for frontend and editor.
+ * Theme stylesheets, keyed by handle.
+ *
+ * Shared by the frontend enqueue and the editor styles so both load the same files.
+ *
+ * @since 1.9.4
+ * @return array<string, string> Handle => file name in assets/css/.
+ */
+function tufte_blocks_stylesheets(): array {
+	return array(
+		'tufte-blocks-navigation' => 'navigation.css', // Navigation styles.
+		'tufte-blocks-buttons'    => 'buttons.css',    // Button styles.
+		'tufte-blocks-links'      => 'links.css',      // Link styles.
+		'tufte-blocks-components' => 'components.css', // Quotes, details, inline code, etc.
+		'tufte-blocks-patterns'   => 'patterns.css',   // Epigraph, etc.
+		'tufte-layout'            => 'layout.css',     // Left margin, responsive padding.
+		'tufte-blocks-comments'   => 'comments.css',   // Comment threads.
+	);
+}
+
+/**
+ * Enqueue theme stylesheets on the frontend.
+ *
+ * Uses wp_enqueue_scripts rather than enqueue_block_assets: the latter also
+ * loads into the editor's outer admin document, where these unscoped rules
+ * leak into plugin UI (e.g. Jetpack Social's placeholder chips).
  *
  * @since 1.0.0
  * @return void
  */
 function tufte_blocks_enqueue_styles(): void {
 	$theme_path = get_template_directory_uri() . '/assets/css/';
-	$version    = TUFTE_BLOCKS_VERSION;
 
-	// Navigation styles.
-	wp_enqueue_style(
-		'tufte-blocks-navigation',
-		$theme_path . 'navigation.css',
-		array(),
-		$version
-	);
-
-	// Button styles.
-	wp_enqueue_style(
-		'tufte-blocks-buttons',
-		$theme_path . 'buttons.css',
-		array(),
-		$version
-	);
-
-	// Link styles.
-	wp_enqueue_style(
-		'tufte-blocks-links',
-		$theme_path . 'links.css',
-		array(),
-		$version
-	);
-
-	// Component styles (quotes, details, etc.).
-	wp_enqueue_style(
-		'tufte-blocks-components',
-		$theme_path . 'components.css',
-		array(),
-		$version
-	);
-
-	// Pattern styles (epigraph, etc.).
-	wp_enqueue_style(
-		'tufte-blocks-patterns',
-		$theme_path . 'patterns.css',
-		array(),
-		$version
-	);
-
-	// Tufte layout (left margin, responsive padding).
-	wp_enqueue_style(
-		'tufte-layout',
-		$theme_path . 'layout.css',
-		array(),
-		$version
-	);
-
-	// Comment thread styles.
-	wp_enqueue_style(
-		'tufte-blocks-comments',
-		$theme_path . 'comments.css',
-		array(),
-		$version
-	);
+	foreach ( tufte_blocks_stylesheets() as $handle => $file ) {
+		wp_enqueue_style( $handle, $theme_path . $file, array(), TUFTE_BLOCKS_VERSION );
+	}
 }
-add_action( 'enqueue_block_assets', 'tufte_blocks_enqueue_styles' );
+add_action( 'wp_enqueue_scripts', 'tufte_blocks_enqueue_styles' );
 
 /**
- * Add editor-specific styles.
+ * Add editor styles.
  *
- * Ensures proper color visibility in the block editor.
+ * Editor styles are scoped to the editor canvas, so the theme's CSS styles
+ * post content without reaching sidebars, modals, or other plugin UI.
+ * editor.css loads last so its editor-only overrides still win.
  *
  * @since 1.0.0
  * @return void
  */
 function tufte_blocks_editor_styles(): void {
-	add_editor_style( 'assets/css/editor.css' );
+	$styles = array();
+	foreach ( tufte_blocks_stylesheets() as $file ) {
+		$styles[] = 'assets/css/' . $file;
+	}
+	$styles[] = 'assets/css/editor.css';
+
+	add_editor_style( $styles );
 }
 add_action( 'after_setup_theme', 'tufte_blocks_editor_styles' );
 
