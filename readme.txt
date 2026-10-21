@@ -7,7 +7,7 @@ Stable tag: 1.10.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A typography-first block theme inspired by Edward Tufte's design principles, with a Projects post type for plugins and themes.
+A typography-first block theme inspired by Edward Tufte's design principles.
 
 == Post formats ==
 
@@ -16,9 +16,24 @@ The theme supports all nine core post formats and styles them with core's own cl
 * Status and aside: no visible title. The date, linked to the post, opens the entry, and the text reads at body size.
 * Quote: the first Quote block gets the epigraph treatment.
 * Link: the first link in the first paragraph reads as the headline.
-* Image and gallery: the first image or gallery runs the full content width. On wide screens its caption moves into the right margin.
+* Image and gallery: the first image or gallery runs the full content width. On wide screens its caption moves into the right margin. The margin note works on the theme's own single template, which it keys on through the hero image wrapper; other layouts show the caption below the image.
 * Audio and video: the first player or embed runs the full content width.
 * Chat: start each line with the speaker's name in bold, followed by a colon, as in <strong>Name:</strong> Hello. The name shows in small capitals.
+
+== Copyright ==
+
+Tufte Blocks, Copyright 2026 Derek Hanson
+Tufte Blocks is distributed under the terms of the GNU General Public License v2 or later.
+
+== Resources ==
+
+* ET Book typeface: MIT License, Copyright Dmitry Krasny, Bonnie Scranton, and Edward Tufte. https://github.com/edwardtufte/et-book
+* Portrait placeholder (assets/images/placeholder-portrait.svg): a plain silhouette drawn for this theme, licensed under the theme's own GPLv2 or later.
+
+== Upgrade Notice ==
+
+= 2.0.0 =
+Projects moved to the Tufte Projects plugin; install it before updating if you use Projects.
 
 == Changelog ==
 

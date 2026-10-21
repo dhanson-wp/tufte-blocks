@@ -82,17 +82,6 @@ function tufte_blocks_register_block_styles(): void {
 add_action( 'init', 'tufte_blocks_register_block_styles' );
 
 /**
- * Shortcode: current year (for footer copyright).
- *
- * @since 1.0.0
- * @return string Current 4-digit year.
- */
-function tufte_current_year_shortcode(): string {
-	return (string) gmdate( 'Y' );
-}
-add_shortcode( 'current_year', 'tufte_current_year_shortcode' );
-
-/**
  * Theme stylesheets, keyed by handle.
  *
  * Shared by the frontend enqueue and the editor styles so both load the same files.

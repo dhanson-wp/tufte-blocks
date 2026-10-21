@@ -1,0 +1,7 @@
+.github/ export-ignore
+docs/ export-ignore
+tests/ export-ignore
+TODOS.md export-ignore
+README.md export-ignore
+.gitignore export-ignore
+.gitattributes export-ignore

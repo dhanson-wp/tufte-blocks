@@ -33,16 +33,20 @@
 			<p class="has-secondary-color has-text-color has-monospace-font-family has-small-font-size" style="letter-spacing:0.05em;text-transform:uppercase"><a href="#">Contact</a></p>
 			<!-- /wp:paragraph -->
 			<!-- wp:paragraph {"style":{"typography":{"textTransform":"uppercase","letterSpacing":"0.05em"}},"textColor":"secondary","fontSize":"small","fontFamily":"monospace"} -->
-			<p class="has-secondary-color has-text-color has-monospace-font-family has-small-font-size" style="letter-spacing:0.05em;text-transform:uppercase"><a href="#">RSS</a></p>
+			<p class="has-secondary-color has-text-color has-monospace-font-family has-small-font-size" style="letter-spacing:0.05em;text-transform:uppercase"><a href="<?php echo esc_url( get_feed_link() ); ?>">RSS</a></p>
 			<!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:group -->
 	</div>
 	<!-- /wp:group -->
-	<!-- wp:group {"style":{"spacing":{"margin":{"top":"var:preset|spacing|50"}}},"layout":{"type":"default"}} -->
+	<!-- wp:group {"style":{"spacing":{"margin":{"top":"var:preset|spacing|50"},"blockGap":"var:preset|spacing|30"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"left"}} -->
 	<div class="wp-block-group" style="margin-top:var(--wp--preset--spacing--50)">
-		<!-- wp:paragraph {"align":"left","textColor":"secondary","fontSize":"small","fontFamily":"monospace"} -->
-		<p class="has-text-align-left has-secondary-color has-text-color has-monospace-font-family has-small-font-size">© [current_year]</p>
+		<!-- wp:paragraph {"textColor":"secondary","fontSize":"small","fontFamily":"monospace"} -->
+		<p class="has-secondary-color has-text-color has-monospace-font-family has-small-font-size">© <?php echo esc_html( gmdate( 'Y' ) ); ?></p>
+		<!-- /wp:paragraph -->
+		<!-- wp:site-title {"level":0,"isLink":false,"textColor":"secondary","fontSize":"small","fontFamily":"monospace"} /-->
+		<!-- wp:paragraph {"textColor":"secondary","fontSize":"small","fontFamily":"monospace"} -->
+		<p class="has-secondary-color has-text-color has-monospace-font-family has-small-font-size"><a href="https://github.com/dhanson-wp/tufte-blocks">Tufte Blocks theme</a></p>
 		<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:group -->

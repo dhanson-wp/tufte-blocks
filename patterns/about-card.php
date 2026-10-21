@@ -16,7 +16,7 @@
 	<!-- wp:group {"className":"tufte-about-row","layout":{"type":"flex","flexWrap":"nowrap","orientation":"horizontal","verticalAlignment":"top"},"style":{"spacing":{"blockGap":"2.5rem"}}} -->
 	<div class="wp-block-group tufte-about-row">
 		<!-- wp:image {"sizeSlug":"full","className":"tufte-about-photo","width":200,"style":{"dimensions":{"aspectRatio":"3/4"},"color":{"duotone":"var:preset|duotone|tufte-portrait"}},"linkDestination":"none"} -->
-		<figure class="wp-block-image size-full is-resized tufte-about-photo"><img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/placeholder-portrait.jpg" alt="" width="200"/></figure>
+		<figure class="wp-block-image size-full is-resized tufte-about-photo"><img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/placeholder-portrait.svg" alt="" width="200"/></figure>
 		<!-- /wp:image -->
 
 		<!-- wp:group {"className":"tufte-about-info","layout":{"type":"flex","orientation":"vertical"},"style":{"spacing":{"blockGap":"0"}}} -->
