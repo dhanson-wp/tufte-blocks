@@ -94,10 +94,12 @@ Move the Projects feature out of the theme into a new plugin. Behavior stays ide
 
 This task is operations, not code, and every numbered step needs Derek's go.
 
-- [ ] **Step 1:** Export the live database, or confirm a fresh WordPress.com backup.
-- [ ] **Step 2:** Connect `dhanson-wp/tufte-projects` to WordPress.com GitHub Deployments (Advanced, Manual) with the destination `/wp-content/plugins/tufte-projects`, the same way Tufte Formats is connected. Deploy, then activate the plugin on live.
-- [ ] **Step 3:** Merge the 1.10.0 PR (this deploys the theme).
-- [ ] **Step 4: Verify on live.** `/projects/` and every project page render with their bound fields. `wp cron event list` shows one `tufte_blocks_projects_sync`. The sync button in the editor's "Project details" panel works (it hits `tufte-projects/v1`). The PHP error log has no new notices.
+- [ ] **Step 1: Back up.** Export the live database, or confirm a fresh WordPress.com backup.
+- [ ] **Step 2: Deploy the plugin, inactive.** Connect `dhanson-wp/tufte-projects` to WordPress.com GitHub Deployments (Advanced, Manual) with the destination `/wp-content/plugins/tufte-projects`, the same way Tufte Formats is connected. Deploy it, but leave it **inactive**. Live is still on 1.9.4, which has no bridge guard, so activating now would load Projects twice.
+- [ ] **Step 3: Merge 1.10.0.** Merge the 1.10.0 PR (this deploys the theme, and the bridge guard goes live).
+- [ ] **Step 4: Activate Tufte Projects.**
+- [ ] **Step 5: Verify on live.** `/projects/` and every project page render with their bound fields. `wp cron event list` shows one `tufte_blocks_projects_sync`. The sync button in the editor's "Project details" panel works (it hits `tufte-projects/v1`). The PHP error log has no new notices. The inserter shows each project pattern twice until 2.0.0; that's expected.
+- [ ] **Step 6: Merge the child PR before 2.0.0.** Merge the child theme PR (`wporg/move-performance`: prerender, Threads defer, `[current_year]`) so those behaviors don't drop out when 2.0.0 deploys. Then grep live content for `tufte-blocks/project-` pattern references before 2.0.0, since those patterns leave the theme.
 
 ### Task 4: Tufte Blocks 2.0.0, removing what isn't theme work
 
@@ -170,5 +172,5 @@ Each item below fails the review as the theme stands today.
 
 - [ ] **Step 1:** Bump to 2.0.0 (`style.css`, `TUFTE_BLOCKS_VERSION`, `readme.txt` stable tag and changelog). The changelog should cover: Projects moved to Tufte Projects; Status posts now appear in the blog loop unless a plugin like Tufte Formats keeps them out; every post format is supported and styled; the footer year no longer uses a shortcode.
 - [ ] **Step 2:** On the derekhansonblog Studio site, run the theme, Tufte Projects, and child theme runners. Then do a visual pass of the home page, `/archive/` (all views), a note of each kind, `/projects/`, a project, an essay with footnotes, and `/follow/` against live. Expected: no visible difference from live except the footer credit link.
-- [ ] **Step 3:** Open the PR with `wp-ship`. Merge only with Derek's go, and only after the child theme PR from Task 7 step 3 is live, so the prerender behavior doesn't drop out for a deploy cycle.
+- [ ] **Step 3:** Open the PR with `wp-ship`. Merge only with Derek's go, and only after Tufte Projects is active on live and the child PR from Task 7 step 3 is live, so neither Projects nor the prerender behavior drops out for a deploy cycle.
 - [ ] **Step 4: Check the theme slug.** Confirm `tufte-blocks` is free on WordPress.org (`https://wordpress.org/themes/tufte-blocks/` returns 404), and record the result in the Workshop inbox. Submitting the theme is Derek's call and isn't part of this plan.

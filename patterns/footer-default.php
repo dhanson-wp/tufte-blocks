@@ -4,7 +4,7 @@
  * Slug: tufte-blocks/footer-default
  * Categories: footer
  * Block Types: core/template-part/footer
- * Description: A quiet, functional footer with site title, tagline, navigation links, and copyright.
+ * Description: A quiet, functional footer with site title, tagline, an RSS link, the year, and a theme credit link.
  * Keywords: footer, site, links, copyright
  *
  * @package Tufte_Blocks
@@ -19,9 +19,7 @@
 		<!-- wp:group {"layout":{"type":"default"}} -->
 		<div class="wp-block-group">
 			<!-- wp:site-title {"level":0,"style":{"typography":{"fontSize":"1rem"}}} /-->
-			<!-- wp:paragraph {"textColor":"secondary","fontSize":"small"} -->
-			<p class="has-secondary-color has-text-color has-small-font-size"><?php echo esc_html__( 'A typography-first theme inspired by Edward Tufte.', 'tufte-blocks' ); ?></p>
-			<!-- /wp:paragraph -->
+			<!-- wp:site-tagline {"textColor":"secondary","fontSize":"small"} /-->
 		</div>
 		<!-- /wp:group -->
 		<!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"left"}} -->
