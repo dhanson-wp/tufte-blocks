@@ -55,12 +55,6 @@ function tufte_fixture_json( string $name ): array {
 
 foreach ( glob( __DIR__ . '/test-*.php' ) as $tufte_test_file ) {
 	echo "\n== " . basename( $tufte_test_file ) . "\n";
-	// The Projects suites test the theme's copy of that code. With Tufte
-	// Projects active the theme doesn't load it, and the plugin runs these.
-	if ( defined( 'TUFTE_PROJECTS_VERSION' ) && 'test-bridge.php' !== basename( $tufte_test_file ) ) {
-		echo "SKIP  Tufte Projects is active; its own runner covers this\n";
-		continue;
-	}
 	require $tufte_test_file;
 }
 

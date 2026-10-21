@@ -18,42 +18,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'TUFTE_BLOCKS_VERSION', '1.10.0' );
 
 /**
- * Projects feature: post type, taxonomies, fields, sync, bindings, editor panel.
- *
- * The Tufte Projects plugin now owns this. The theme only loads its own copy
- * when the plugin isn't active, so a site upgrading in two steps keeps working.
- * Plugins load before functions.php, so the plugin's constant is set by now.
- *
- * Files are loaded in dependency order. The registry (fields.php) must load
- * before anything that reads it.
- *
- * @since 1.5.0
- */
-if ( ! defined( 'TUFTE_PROJECTS_VERSION' ) ) {
-	foreach ( array(
-		'post-type',
-		'tool-icons',
-		'fields',
-		'header-parser',
-		'sources/wporg',
-		'sources/github',
-		'sync',
-		'bindings',
-		'editor',
-	) as $tufte_blocks_projects_file ) {
-		require_once get_template_directory() . '/inc/projects/' . $tufte_blocks_projects_file . '.php';
-	}
-	unset( $tufte_blocks_projects_file );
-}
-
-/**
  * Linkbacks: link webmentions and pingbacks to the post they came from.
  *
  * @since 1.7.0
  */
 require_once get_template_directory() . '/inc/linkbacks.php';
 require_once get_template_directory() . '/inc/microformats.php';
-require_once get_template_directory() . '/inc/notes.php';
+require_once get_template_directory() . '/inc/formats.php';
 require_once get_template_directory() . '/inc/performance.php';
 
 /**
@@ -241,14 +212,6 @@ function tufte_blocks_register_pattern_categories(): void {
 		array(
 			'label'       => __( 'Layout', 'tufte-blocks' ),
 			'description' => __( 'Structural patterns like heroes and section breaks.', 'tufte-blocks' ),
-		)
-	);
-
-	register_block_pattern_category(
-		'tufte-projects',
-		array(
-			'label'       => __( 'Projects', 'tufte-blocks' ),
-			'description' => __( 'Project showcase cards and layouts.', 'tufte-blocks' ),
 		)
 	);
 }
