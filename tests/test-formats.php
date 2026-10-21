@@ -56,6 +56,60 @@ if ( function_exists( 'tufte_blocks_format_hide_title' ) ) {
 	tufte_assert_same( true, false, 'tufte_blocks_format_hide_title() exists' );
 }
 
+/**
+ * Render a core/post-date block for a post inside a query-loop-style context.
+ *
+ * @param int  $post_id Post ID.
+ * @param bool $is_link Whether the date block links itself.
+ * @return string
+ */
+function tufte_formats_test_render_date( int $post_id, bool $is_link ): string {
+	$block = new WP_Block(
+		array(
+			'blockName' => 'core/post-date',
+			'attrs'     => array( 'isLink' => $is_link ),
+		),
+		array(
+			'postId'   => $post_id,
+			'postType' => 'post',
+		)
+	);
+	return $block->render();
+}
+
+$tufte_status_permalink = get_permalink( $tufte_status_id );
+$tufte_status_date      = tufte_formats_test_render_date( $tufte_status_id, false );
+tufte_assert_same(
+	1,
+	preg_match( '#<a\b[^>]*href="' . preg_quote( $tufte_status_permalink, '#' ) . '"[^>]*>\s*<time\b#', $tufte_status_date ),
+	'status post date link wraps the time element'
+);
+tufte_assert_same(
+	0,
+	preg_match( '#<a\b(?:(?!</a>).)*<a\b#s', $tufte_status_date ),
+	'status post date has no nested links'
+);
+tufte_assert_same(
+	true,
+	str_contains( $tufte_status_date, 'u-url' ) && str_contains( $tufte_status_date, 'dt-published' ),
+	'status post date keeps its microformats'
+);
+tufte_assert_same(
+	0,
+	preg_match( '#<a\\b[^>]*>\\s*<time\\b#', tufte_formats_test_render_date( $tufte_standard_id, false ) ),
+	'standard post date does not gain a link around the time'
+);
+tufte_assert_same(
+	1,
+	preg_match( '#<a\\b[^>]*href="' . preg_quote( $tufte_status_permalink, '#' ) . '"[^>]*>\\s*<time\\b#', tufte_formats_test_render_date( $tufte_status_id, true ) ),
+	'status post date with isLink true stays linked'
+);
+tufte_assert_same(
+	0,
+	preg_match( '#<a\b(?:(?!</a>).)*<a\b#s', tufte_formats_test_render_date( $tufte_status_id, true ) ),
+	'status post date with isLink true has no nested links'
+);
+
 if ( defined( 'TUFTE_FORMATS_VERSION' ) ) {
 	echo "SKIP  Tufte Formats is active; it owns the home query\n";
 } else {

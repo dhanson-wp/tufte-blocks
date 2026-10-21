@@ -9,6 +9,17 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 A typography-first block theme inspired by Edward Tufte's design principles, with a Projects post type for plugins and themes.
 
+== Post formats ==
+
+The theme supports all nine core post formats and styles them with core's own classes, so they look right with no plugin, with Tufte Formats, or with Post Formats for Block Themes. Set the format in the editor's post settings.
+
+* Status and aside: no visible title. The date, linked to the post, opens the entry, and the text reads at body size.
+* Quote: the first Quote block gets the epigraph treatment.
+* Link: the first link in the first paragraph reads as the headline.
+* Image and gallery: the first image or gallery runs the full content width. On wide screens its caption moves into the right margin.
+* Audio and video: the first player or embed runs the full content width.
+* Chat: start each line with the speaker's name in bold, followed by a colon, as in <strong>Name:</strong> Hello. The name shows in small capitals.
+
 == Changelog ==
 
 = 1.10.0 =

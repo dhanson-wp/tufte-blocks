@@ -107,6 +107,7 @@ function tufte_blocks_stylesheets(): array {
 		'tufte-blocks-links'      => 'links.css',      // Link styles.
 		'tufte-blocks-components' => 'components.css', // Quotes, details, inline code, etc.
 		'tufte-blocks-patterns'   => 'patterns.css',   // Epigraph, etc.
+		'tufte-blocks-formats'    => 'formats.css',    // Post format presentation.
 		'tufte-layout'            => 'layout.css',     // Left margin, responsive padding.
 		'tufte-blocks-comments'   => 'comments.css',   // Comment threads.
 	);
