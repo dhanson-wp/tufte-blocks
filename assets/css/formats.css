@@ -42,9 +42,12 @@
 /* ==========================================================================
    Quote
    The first quote takes the epigraph treatment.
+   Content rules below match a direct child of the post content, or of an
+   .e-content wrapper some plugins add inside it, so the first-element
+   treatments keep working when the body is wrapped.
    ========================================================================== */
 
-:is(.format-quote, .single-format-quote) .wp-block-post-content > .wp-block-quote:first-of-type:not([class*="is-style-"]) {
+:is(.format-quote, .single-format-quote) :is(.wp-block-post-content, .wp-block-post-content > .e-content) > .wp-block-quote:first-of-type:not([class*="is-style-"]) {
 	text-align: right;
 	max-width: 480px;
 	margin-left: auto;
@@ -55,7 +58,7 @@
 	font-style: italic;
 }
 
-:is(.format-quote, .single-format-quote) .wp-block-post-content > .wp-block-quote:first-of-type:not([class*="is-style-"]) :is(cite, footer) {
+:is(.format-quote, .single-format-quote) :is(.wp-block-post-content, .wp-block-post-content > .e-content) > .wp-block-quote:first-of-type:not([class*="is-style-"]) :is(cite, footer) {
 	text-align: right;
 }
 
@@ -64,7 +67,7 @@
    The first link in the content is the entry's headline.
    ========================================================================== */
 
-:is(.format-link, .single-format-link) .wp-block-post-content > p:first-of-type > a:first-child {
+:is(.format-link, .single-format-link) :is(.wp-block-post-content, .wp-block-post-content > .e-content) > p:first-of-type > a:first-child {
 	font-size: var(--wp--preset--font-size--medium);
 	line-height: 1.35;
 }
@@ -78,22 +81,22 @@
    Wide, full, floated, and explicitly sized images are left as authored.
    ========================================================================== */
 
-:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) .wp-block-post-content > .wp-block-image:not(.alignwide, .alignfull, .alignleft, .alignright, .is-resized) img {
+:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) :is(.wp-block-post-content, .wp-block-post-content > .e-content) > .wp-block-image:not(.alignwide, .alignfull, .alignleft, .alignright, .is-resized) img {
 	width: 100%;
 	height: auto;
 }
 
 /* Only the first image fills the column; later ones keep their own size. */
-:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) .wp-block-post-content > :is(.wp-block-image, .wp-block-gallery) ~ .wp-block-image:not(.alignwide, .alignfull, .alignleft, .alignright, .is-resized) img {
+:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) :is(.wp-block-post-content, .wp-block-post-content > .e-content) > :is(.wp-block-image, .wp-block-gallery) ~ .wp-block-image:not(.alignwide, .alignfull, .alignleft, .alignright, .is-resized) img {
 	width: auto;
 }
 
 @media (min-width: 1200px) {
-	:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) .tufte-hero ~ .wp-block-post-content > :is(.wp-block-image, .wp-block-gallery):not(.alignwide, .alignfull, .alignleft, .alignright) {
+	:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) .tufte-hero ~ :is(.wp-block-post-content, .wp-block-post-content > .e-content) > :is(.wp-block-image, .wp-block-gallery):not(.alignwide, .alignfull, .alignleft, .alignright) {
 		position: relative;
 	}
 
-	:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) .tufte-hero ~ .wp-block-post-content > :is(.wp-block-image, .wp-block-gallery):not(.alignwide, .alignfull, .alignleft, .alignright) > figcaption {
+	:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) .tufte-hero ~ :is(.wp-block-post-content, .wp-block-post-content > .e-content) > :is(.wp-block-image, .wp-block-gallery):not(.alignwide, .alignfull, .alignleft, .alignright) > figcaption {
 		position: absolute;
 		top: 0;
 		left: calc(100% + var(--wp--preset--spacing--50));
@@ -106,7 +109,7 @@
 	}
 
 	/* Only the first image gets a margin note; later ones keep their captions below. */
-	:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) .tufte-hero ~ .wp-block-post-content > :is(.wp-block-image, .wp-block-gallery) ~ :is(.wp-block-image, .wp-block-gallery) > figcaption {
+	:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) .tufte-hero ~ :is(.wp-block-post-content, .wp-block-post-content > .e-content) > :is(.wp-block-image, .wp-block-gallery) ~ :is(.wp-block-image, .wp-block-gallery) > figcaption {
 		position: static;
 		width: auto;
 		margin: var(--wp--preset--spacing--30) 0 0;
@@ -121,14 +124,14 @@
    without touching figure sizing, alignment, or later embeds.
    ========================================================================== */
 
-:is(.format-audio, .single-format-audio) .wp-block-post-content > .wp-block-audio:first-of-type audio,
-:is(.format-video, .single-format-video) .wp-block-post-content > .wp-block-video:first-of-type video {
+:is(.format-audio, .single-format-audio) :is(.wp-block-post-content, .wp-block-post-content > .e-content) > .wp-block-audio:first-of-type audio,
+:is(.format-video, .single-format-video) :is(.wp-block-post-content, .wp-block-post-content > .e-content) > .wp-block-video:first-of-type video {
 	display: block;
 	width: 100%;
 	max-width: 100%;
 }
 
-:is(.format-video, .single-format-video) .wp-block-post-content > .wp-block-embed:first-of-type iframe {
+:is(.format-video, .single-format-video) :is(.wp-block-post-content, .wp-block-post-content > .e-content) > .wp-block-embed:first-of-type iframe {
 	max-width: 100%;
 }
 
@@ -138,11 +141,11 @@
    ::first-line would style a whole wrapped line, so the name itself is styled.
    ========================================================================== */
 
-:is(.format-chat, .single-format-chat) .wp-block-post-content > p {
+:is(.format-chat, .single-format-chat) :is(.wp-block-post-content, .wp-block-post-content > .e-content) > p {
 	margin-block: var(--wp--preset--spacing--30);
 }
 
-:is(.format-chat, .single-format-chat) .wp-block-post-content > p > strong:first-child {
+:is(.format-chat, .single-format-chat) :is(.wp-block-post-content, .wp-block-post-content > .e-content) > p > strong:first-child {
 	font-weight: 400;
 	font-variant-caps: all-small-caps;
 	letter-spacing: 0.06em;
