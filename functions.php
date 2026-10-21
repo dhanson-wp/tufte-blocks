@@ -15,30 +15,36 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Define theme version for cache busting.
  */
-define( 'TUFTE_BLOCKS_VERSION', '1.9.4' );
+define( 'TUFTE_BLOCKS_VERSION', '1.10.0' );
 
 /**
  * Projects feature: post type, taxonomies, fields, sync, bindings, editor panel.
+ *
+ * The Tufte Projects plugin now owns this. The theme only loads its own copy
+ * when the plugin isn't active, so a site upgrading in two steps keeps working.
+ * Plugins load before functions.php, so the plugin's constant is set by now.
  *
  * Files are loaded in dependency order. The registry (fields.php) must load
  * before anything that reads it.
  *
  * @since 1.5.0
  */
-foreach ( array(
-	'post-type',
-	'tool-icons',
-	'fields',
-	'header-parser',
-	'sources/wporg',
-	'sources/github',
-	'sync',
-	'bindings',
-	'editor',
-) as $tufte_blocks_projects_file ) {
-	require_once get_template_directory() . '/inc/projects/' . $tufte_blocks_projects_file . '.php';
+if ( ! defined( 'TUFTE_PROJECTS_VERSION' ) ) {
+	foreach ( array(
+		'post-type',
+		'tool-icons',
+		'fields',
+		'header-parser',
+		'sources/wporg',
+		'sources/github',
+		'sync',
+		'bindings',
+		'editor',
+	) as $tufte_blocks_projects_file ) {
+		require_once get_template_directory() . '/inc/projects/' . $tufte_blocks_projects_file . '.php';
+	}
+	unset( $tufte_blocks_projects_file );
 }
-unset( $tufte_blocks_projects_file );
 
 /**
  * Linkbacks: link webmentions and pingbacks to the post they came from.
@@ -192,38 +198,6 @@ add_action( 'after_setup_theme', 'tufte_blocks_disable_core_and_remote_patterns'
 add_filter( 'should_load_remote_block_patterns', '__return_false' );
 
 /**
- * TEMPORARY: Reset page template database override.
- *
- * The page template was saved to the database with incorrect post-content
- * attributes. This deletes the DB record so WordPress falls back to the theme
- * file (templates/page.html).
- *
- * Load any page once, then REMOVE this block immediately.
- */
-add_action( 'init', function (): void {
-	$query = new WP_Query(
-		array(
-			'post_type'      => 'wp_template',
-			'post_name__in'  => array( 'page' ),
-			'post_status'    => array( 'publish', 'draft' ),
-			'posts_per_page' => 1,
-			'fields'         => 'ids',
-			'tax_query'      => array(
-				array(
-					'taxonomy' => 'wp_theme',
-					'field'    => 'name',
-					'terms'    => get_stylesheet(),
-				),
-			),
-		)
-	);
-	$posts = $query->posts;
-	if ( ! empty( $posts ) ) {
-		wp_delete_post( (int) $posts[0], true );
-	}
-} );
-
-/**
  * Register pattern categories.
  *
  * @since 1.0.0
@@ -279,33 +253,3 @@ function tufte_blocks_register_pattern_categories(): void {
 	);
 }
 add_action( 'init', 'tufte_blocks_register_pattern_categories' );
-
-/**
- * One-time migration: clear duplicated Tufte layout CSS from Additional CSS.
- *
- * After moving layout rules to assets/css/layout.css, clear them from
- * Appearance → Editor → Styles → Additional CSS to avoid duplication.
- * Only runs when Tufte layout rules are present. Remove this block after
- * the migration has run once.
- *
- * @since 1.0.0
- * @return void
- */
-add_action( 'init', function (): void {
-	if ( get_option( 'tufte_blocks_layout_css_migrated', false ) ) {
-		return;
-	}
-
-	$css = wp_get_custom_css( get_stylesheet() );
-	if ( empty( trim( $css ) ) ) {
-		update_option( 'tufte_blocks_layout_css_migrated', true );
-		return;
-	}
-
-	// Clear Additional CSS if it contains the Tufte layout block (avoid duplication).
-	if ( str_contains( $css, 'TUFTE LEFT MARGIN' ) ) {
-		wp_update_custom_css_post( '', array( 'stylesheet' => get_stylesheet() ) );
-	}
-
-	update_option( 'tufte_blocks_layout_css_migrated', true );
-} );

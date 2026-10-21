@@ -3,7 +3,7 @@ Contributors: dhanson
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.9.4
+Stable tag: 1.10.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,13 +11,15 @@ A typography-first block theme inspired by Edward Tufte's design principles, wit
 
 == Changelog ==
 
+= 1.10.0 =
+* Projects is moving to its own plugin, Tufte Projects. This release is the bridge: when the plugin is active, the theme steps aside and the plugin takes over, with no change to your projects, fields, or templates.
+* Removed two leftover one-time routines that ran on every page load, the page template reset and the Additional CSS cleanup. A page template you save in the Site Editor now stays saved.
+
 = 1.9.4 =
 * Theme styles no longer leak into the editor's sidebars and modals. Inline code in plugin panels, such as Jetpack Social's {title} and {url} placeholders, is readable again.
 
 = 1.9.3 =
 * Removed the background job that requested pages every four minutes. The site no longer schedules any cron events of its own.
-
-= 1.9.3 =
 * A long URL pasted into a note wraps onto the next line instead of pushing the page wider than a phone screen.
 
 = 1.9.2 =
