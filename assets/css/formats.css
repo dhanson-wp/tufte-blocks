@@ -31,7 +31,7 @@
 :is(.format-status, .format-aside) .wp-block-post-excerpt,
 :is(.single-format-status, .single-format-aside) .wp-block-post-content {
 	color: var(--wp--preset--color--foreground);
-	font-size: 1rem;
+	font-size: inherit;
 }
 
 /* No title above the date, so no space where the title was. */
