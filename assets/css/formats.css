@@ -15,15 +15,15 @@
    ========================================================================== */
 
 /* The date is the row's only handle, so it reads as a quiet link. */
-.format-status .wp-block-post-date a,
-.format-aside .wp-block-post-date a {
+.format-status .wp-block-post-date a:not(.u-url),
+.format-aside .wp-block-post-date a:not(.u-url) {
 	color: inherit;
 	text-decoration: none;
 	background-image: none;
 }
 
-.format-status .wp-block-post-date a:hover,
-.format-aside .wp-block-post-date a:hover {
+.format-status .wp-block-post-date a:not(.u-url):hover,
+.format-aside .wp-block-post-date a:not(.u-url):hover {
 	color: var(--wp--preset--color--primary);
 }
 
@@ -73,24 +73,25 @@
    Image and Gallery
    The first image runs the full content width. On wide screens its caption
    moves into the right margin, the same column the single-post hero uses.
+   Wide, full, floated, and explicitly sized images are left as authored.
    ========================================================================== */
 
-:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) .wp-block-post-content > :is(.wp-block-image, .wp-block-gallery) {
-	width: 100%;
-	max-width: 100%;
-}
-
-:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) .wp-block-post-content > .wp-block-image img {
+:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) .wp-block-post-content > .wp-block-image:not(.alignwide, .alignfull, .alignleft, .alignright, .is-resized) img {
 	width: 100%;
 	height: auto;
 }
 
+/* Only the first image fills the column; later ones keep their own size. */
+:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) .wp-block-post-content > :is(.wp-block-image, .wp-block-gallery) ~ .wp-block-image:not(.alignwide, .alignfull, .alignleft, .alignright, .is-resized) img {
+	width: auto;
+}
+
 @media (min-width: 1200px) {
-	:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) .wp-block-post-content > :is(.wp-block-image, .wp-block-gallery) {
+	:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) .wp-block-post-content > :is(.wp-block-image, .wp-block-gallery):not(.alignwide, .alignfull, .alignleft, .alignright) {
 		position: relative;
 	}
 
-	:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) .wp-block-post-content > :is(.wp-block-image, .wp-block-gallery) > figcaption {
+	:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) .wp-block-post-content > :is(.wp-block-image, .wp-block-gallery):not(.alignwide, .alignfull, .alignleft, .alignright) > figcaption {
 		position: absolute;
 		top: 0;
 		left: calc(100% + var(--wp--preset--spacing--50));
@@ -113,22 +114,19 @@
 
 /* ==========================================================================
    Audio and Video
-   The first embed runs the full content width.
+   Core already sizes players and embeds to the column, so this only guards
+   against a fixed width pushing past it. It matches the first embed's width
+   without touching figure sizing, alignment, or later embeds.
    ========================================================================== */
 
-:is(.format-audio, .single-format-audio, .format-video, .single-format-video) .wp-block-post-content > :is(.wp-block-audio, .wp-block-video, .wp-block-embed) {
-	width: 100%;
-	max-width: 100%;
-}
-
-:is(.format-audio, .single-format-audio) .wp-block-post-content > .wp-block-audio audio,
-:is(.format-video, .single-format-video) .wp-block-post-content > .wp-block-video video {
+:is(.format-audio, .single-format-audio) .wp-block-post-content > .wp-block-audio:first-of-type audio,
+:is(.format-video, .single-format-video) .wp-block-post-content > .wp-block-video:first-of-type video {
 	display: block;
 	width: 100%;
 	max-width: 100%;
 }
 
-:is(.format-video, .single-format-video) .wp-block-post-content > .wp-block-embed iframe {
+:is(.format-video, .single-format-video) .wp-block-post-content > .wp-block-embed:first-of-type iframe {
 	max-width: 100%;
 }
 
