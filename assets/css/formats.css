@@ -92,11 +92,11 @@
 }
 
 @media (min-width: 1200px) {
-	:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) .tufte-hero ~ :is(.wp-block-post-content, .wp-block-post-content > .e-content) > :is(.wp-block-image, .wp-block-gallery):not(.alignwide, .alignfull, .alignleft, .alignright) {
+	:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) :is(.tufte-hero ~ .wp-block-post-content, .tufte-hero ~ .wp-block-post-content > .e-content) > :is(.wp-block-image, .wp-block-gallery):not(.alignwide, .alignfull, .alignleft, .alignright) {
 		position: relative;
 	}
 
-	:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) .tufte-hero ~ :is(.wp-block-post-content, .wp-block-post-content > .e-content) > :is(.wp-block-image, .wp-block-gallery):not(.alignwide, .alignfull, .alignleft, .alignright) > figcaption {
+	:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) :is(.tufte-hero ~ .wp-block-post-content, .tufte-hero ~ .wp-block-post-content > .e-content) > :is(.wp-block-image, .wp-block-gallery):not(.alignwide, .alignfull, .alignleft, .alignright) > figcaption {
 		position: absolute;
 		top: 0;
 		left: calc(100% + var(--wp--preset--spacing--50));
@@ -109,7 +109,7 @@
 	}
 
 	/* Only the first image gets a margin note; later ones keep their captions below. */
-	:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) .tufte-hero ~ :is(.wp-block-post-content, .wp-block-post-content > .e-content) > :is(.wp-block-image, .wp-block-gallery) ~ :is(.wp-block-image, .wp-block-gallery) > figcaption {
+	:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) :is(.tufte-hero ~ .wp-block-post-content, .tufte-hero ~ .wp-block-post-content > .e-content) > :is(.wp-block-image, .wp-block-gallery) ~ :is(.wp-block-image, .wp-block-gallery) > figcaption {
 		position: static;
 		width: auto;
 		margin: var(--wp--preset--spacing--30) 0 0;
