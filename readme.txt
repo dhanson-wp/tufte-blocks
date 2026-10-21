@@ -30,6 +30,10 @@ Tufte Blocks is distributed under the terms of the GNU General Public License v2
 * ET Book typeface: MIT License, Copyright Dmitry Krasny, Bonnie Scranton, and Edward Tufte. https://github.com/edwardtufte/et-book
 * Portrait placeholder (assets/images/placeholder-portrait.svg): a plain silhouette drawn for this theme, licensed under the theme's own GPLv2 or later.
 
+== Privacy ==
+
+Tufte Blocks doesn't collect, store, or send any user data. It sets no cookies and makes no outside requests.
+
 == Upgrade Notice ==
 
 = 2.0.0 =

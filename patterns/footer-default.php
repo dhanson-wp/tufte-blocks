@@ -1,6 +1,6 @@
 <?php
 /**
- * Title: Footer — Default
+ * Title: Footer, default
  * Slug: tufte-blocks/footer-default
  * Categories: footer
  * Block Types: core/template-part/footer
@@ -20,20 +20,14 @@
 		<div class="wp-block-group">
 			<!-- wp:site-title {"level":0,"style":{"typography":{"fontSize":"1rem"}}} /-->
 			<!-- wp:paragraph {"textColor":"secondary","fontSize":"small"} -->
-			<p class="has-secondary-color has-text-color has-small-font-size">A typography-first theme inspired by Edward Tufte.</p>
+			<p class="has-secondary-color has-text-color has-small-font-size"><?php echo esc_html__( 'A typography-first theme inspired by Edward Tufte.', 'tufte-blocks' ); ?></p>
 			<!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:group -->
 		<!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"left"}} -->
 		<div class="wp-block-group">
 			<!-- wp:paragraph {"style":{"typography":{"textTransform":"uppercase","letterSpacing":"0.05em"}},"textColor":"secondary","fontSize":"small","fontFamily":"monospace"} -->
-			<p class="has-secondary-color has-text-color has-monospace-font-family has-small-font-size" style="letter-spacing:0.05em;text-transform:uppercase"><a href="#">About</a></p>
-			<!-- /wp:paragraph -->
-			<!-- wp:paragraph {"style":{"typography":{"textTransform":"uppercase","letterSpacing":"0.05em"}},"textColor":"secondary","fontSize":"small","fontFamily":"monospace"} -->
-			<p class="has-secondary-color has-text-color has-monospace-font-family has-small-font-size" style="letter-spacing:0.05em;text-transform:uppercase"><a href="#">Contact</a></p>
-			<!-- /wp:paragraph -->
-			<!-- wp:paragraph {"style":{"typography":{"textTransform":"uppercase","letterSpacing":"0.05em"}},"textColor":"secondary","fontSize":"small","fontFamily":"monospace"} -->
-			<p class="has-secondary-color has-text-color has-monospace-font-family has-small-font-size" style="letter-spacing:0.05em;text-transform:uppercase"><a href="<?php echo esc_url( get_feed_link() ); ?>">RSS</a></p>
+			<p class="has-secondary-color has-text-color has-monospace-font-family has-small-font-size" style="letter-spacing:0.05em;text-transform:uppercase"><a href="<?php echo esc_url( get_feed_link() ); ?>"><?php echo esc_html__( 'RSS', 'tufte-blocks' ); ?></a></p>
 			<!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:group -->
@@ -44,9 +38,8 @@
 		<!-- wp:paragraph {"textColor":"secondary","fontSize":"small","fontFamily":"monospace"} -->
 		<p class="has-secondary-color has-text-color has-monospace-font-family has-small-font-size">© <?php echo esc_html( gmdate( 'Y' ) ); ?></p>
 		<!-- /wp:paragraph -->
-		<!-- wp:site-title {"level":0,"isLink":false,"textColor":"secondary","fontSize":"small","fontFamily":"monospace"} /-->
 		<!-- wp:paragraph {"textColor":"secondary","fontSize":"small","fontFamily":"monospace"} -->
-		<p class="has-secondary-color has-text-color has-monospace-font-family has-small-font-size"><a href="https://github.com/dhanson-wp/tufte-blocks">Tufte Blocks theme</a></p>
+		<p class="has-secondary-color has-text-color has-monospace-font-family has-small-font-size"><a href="https://github.com/dhanson-wp/tufte-blocks"><?php echo esc_html__( 'Tufte Blocks theme', 'tufte-blocks' ); ?></a></p>
 		<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:group -->
