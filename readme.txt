@@ -3,7 +3,7 @@ Contributors: dhanson
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.10.0
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,14 @@ Tufte Blocks doesn't collect, store, or send any user data. It sets no cookies a
 Projects moved to the Tufte Projects plugin; install it before updating if you use Projects.
 
 == Changelog ==
+
+= 2.0.0 =
+* Projects moved to the Tufte Projects plugin. Install it to keep your projects, fields, and templates; the theme no longer registers them.
+* Status posts now show in the blog loop like any other post. A plugin like Tufte Formats can keep them out.
+* Every post format is supported and styled, with or without a plugin.
+* The footer now loads from a pattern with a small theme credit link, and its year no longer uses a shortcode.
+* Text in the theme's patterns is translatable.
+* The prerender and Threads script tweaks are gone from the theme.
 
 = 1.10.0 =
 * Projects is moving to its own plugin, Tufte Projects. This release is the bridge: when the plugin is active, the theme steps aside and the plugin takes over, with no change to your projects, fields, or templates.

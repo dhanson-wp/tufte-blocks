@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Define theme version for cache busting.
  */
-define( 'TUFTE_BLOCKS_VERSION', '1.10.0' );
+define( 'TUFTE_BLOCKS_VERSION', '2.0.0' );
 
 /**
  * Linkbacks: link webmentions and pingbacks to the post they came from.
