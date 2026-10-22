@@ -18,12 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Post types that carry microformats: posts, and Jetpack Social notes.
+ * Post types that carry microformats.
  *
  * @return string[]
  */
 function tufte_blocks_mf2_post_types(): array {
-	return array( 'post', 'jetpack-social-note' );
+	return array( 'post' );
 }
 
 /**

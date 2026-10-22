@@ -18,11 +18,11 @@
 	<!-- /wp:paragraph -->
 
 	<!-- wp:paragraph {"className":"tufte-epigraph-quote","align":"center"} -->
-	<p class="tufte-epigraph-quote has-text-align-center">The minimum we should hope for with any display technology is that it should do no harm to the content.</p>
+	<p class="tufte-epigraph-quote has-text-align-center"><?php echo esc_html__( 'The minimum we should hope for with any display technology is that it should do no harm to the content.', 'tufte-blocks' ); ?></p>
 	<!-- /wp:paragraph -->
 
 	<!-- wp:paragraph {"className":"tufte-epigraph-attribution","align":"center","textColor":"secondary"} -->
-	<p class="tufte-epigraph-attribution has-text-align-center has-secondary-color has-text-color">— <strong>Edward Tufte</strong>, The Cognitive Style of PowerPoint</p>
+	<p class="tufte-epigraph-attribution has-text-align-center has-secondary-color has-text-color"><?php echo wp_kses_post( __( '— <strong>Edward Tufte</strong>, The Cognitive Style of PowerPoint', 'tufte-blocks' ) ); ?></p>
 	<!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->

@@ -15,36 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Define theme version for cache busting.
  */
-define( 'TUFTE_BLOCKS_VERSION', '1.10.0' );
-
-/**
- * Projects feature: post type, taxonomies, fields, sync, bindings, editor panel.
- *
- * The Tufte Projects plugin now owns this. The theme only loads its own copy
- * when the plugin isn't active, so a site upgrading in two steps keeps working.
- * Plugins load before functions.php, so the plugin's constant is set by now.
- *
- * Files are loaded in dependency order. The registry (fields.php) must load
- * before anything that reads it.
- *
- * @since 1.5.0
- */
-if ( ! defined( 'TUFTE_PROJECTS_VERSION' ) ) {
-	foreach ( array(
-		'post-type',
-		'tool-icons',
-		'fields',
-		'header-parser',
-		'sources/wporg',
-		'sources/github',
-		'sync',
-		'bindings',
-		'editor',
-	) as $tufte_blocks_projects_file ) {
-		require_once get_template_directory() . '/inc/projects/' . $tufte_blocks_projects_file . '.php';
-	}
-	unset( $tufte_blocks_projects_file );
-}
+define( 'TUFTE_BLOCKS_VERSION', '2.0.0' );
 
 /**
  * Linkbacks: link webmentions and pingbacks to the post they came from.
@@ -53,7 +24,7 @@ if ( ! defined( 'TUFTE_PROJECTS_VERSION' ) ) {
  */
 require_once get_template_directory() . '/inc/linkbacks.php';
 require_once get_template_directory() . '/inc/microformats.php';
-require_once get_template_directory() . '/inc/notes.php';
+require_once get_template_directory() . '/inc/formats.php';
 require_once get_template_directory() . '/inc/performance.php';
 
 /**
@@ -111,17 +82,6 @@ function tufte_blocks_register_block_styles(): void {
 add_action( 'init', 'tufte_blocks_register_block_styles' );
 
 /**
- * Shortcode: current year (for footer copyright).
- *
- * @since 1.0.0
- * @return string Current 4-digit year.
- */
-function tufte_current_year_shortcode(): string {
-	return (string) gmdate( 'Y' );
-}
-add_shortcode( 'current_year', 'tufte_current_year_shortcode' );
-
-/**
  * Theme stylesheets, keyed by handle.
  *
  * Shared by the frontend enqueue and the editor styles so both load the same files.
@@ -136,6 +96,7 @@ function tufte_blocks_stylesheets(): array {
 		'tufte-blocks-links'      => 'links.css',      // Link styles.
 		'tufte-blocks-components' => 'components.css', // Quotes, details, inline code, etc.
 		'tufte-blocks-patterns'   => 'patterns.css',   // Epigraph, etc.
+		'tufte-blocks-formats'    => 'formats.css',    // Post format presentation.
 		'tufte-layout'            => 'layout.css',     // Left margin, responsive padding.
 		'tufte-blocks-comments'   => 'comments.css',   // Comment threads.
 	);
@@ -241,14 +202,6 @@ function tufte_blocks_register_pattern_categories(): void {
 		array(
 			'label'       => __( 'Layout', 'tufte-blocks' ),
 			'description' => __( 'Structural patterns like heroes and section breaks.', 'tufte-blocks' ),
-		)
-	);
-
-	register_block_pattern_category(
-		'tufte-projects',
-		array(
-			'label'       => __( 'Projects', 'tufte-blocks' ),
-			'description' => __( 'Project showcase cards and layouts.', 'tufte-blocks' ),
 		)
 	);
 }

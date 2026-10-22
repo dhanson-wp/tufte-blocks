@@ -1,0 +1,153 @@
+/**
+ * Post Format Styles
+ *
+ * Presents each core post format using only core's own hooks: the
+ * .format-<slug> class on posts in a loop and the .single-format-<slug>
+ * class on the body of a single post. Nothing here needs a plugin.
+ * Every value is a theme.json token or reuses an existing theme pattern.
+ *
+ * @package Tufte_Blocks
+ */
+
+/* ==========================================================================
+   Status and Aside
+   The title is hidden (see inc/formats.php), so the row opens on the date.
+   ========================================================================== */
+
+/* The date is the row's only handle, so it reads as a quiet link. */
+.format-status .wp-block-post-date a:not(.u-url),
+.format-aside .wp-block-post-date a:not(.u-url) {
+	color: inherit;
+	text-decoration: none;
+	background-image: none;
+}
+
+.format-status .wp-block-post-date a:not(.u-url):hover,
+.format-aside .wp-block-post-date a:not(.u-url):hover {
+	color: var(--wp--preset--color--primary);
+}
+
+/* The post's text is the point, so it reads at body size in the body color. */
+:is(.format-status, .format-aside) .wp-block-post-excerpt,
+:is(.single-format-status, .single-format-aside) .wp-block-post-content {
+	color: var(--wp--preset--color--foreground);
+	font-size: inherit;
+}
+
+/* No title above the date, so no space where the title was. */
+:is(.single-format-status, .single-format-aside) .tufte-hero {
+	margin-bottom: var(--wp--preset--spacing--40);
+}
+
+/* ==========================================================================
+   Quote
+   The first quote takes the epigraph treatment.
+   Content rules below match a direct child of the post content, or of an
+   .e-content wrapper some plugins add inside it, so the first-element
+   treatments keep working when the body is wrapped.
+   ========================================================================== */
+
+:is(.format-quote, .single-format-quote) :is(.wp-block-post-content, .wp-block-post-content > .e-content) > .wp-block-quote:first-of-type:not([class*="is-style-"]) {
+	text-align: right;
+	max-width: 480px;
+	margin-left: auto;
+	margin-right: 0;
+	padding-right: var(--wp--preset--spacing--50);
+	border-right: 3px solid var(--wp--preset--color--primary);
+	font-size: 1.1rem;
+	font-style: italic;
+}
+
+:is(.format-quote, .single-format-quote) :is(.wp-block-post-content, .wp-block-post-content > .e-content) > .wp-block-quote:first-of-type:not([class*="is-style-"]) :is(cite, footer) {
+	text-align: right;
+}
+
+/* ==========================================================================
+   Link
+   The first link in the content is the entry's headline.
+   ========================================================================== */
+
+:is(.format-link, .single-format-link) :is(.wp-block-post-content, .wp-block-post-content > .e-content) > p:first-of-type > a:first-child {
+	font-size: var(--wp--preset--font-size--medium);
+	line-height: 1.35;
+}
+
+/* ==========================================================================
+   Image and Gallery
+   The first image runs the full content width. On wide screens its caption
+   moves into the right margin, the same column the single-post hero uses.
+   That only happens under the theme's own single template (after .tufte-hero),
+   so a child theme or plugin layout with a sidebar keeps captions below.
+   Wide, full, floated, and explicitly sized images are left as authored.
+   ========================================================================== */
+
+:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) :is(.wp-block-post-content, .wp-block-post-content > .e-content) > .wp-block-image:not(.alignwide, .alignfull, .alignleft, .alignright, .is-resized) img {
+	width: 100%;
+	height: auto;
+}
+
+/* Only the first image fills the column; later ones keep their own size. */
+:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) :is(.wp-block-post-content, .wp-block-post-content > .e-content) > :is(.wp-block-image, .wp-block-gallery) ~ .wp-block-image:not(.alignwide, .alignfull, .alignleft, .alignright, .is-resized) img {
+	width: auto;
+}
+
+@media (min-width: 1200px) {
+	:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) :is(.tufte-hero ~ .wp-block-post-content, .tufte-hero ~ .wp-block-post-content > .e-content) > :is(.wp-block-image, .wp-block-gallery):not(.alignwide, .alignfull, .alignleft, .alignright) {
+		position: relative;
+	}
+
+	:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) :is(.tufte-hero ~ .wp-block-post-content, .tufte-hero ~ .wp-block-post-content > .e-content) > :is(.wp-block-image, .wp-block-gallery):not(.alignwide, .alignfull, .alignleft, .alignright) > figcaption {
+		position: absolute;
+		top: 0;
+		left: calc(100% + var(--wp--preset--spacing--50));
+		width: 14rem;
+		margin: 0;
+		font-size: var(--wp--preset--font-size--small);
+		line-height: 1.5;
+		text-align: left;
+		color: var(--wp--preset--color--secondary);
+	}
+
+	/* Only the first image gets a margin note; later ones keep their captions below. */
+	:is(.format-image, .single-format-image, .format-gallery, .single-format-gallery) :is(.tufte-hero ~ .wp-block-post-content, .tufte-hero ~ .wp-block-post-content > .e-content) > :is(.wp-block-image, .wp-block-gallery) ~ :is(.wp-block-image, .wp-block-gallery) > figcaption {
+		position: static;
+		width: auto;
+		margin: var(--wp--preset--spacing--30) 0 0;
+		color: inherit;
+	}
+}
+
+/* ==========================================================================
+   Audio and Video
+   Core already sizes players and embeds to the column, so this only guards
+   against a fixed width pushing past it. It matches the first embed's width
+   without touching figure sizing, alignment, or later embeds.
+   ========================================================================== */
+
+:is(.format-audio, .single-format-audio) :is(.wp-block-post-content, .wp-block-post-content > .e-content) > .wp-block-audio:first-of-type audio,
+:is(.format-video, .single-format-video) :is(.wp-block-post-content, .wp-block-post-content > .e-content) > .wp-block-video:first-of-type video {
+	display: block;
+	width: 100%;
+	max-width: 100%;
+}
+
+:is(.format-video, .single-format-video) :is(.wp-block-post-content, .wp-block-post-content > .e-content) > .wp-block-embed:first-of-type iframe {
+	max-width: 100%;
+}
+
+/* ==========================================================================
+   Chat
+   A speaker is a bold name at the start of a paragraph: <strong>Name:</strong>.
+   ::first-line would style a whole wrapped line, so the name itself is styled.
+   ========================================================================== */
+
+:is(.format-chat, .single-format-chat) :is(.wp-block-post-content, .wp-block-post-content > .e-content) > p {
+	margin-block: var(--wp--preset--spacing--30);
+}
+
+:is(.format-chat, .single-format-chat) :is(.wp-block-post-content, .wp-block-post-content > .e-content) > p > strong:first-child {
+	font-weight: 400;
+	font-variant-caps: all-small-caps;
+	letter-spacing: 0.06em;
+	color: var(--wp--preset--color--primary);
+}

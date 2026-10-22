@@ -1,6 +1,6 @@
 <?php
 /**
- * Title: Header — Default
+ * Title: Header, default
  * Slug: tufte-blocks/header-default
  * Categories: header
  * Block Types: core/template-part/header

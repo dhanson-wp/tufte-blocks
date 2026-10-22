@@ -3,13 +3,62 @@ Contributors: dhanson
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.10.0
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A typography-first block theme inspired by Edward Tufte's design principles, with a Projects post type for plugins and themes.
+== Description ==
+
+A typography-first block theme inspired by Edward Tufte's design principles.
+
+= Post formats =
+
+The theme supports all nine core post formats and styles them with core's own classes, so they look right with no plugin, with Tufte Formats, or with Post Formats for Block Themes. Set the format in the editor's post settings.
+
+* Status and aside: no visible title. The date, linked to the post, opens the entry, and the text reads at body size.
+* Quote: the first Quote block gets the epigraph treatment.
+* Link: the first link in the first paragraph reads as the headline.
+* Image and gallery: the first image or gallery runs the full content width. On wide screens its caption moves into the right margin. The margin note works on the theme's own single template, which it keys on through the hero image wrapper; other layouts show the caption below the image.
+* Audio and video: the first player or embed runs the full content width.
+* Chat: start each line with the speaker's name in bold, followed by a colon, as in <strong>Name:</strong> Hello. The name shows in small capitals.
+
+== Frequently Asked Questions ==
+
+= I used Projects. Where did they go? =
+
+Install the Tufte Projects plugin. Your projects, fields, and templates come back unchanged.
+
+= Do post formats need a plugin? =
+
+No. The theme supports and styles all nine core formats on its own. It also works with Tufte Formats and Post Formats for Block Themes if you'd rather manage formats with a plugin.
+
+= Where do image margin notes appear? =
+
+On wide screens, the caption of the first image or gallery in a post moves into the right margin on the theme's own single template. On narrower screens, and in other layouts, the caption stays below the image.
+
+== Copyright ==
+
+Tufte Blocks, Copyright 2026 Derek Hanson
+Tufte Blocks is distributed under the terms of the GNU General Public License v2 or later.
+
+== Resources ==
+
+* ET Book typeface: MIT License, Copyright Dmitry Krasny, Bonnie Scranton, and Edward Tufte. License text in assets/fonts/et-book/LICENSE. https://github.com/edwardtufte/et-book
+* Portrait placeholder (assets/images/placeholder-portrait.svg): a plain silhouette drawn for this theme, licensed under the theme's own GPLv2 or later.
+
+== Privacy ==
+
+Tufte Blocks doesn't collect, store, or send any user data. It sets no cookies and makes no outside requests.
 
 == Changelog ==
+
+= 2.0.0 =
+* Projects moved to the Tufte Projects plugin. Install it to keep your projects, fields, and templates; the theme no longer registers them.
+* Status posts now show in the blog loop like any other post. A plugin like Tufte Formats can keep them out.
+* Every post format is supported and styled, with or without a plugin.
+* The footer now loads from a pattern with a small theme credit link, and its year no longer uses a shortcode.
+* Text in the theme's patterns is translatable.
+* The prerender and Threads script tweaks are gone from the theme.
 
 = 1.10.0 =
 * Projects is moving to its own plugin, Tufte Projects. This release is the bridge: when the plugin is active, the theme steps aside and the plugin takes over, with no change to your projects, fields, or templates.
@@ -69,3 +118,8 @@ A typography-first block theme inspired by Edward Tufte's design principles, wit
 
 = 1.5.0 =
 * Added the Projects post type with synced GitHub and WordPress.org details, archive and single templates, and patterns for features, install steps, and FAQs.
+
+== Upgrade Notice ==
+
+= 2.0.0 =
+Projects moved to the Tufte Projects plugin; install it before updating if you use Projects.
