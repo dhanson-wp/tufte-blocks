@@ -57,7 +57,7 @@
         margin-left: auto !important;
     }
 
-    header.wp-block-group > .wp-block-group.is-layout-flex {
+    header > .wp-block-group > .wp-block-group.is-layout-flex {
         border-bottom: 1px solid var(--wp--preset--color--border);
         padding-bottom: var(--wp--preset--spacing--40);
     }

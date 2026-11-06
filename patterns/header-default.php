@@ -12,13 +12,13 @@
 
 ?>
 
-<!-- wp:group {"tagName":"header","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50"}}},"layout":{"type":"default"}} -->
-<header class="wp-block-group" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50)">
+<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50"}}},"layout":{"type":"default"}} -->
+<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50)">
   <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|50"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"left","verticalAlignment":"center"}} -->
   <div class="wp-block-group">
     <!-- wp:site-title {"level":0} /-->
     <!-- wp:navigation {"overlayBackgroundColor":"background","overlayTextColor":"foreground","style":{"spacing":{"blockGap":"var:preset|spacing|50"}},"layout":{"type":"flex","justifyContent":"left","verticalAlignment":"center"}} /-->
   </div>
   <!-- /wp:group -->
-</header>
+</div>
 <!-- /wp:group -->
