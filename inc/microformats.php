@@ -130,6 +130,26 @@ function tufte_blocks_mf2_content( string $block_content, array $block, WP_Block
 add_filter( 'render_block_core/post-content', 'tufte_blocks_mf2_content', 10, 3 );
 
 /**
+ * Post excerpt in a list: p-summary.
+ *
+ * Without it, status and aside entries in a feed, which have no title,
+ * carry no text at all.
+ *
+ * @param string   $block_content Rendered core/post-excerpt.
+ * @param array    $block         Parsed block.
+ * @param WP_Block $instance      Block instance.
+ * @return string
+ */
+function tufte_blocks_mf2_summary( string $block_content, array $block, WP_Block $instance ): string {
+	if ( ! tufte_blocks_mf2_post_id( $instance ) || '' === trim( wp_strip_all_tags( $block_content ) ) ) {
+		return $block_content;
+	}
+
+	return tufte_blocks_mf2_add_classes( $block_content, array( 'p-summary' ), 'p' );
+}
+add_filter( 'render_block_core/post-excerpt', 'tufte_blocks_mf2_summary', 10, 3 );
+
+/**
  * Post date: dt-published, plus the entry's permalink and author.
  *
  * The permalink and author card are hidden, because the theme doesn't print
