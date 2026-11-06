@@ -19,7 +19,7 @@
 .entry-content a:not(.wp-block-button__link):not(.wp-block-navigation-item__content),
 .wp-block-post-content a:not(.wp-block-button__link):not(.wp-block-navigation-item__content),
 .comment-content a:not(.wp-block-button__link) {
-	color: var(--wp--preset--color--accent, #c9a959);
+	color: var(--wp--preset--color--primary);
 	text-decoration: none;
 	background-image: linear-gradient(currentColor, currentColor);
 	background-position: left bottom;
@@ -89,7 +89,7 @@
 }
 
 .wp-block-post-title a:hover {
-	color: var(--wp--preset--color--accent, #c9a959);
+	color: var(--wp--preset--color--primary);
 }
 
 .wp-block-post-title a:focus {
