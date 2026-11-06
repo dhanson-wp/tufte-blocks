@@ -66,7 +66,7 @@
 
 .editor-styles-wrapper .entry-content a:not(.wp-block-button__link),
 .editor-styles-wrapper .wp-block-post-content a:not(.wp-block-button__link) {
-	color: var(--wp--preset--color--accent, #c9a959);
+	color: var(--wp--preset--color--primary);
 	text-decoration: none;
 	background-image: linear-gradient(currentColor, currentColor);
 	background-position: left bottom;
@@ -93,7 +93,7 @@
 }
 
 .editor-styles-wrapper .wp-block-post-title a:hover {
-	color: var(--wp--preset--color--accent, #c9a959);
+	color: var(--wp--preset--color--primary);
 }
 
 @media (prefers-reduced-motion: reduce) {
