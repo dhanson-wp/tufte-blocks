@@ -3,7 +3,7 @@ Contributors: dhanson
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,6 +51,23 @@ Tufte Blocks is distributed under the terms of the GNU General Public License v2
 Tufte Blocks doesn't collect, store, or send any user data. It sets no cookies and makes no outside requests.
 
 == Changelog ==
+
+= 2.0.1 =
+Released 2026-11-17.
+
+**Added**
+
+* The ET Book license now ships with the font, in `assets/fonts/et-book/LICENSE`.
+
+**Changed**
+
+* The footer pattern shows your site's own tagline instead of a fixed line about the theme.
+
+**Fixed**
+
+* A link color you set on a block, such as Details or Group, now shows on its links. The theme's own link color used to override it.
+* Links in the Light style variation use its darker gold, so they're readable against the light background. They used the dark palette's gold before.
+* The LICENSE file now holds the GPLv2 text, matching the theme's GPLv2 or later license. It held the GPLv3 text before.
 
 = 2.0.0 =
 **Changed**
