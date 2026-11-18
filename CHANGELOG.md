@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.1] - 2026-11-17
+
 ### Added
 
 - The ET Book license now ships with the font, in `assets/fonts/et-book/LICENSE`.
@@ -17,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- A link color you set on a block, such as Details or Group, now shows on its links. The theme's own link color used to override it.
+- Links in the Light style variation use its darker gold, so they're readable against the light background. They used the dark palette's gold before.
 - The LICENSE file now holds the GPLv2 text, matching the theme's GPLv2 or later license. It held the GPLv3 text before.
 
 ## [2.0.0]
@@ -197,7 +201,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Block patterns for the header, footer, about card, reading list, newsletter call to action, syllabus, testimonial, stats row, and more.
 - Full site editing, so you can change templates and styles in the Site Editor.
 
-[Unreleased]: https://github.com/dhanson-wp/tufte-blocks/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/dhanson-wp/tufte-blocks/compare/v2.0.1...HEAD
+[2.0.1]: https://github.com/dhanson-wp/tufte-blocks/releases/tag/v2.0.1
 [1.3.0]: https://github.com/dhanson-wp/tufte-blocks/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/dhanson-wp/tufte-blocks/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/dhanson-wp/tufte-blocks/compare/v1.0.1...v1.1.0
